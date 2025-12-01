@@ -1,0 +1,164 @@
+/* src/pages/Register.css */
+
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Kolom Kiri - Gambar Ilustrasi */
+.leftSide {
+  width: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.leftImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Kolom Kanan - Form Register */
+.rightSide {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* 🔽 Kurangi padding agar lebih kecil */
+  background-color: #ffffff;
+  position: relative;
+  
+}
+
+.logo {
+  width: 50px; /* 🔽 Kurangi ukuran logo */
+  height: auto;
+  margin-bottom: 15px;
+  margin-left: 50px;
+}
+
+.titleSection {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 19px; /* 🔽 Sedikit kecilkan */
+  font-weight: bold;
+  color: #333333;
+  margin: 0 0 8px 0;
+  margin-left: 50px;
+}
+
+.description {
+  color: #666666;
+  max-width: 350px; /* 🔽 Lebih kecil */
+  margin: 0;
+  font-size: 12px; /* 🔽 Lebih kecil */
+  line-height: 1.4;
+  margin-left: 50px;
+}
+
+.message {
+  background-color: #fef2f2;
+  border: 1px solid #ef4444;
+  color: #dc2626;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  max-width: 300px; /* 🔽 Lebih kecil */
+  max-height: 300px;
+  height: 100%;
+  margin-left: 50px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #93c5fd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  background-color: #f3f4f6;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #2563eb;
+}
+
+.loginText {
+  font-size: 12px;
+  color: #666666;
+  margin-top: 20px;
+  padding-top: 30px;
+  text-align: center;
+  margin-left: 50px;
+}
+
+.loginLink {
+  color: #3b82f6;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.cornerIllustration {
+  position: absolute;
+  bottom: 0; /* 🔽 Jaga jarak dari bawah */
+  right: 10px;
+  width: 100px; /* 🔽 Kurangi ukuran */
+  height: 100px;
+  margin-top: 27px;
+}
+
+.cornerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
