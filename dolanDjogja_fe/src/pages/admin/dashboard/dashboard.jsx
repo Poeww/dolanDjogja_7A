@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import "./dashboard.css";
 
-import logo from "../../assets/logo.png";
+import logo from "../../../assets/img/logo-dolandjogja.svg";
 
-import DashboardIcon from "../../assets/icons/dashboard.svg";
-import PaketIcon from "../../assets/icons/paket.svg";
-import DestinasiIcon from "../../assets/icons/destinasi.svg";
-import JadwalIcon from "../../assets/icons/jadwal.svg";
-import BookingIcon from "../../assets/icons/booking.svg";
-import PaymentIcon from "../../assets/icons/payment.svg";
-import LogoutIcon from "../../assets/icons/logout.svg";
+// ICONS
+import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import PaketIcon from "../../../assets/icon/paket.svg";
+import DestinasiIcon from "../../../assets/icon/destinasi.svg";
+import JadwalIcon from "../../../assets/icon/jadwal.svg";
+import BookingIcon from "../../../assets/icon/booking.svg";
+import PaymentIcon from "../../../assets/icon/payment.svg";
+import LogoutIcon from "../../../assets/icon/logout.svg";
 
 export default function AdminDashboard() {
     return (
