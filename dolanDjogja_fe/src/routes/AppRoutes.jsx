@@ -29,7 +29,7 @@ import Payment from "../pages/customer/payment";
 import PaymentList from "../pages/admin/payment/paymentList";
 import PaymentEdit from "../pages/admin/payment/paymentEdit";
 
-import Dashboard from "../pages/admin/dashboard/dashboard";
+import AdminDashboard from "../pages/admin/dashboard/dashboard";
 
 // Auth Service
 import { getUser } from "../services/authService";
@@ -214,13 +214,13 @@ export default function AppRoutes() {
       </Routes>
 
       <Route
-      path="/admin/dashboard"
-      element={
-        <PrivateRoute role="admin">
-          <Dashboard />
-        </PrivateRoute>
-      }
-    />
+        path="/admin/dashboard"
+        element={
+          <PrivateRoute role="admin">
+            <AdminDashboard />
+          </PrivateRoute>
+        }
+      />
 
     </BrowserRouter>
   );
