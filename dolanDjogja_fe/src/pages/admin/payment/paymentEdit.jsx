@@ -1,64 +1,55 @@
 import { useEffect, useState } from "react";
-import { getAllPayments } from "../../../services/paymentService";
-import { Link, useNavigate } from "react-router-dom";
-import { getUser } from "../../../services/authService";
+import { updatePayment, getAllPayments } from "../../../services/paymentService";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function PaymentList() {
-  const [payments, setPayments] = useState([]);
+export default function PaymentEdit() {
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = getUser();
-    if (!user || user.role !== "admin") {
-      navigate("/login");
-      return;
-    }
+  const [payment, setPayment] = useState(null);
+  const [status, setStatus] = useState("");
 
+  useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
     const data = await getAllPayments();
-    setPayments(data);
+    const found = data.find((p) => p.id == id);
+    setPayment(found);
+    setStatus(found.status_verifikasi);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("status_verifikasi", status);
+
+    await updatePayment(id, formData);
+    navigate("/admin/payments");
+  };
+
+  if (!payment) return <p>Loading...</p>;
 
   return (
     <div style={{ padding: 40 }}>
-      <h2>Daftar Pembayaran</h2>
+      <h2>Verifikasi Pembayaran</h2>
 
-      <table border="1" cellPadding="8">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Booking ID</th>
-            <th>Jumlah Bayar</th>
-            <th>Bukti Pembayaran</th>
-            <th>Status</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
+      <p>Booking ID: {payment.booking_id}</p>
+      <p>Jumlah Bayar: {payment.jumlah_bayar}</p>
+      <img src={payment.bukti_pembayaran} width="200" alt="Bukti" />
 
-        <tbody>
-          {payments.map((p) => (
-            <tr key={p.id}>
-              <td>{p.id}</td>
-              <td>{p.booking_id}</td>
-              <td>{p.jumlah_bayar}</td>
-              <td>
-                {p.bukti_pembayaran ? (
-                  <img src={p.bukti_pembayaran} width="80" />
-                ) : (
-                  "Belum Upload"
-                )}
-              </td>
-              <td>{p.status_verifikasi}</td>
-              <td>
-                <Link to={`/admin/payments/edit/${p.id}`}>Verifikasi</Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <form onSubmit={handleSubmit}>
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option value="pending">Pending</option>
+          <option value="verified">Verified</option>
+          <option value="rejected">Rejected</option>
+        </select>
+
+        <br /><br />
+        <button type="submit">Update Status</button>
+      </form>
     </div>
   );
 }
