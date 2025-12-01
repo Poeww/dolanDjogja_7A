@@ -16,6 +16,10 @@ import JadwalList from "../pages/admin/jadwal/jadwalList";
 import JadwalCreate from "../pages/admin/jadwal/jadwalCreate";
 import JadwalEdit from "../pages/admin/jadwal/jadwalEdit";
 
+import Booking from "../pages/customer/booking";
+import MyBookings from "../pages/customer/myBookings";
+
+
 import { getUser } from "../services/authService";
 
 const PrivateRoute = ({ children, role }) => {
@@ -119,6 +123,25 @@ export default function AppRoutes() {
           element={
             <PrivateRoute role="admin">
               <JadwalEdit />
+            </PrivateRoute>
+          }
+        />
+
+        {/* CUSTOMER BOOKING */}
+        <Route
+          path="/booking/:id"
+          element={
+            <PrivateRoute role="user">
+              <Booking />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-bookings"
+          element={
+            <PrivateRoute role="user">
+              <MyBookings />
             </PrivateRoute>
           }
         />
