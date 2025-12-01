@@ -3,10 +3,9 @@ import "./dashboard.css";
 
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 
-// ICONS
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
-import DestinasiIcon from "../../../assets/icon/destinasi.svg";
+import DestinasiIcon from "../../../assets/icon/detinasi.svg";
 import JadwalIcon from "../../../assets/icon/jadwal.svg";
 import BookingIcon from "../../../assets/icon/booking.svg";
 import PaymentIcon from "../../../assets/icon/payment.svg";
