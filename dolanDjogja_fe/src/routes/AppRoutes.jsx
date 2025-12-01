@@ -178,41 +178,37 @@ export default function AppRoutes() {
           }
         />
 
+      {/* ============================
+          PAYMENT
+      ============================ */}
+      <Route
+        path="/payment/:id"
+        element={
+          <PrivateRoute role="user">
+            <Payment />
+          </PrivateRoute>
+        }
+      />
 
-        {/* ============================
-            PAYMENT
-        ============================ */}
-        {/* CUSTOMER */}
-        <Route
-          path="/payment/:id"
-          element={
-            <PrivateRoute role="user">
-              <Payment />
-            </PrivateRoute>
-          }
-        />
+      <Route
+        path="/admin/payments"
+        element={
+          <PrivateRoute role="admin">
+            <PaymentList />
+          </PrivateRoute>
+        }
+      />
 
-        {/* ADMIN */}
-        <Route
-          path="/admin/payments"
-          element={
-            <PrivateRoute role="admin">
-              <PaymentList />
-            </PrivateRoute>
-          }
-        />
+      <Route
+        path="/admin/payments/edit/:id"
+        element={
+          <PrivateRoute role="admin">
+            <PaymentEdit />
+          </PrivateRoute>
+        }
+      />
 
-        <Route
-          path="/admin/payments/edit/:id"
-          element={
-            <PrivateRoute role="admin">
-              <PaymentEdit />
-            </PrivateRoute>
-          }
-        />
-
-      </Routes>
-
+      {/* ========== ADMIN DASHBOARD ========== */}
       <Route
         path="/admin/dashboard"
         element={
@@ -222,6 +218,8 @@ export default function AppRoutes() {
         }
       />
 
-    </BrowserRouter>
-  );
+    </Routes>
+  </BrowserRouter>
+);
+
 }
