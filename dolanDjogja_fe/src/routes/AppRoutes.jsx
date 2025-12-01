@@ -1,54 +1,70 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+// PUBLIC PAGES
 import Login from "../home/login";
 import Register from "../home/register";
 import Home from "../home/home";
 
+// ADMIN - Paket
 import PaketList from "../pages/admin/paket/paketList";
 import PaketCreate from "../pages/admin/paket/paketCreate";
 import PaketEdit from "../pages/admin/paket/paketEdit";
 
+// ADMIN - Destinasi
 import DestinasiList from "../pages/admin/destinasi/destinasiList";
 import DestinasiCreate from "../pages/admin/destinasi/destinasiCreate";
 import DestinasiEdit from "../pages/admin/destinasi/destinasiEdit";
 
+// ADMIN - Jadwal
 import JadwalList from "../pages/admin/jadwal/jadwalList";
 import JadwalCreate from "../pages/admin/jadwal/jadwalCreate";
 import JadwalEdit from "../pages/admin/jadwal/jadwalEdit";
 
+// CUSTOMER - Booking
 import Booking from "../pages/customer/booking";
 import MyBookings from "../pages/customer/myBookings";
 
+// PAYMENT
 import Payment from "../pages/customer/payment";
 import PaymentList from "../pages/admin/payment/paymentList";
 import PaymentEdit from "../pages/admin/payment/paymentEdit";
 
+// Auth Service
 import { getUser } from "../services/authService";
 
+
+// ========== PRIVATE ROUTE HANDLER ==========
 const PrivateRoute = ({ children, role }) => {
   const user = getUser();
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+  // Jika belum login → redirect login
+  if (!user) return <Navigate to="/login" />;
 
-  if (role && user.role !== role) {
-    return <Navigate to="/" />;
-  }
+  // Jika role tidak sesuai → redirect home
+  if (role && user.role !== role) return <Navigate to="/" />;
 
   return children;
 };
 
+
+// ========== ROUTING START ==========
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* PUBLIC */}
+
+        {/* ============================
+            PUBLIC ROUTES
+        ============================ */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* ADMIN PAKET */}
+
+
+        {/* ============================
+            ADMIN - PAKET WISATA
+        ============================ */}
         <Route
           path="/admin/paket"
           element={
@@ -57,6 +73,7 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/admin/paket/create"
           element={
@@ -65,6 +82,7 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/admin/paket/edit/:id"
           element={
@@ -74,35 +92,41 @@ export default function AppRoutes() {
           }
         />
 
-        {/* ADMIN DESTINASI */}
+
+        {/* ============================
+            ADMIN - DESTINASI
+        ============================ */}
         <Route
-        path="/admin/destinasi"
-        element={
+          path="/admin/destinasi"
+          element={
             <PrivateRoute role="admin">
-            <DestinasiList />
+              <DestinasiList />
             </PrivateRoute>
-        }
+          }
         />
 
         <Route
-        path="/admin/destinasi/create"
-        element={
+          path="/admin/destinasi/create"
+          element={
             <PrivateRoute role="admin">
-            <DestinasiCreate />
+              <DestinasiCreate />
             </PrivateRoute>
-        }
+          }
         />
 
         <Route
-        path="/admin/destinasi/edit/:id"
-        element={
+          path="/admin/destinasi/edit/:id"
+          element={
             <PrivateRoute role="admin">
-            <DestinasiEdit />
+              <DestinasiEdit />
             </PrivateRoute>
-        }
+          }
         />
 
-        {/* ADMIN JADWAL */}
+
+        {/* ============================
+            ADMIN - JADWAL TRIP
+        ============================ */}
         <Route
           path="/admin/jadwal"
           element={
@@ -130,7 +154,10 @@ export default function AppRoutes() {
           }
         />
 
-        {/* CUSTOMER BOOKING */}
+
+        {/* ============================
+            CUSTOMER - BOOKING
+        ============================ */}
         <Route
           path="/booking/:id"
           element={
@@ -140,7 +167,30 @@ export default function AppRoutes() {
           }
         />
 
-        {/* ADMIN PAYMENT */}
+        <Route
+          path="/my-bookings"
+          element={
+            <PrivateRoute role="user">
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
+
+
+        {/* ============================
+            PAYMENT
+        ============================ */}
+        {/* CUSTOMER */}
+        <Route
+          path="/payment/:id"
+          element={
+            <PrivateRoute role="user">
+              <Payment />
+            </PrivateRoute>
+          }
+        />
+
+        {/* ADMIN */}
         <Route
           path="/admin/payments"
           element={
@@ -158,25 +208,6 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         />
-
-        <Route
-          path="/my-bookings"
-          element={
-            <PrivateRoute role="user">
-              <MyBookings />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-        path="/payment/:id"
-        element={
-          <PrivateRoute role="user">
-            <Payment />
-          </PrivateRoute>
-        }
-      />
-
 
       </Routes>
     </BrowserRouter>
