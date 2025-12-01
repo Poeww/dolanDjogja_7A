@@ -19,6 +19,9 @@ import JadwalEdit from "../pages/admin/jadwal/jadwalEdit";
 import Booking from "../pages/customer/booking";
 import MyBookings from "../pages/customer/myBookings";
 
+import Payment from "../pages/customer/payment";
+import PaymentList from "../pages/admin/payment/paymentList";
+import PaymentEdit from "../pages/admin/payment/paymentEdit";
 
 import { getUser } from "../services/authService";
 
@@ -137,6 +140,25 @@ export default function AppRoutes() {
           }
         />
 
+        {/* ADMIN PAYMENT */}
+        <Route
+          path="/admin/payments"
+          element={
+            <PrivateRoute role="admin">
+              <PaymentList />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/payments/edit/:id"
+          element={
+            <PrivateRoute role="admin">
+              <PaymentEdit />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/my-bookings"
           element={
@@ -145,6 +167,16 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         />
+
+        <Route
+        path="/payment/:id"
+        element={
+          <PrivateRoute role="user">
+            <Payment />
+          </PrivateRoute>
+        }
+      />
+
 
       </Routes>
     </BrowserRouter>
