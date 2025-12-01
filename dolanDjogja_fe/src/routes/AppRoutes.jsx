@@ -12,6 +12,10 @@ import DestinasiList from "../pages/admin/destinasi/destinasiList";
 import DestinasiCreate from "../pages/admin/destinasi/destinasiCreate";
 import DestinasiEdit from "../pages/admin/destinasi/destinasiEdit";
 
+import JadwalList from "../pages/admin/jadwal/jadwalList";
+import JadwalCreate from "../pages/admin/jadwal/jadwalCreate";
+import JadwalEdit from "../pages/admin/jadwal/jadwalEdit";
+
 import { getUser } from "../services/authService";
 
 const PrivateRoute = ({ children, role }) => {
@@ -89,6 +93,34 @@ export default function AppRoutes() {
             <DestinasiEdit />
             </PrivateRoute>
         }
+        />
+
+        {/* ADMIN JADWAL */}
+        <Route
+          path="/admin/jadwal"
+          element={
+            <PrivateRoute role="admin">
+              <JadwalList />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/jadwal/create"
+          element={
+            <PrivateRoute role="admin">
+              <JadwalCreate />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/jadwal/edit/:id"
+          element={
+            <PrivateRoute role="admin">
+              <JadwalEdit />
+            </PrivateRoute>
+          }
         />
 
       </Routes>
