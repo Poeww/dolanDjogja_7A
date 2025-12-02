@@ -13,10 +13,9 @@ class Payment extends Model
 
     protected $fillable = [
         'booking_id',
-        'metode',
         'jumlah_bayar',
-        'bukti_bayar',
-        'status',
+        'bukti_pembayaran',
+        'status_verifikasi',
     ];
 
     public function booking()

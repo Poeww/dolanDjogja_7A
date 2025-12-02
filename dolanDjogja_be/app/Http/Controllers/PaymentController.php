@@ -18,10 +18,9 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'booking_id'   => 'required|integer|exists:bookings,id',
-            'metode'       => 'required|string|max:100',
-            'jumlah_bayar' => 'required|numeric|min:0',
-            'bukti_bayar'  => 'nullable|string',
+            'booking_id'       => 'required|integer|exists:bookings,id',
+            'jumlah_bayar'     => 'required|numeric|min:0',
+            'bukti_pembayaran' => 'nullable|string',
         ]);
 
         $booking = Booking::findOrFail($validated['booking_id']);
@@ -31,11 +30,10 @@ class PaymentController extends Controller
         }
 
         $payment = Payment::create([
-            'booking_id'   => $validated['booking_id'],
-            'metode'       => $validated['metode'],
-            'jumlah_bayar' => $validated['jumlah_bayar'],
-            'bukti_bayar'  => $validated['bukti_bayar'] ?? null,
-            'status'       => 'pending',
+            'booking_id'       => $validated['booking_id'],
+            'jumlah_bayar'     => $validated['jumlah_bayar'],
+            'bukti_pembayaran' => $validated['bukti_pembayaran'] ?? null,
+            'status_verifikasi'=> 'pending',
         ]);
 
         return response()->json(
@@ -56,14 +54,10 @@ class PaymentController extends Controller
         $payment = Payment::findOrFail($id);
 
         $validated = $request->validate([
-            'status' => 'required|in:pending,verified,rejected',
+            'status_verifikasi' => 'required|in:pending,verified,rejected',
         ]);
 
         $payment->update($validated);
-
-        if ($validated['status'] === 'verified') {
-            $payment->booking->update(['status' => 'confirmed']);
-        }
 
         return response()->json(
             $payment->load('booking.jadwalTrip.paket')
@@ -73,7 +67,6 @@ class PaymentController extends Controller
     public function destroy($id)
     {
         $payment = Payment::findOrFail($id);
-
         $payment->delete();
 
         return response()->json(['message' => 'Payment dihapus']);
