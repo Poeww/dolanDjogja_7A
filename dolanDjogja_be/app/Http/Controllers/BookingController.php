@@ -19,17 +19,17 @@ class BookingController extends Controller
     {
         $validated = $request->validate([
             'jadwal_trip_id' => 'required|integer|exists:jadwal_trip,id',
-            'jumlah_peserta' => 'required|integer|min:1',
+            'jumlah_orang' => 'required|integer|min:1',
         ]);
 
         $jadwal = JadwalTrip::findOrFail($validated['jadwal_trip_id']);
 
-        $total = $jadwal->harga_per_orang * $validated['jumlah_peserta'];
+        $total = $jadwal->harga_per_orang * $validated['jumlah_orang'];
 
         $booking = Booking::create([
             'user_id'        => $request->user()->id,
             'jadwal_trip_id' => $validated['jadwal_trip_id'],
-            'jumlah_peserta' => $validated['jumlah_peserta'],
+            'jumlah_orang' => $validated['jumlah_orang'],
             'total_harga'    => $total,
             'status'         => 'pending',
         ]);

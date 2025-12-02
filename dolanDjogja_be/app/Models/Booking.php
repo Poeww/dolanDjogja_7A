@@ -14,7 +14,7 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'jadwal_trip_id',
-        'jumlah_peserta',
+        'jumlah_orang',
         'total_harga',
         'status',
     ];
