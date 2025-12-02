@@ -32,20 +32,23 @@ class PaketWisataController extends Controller
             'kuota'           => 'required|integer|min:0',
             'gambar_thumbnail'=> 'nullable|string',
 
+            // relasi destinasi
             'destinasi_ids'   => 'array',
             'destinasi_ids.*' => 'integer|exists:destinasi,id',
         ]);
 
+        // Buang destinasi_ids agar tidak disimpan ke tabel paket_wisata
         $paket = PaketWisata::create(
             collect($validated)->except('destinasi_ids')->toArray()
         );
 
+        // Sync relasi pivot
         if ($request->has('destinasi_ids')) {
             $paket->destinasi()->sync($validated['destinasi_ids']);
         }
 
         return response()->json(
-            $paket->load('destinasi', 'jadwal'), 
+            $paket->load('destinasi', 'jadwal'),
             201
         );
     }
@@ -67,10 +70,12 @@ class PaketWisataController extends Controller
             'destinasi_ids.*' => 'integer|exists:destinasi,id',
         ]);
 
+        // update field utama
         $paket->update(
             collect($validated)->except('destinasi_ids')->toArray()
         );
 
+        // update relasi pivot
         if ($request->has('destinasi_ids')) {
             $paket->destinasi()->sync($validated['destinasi_ids']);
         }
@@ -83,8 +88,11 @@ class PaketWisataController extends Controller
     public function destroy($id)
     {
         $paket = PaketWisata::findOrFail($id);
+
         $paket->destinasi()->detach();
+
         $paket->delete();
-        return response()->json(['message' => 'Paket wisata dihapus!']);
+
+        return response()->json(['message' => 'Paket wisata dihapus']);
     }
 }
