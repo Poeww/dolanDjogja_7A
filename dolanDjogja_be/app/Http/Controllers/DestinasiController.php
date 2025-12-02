@@ -9,25 +9,25 @@ class DestinasiController extends Controller
 {
     public function index()
     {
-        $destinasi = Destinasi::all();
-        return response()->json($destinasi);
+        return response()->json(Destinasi::all());
     }
 
     public function show($id)
     {
-        $destinasi = Destinasi::findOrFail($id);
-        return response()->json($destinasi);
+        return response()->json(
+            Destinasi::findOrFail($id)
+        );
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_destinasi' => 'required|string|max:200',
-            'lokasi'         => 'nullable|string|max:200',
+            'nama_destinasi' => 'required|string|max:255',
+            'lokasi'         => 'required|string|max:255',
             'deskripsi'      => 'nullable|string',
-            'harga_tiket'    => 'nullable|numeric|min:0',
-            'jam_buka'       => 'nullable|string|max:100',
-            'gambar'         => 'nullable|string',
+            'harga_tiket'    => 'required|numeric|min:0',
+            'jam_buka'       => 'nullable|string|max:255',
+            'gambar'         => 'nullable|string|max:255',
         ]);
 
         $destinasi = Destinasi::create($validated);
@@ -40,12 +40,12 @@ class DestinasiController extends Controller
         $destinasi = Destinasi::findOrFail($id);
 
         $validated = $request->validate([
-            'nama_destinasi' => 'sometimes|required|string|max:200',
-            'lokasi'         => 'sometimes|nullable|string|max:200',
+            'nama_destinasi' => 'sometimes|required|string|max:255',
+            'lokasi'         => 'sometimes|required|string|max:255',
             'deskripsi'      => 'sometimes|nullable|string',
-            'harga_tiket'    => 'sometimes|nullable|numeric|min:0',
-            'jam_buka'       => 'sometimes|nullable|string|max:100',
-            'gambar'         => 'sometimes|nullable|string',
+            'harga_tiket'    => 'sometimes|required|numeric|min:0',
+            'jam_buka'       => 'sometimes|nullable|string|max:255',
+            'gambar'         => 'sometimes|nullable|string|max:255',
         ]);
 
         $destinasi->update($validated);
@@ -56,6 +56,9 @@ class DestinasiController extends Controller
     public function destroy($id)
     {
         $destinasi = Destinasi::findOrFail($id);
+
+        $destinasi->paketWisata()->detach();
+
         $destinasi->delete();
 
         return response()->json(['message' => 'Destinasi dihapus']);
