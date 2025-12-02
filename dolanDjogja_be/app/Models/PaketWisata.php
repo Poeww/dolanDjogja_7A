@@ -18,7 +18,7 @@ class PaketWisata extends Model
         'durasi',
         'lokasi_tujuan',
         'kuota',
-        'gambar_thumbnail'
+        'gambar_thumbnail',
     ];
 
     public function destinasi()
