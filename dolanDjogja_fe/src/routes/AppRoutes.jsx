@@ -34,20 +34,18 @@ import AdminDashboard from "../pages/admin/dashboard/dashboard";
 // Auth Service
 import { getUser } from "../services/authService";
 
-
 // ========== PRIVATE ROUTE HANDLER ==========
 const PrivateRoute = ({ children, role }) => {
   const user = getUser();
 
-  // Jika belum login → redirect login
+  // Redirect login
   if (!user) return <Navigate to="/login" />;
 
-  // Jika role tidak sesuai → redirect home
+  // Redirect home
   if (role && user.role !== role) return <Navigate to="/" />;
 
   return children;
 };
-
 
 // ========== ROUTING START ==========
 export default function AppRoutes() {
@@ -62,6 +60,25 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
+        {/* ============================
+            FIX: REDIRECT /admin → /admin/dashboard
+        ============================ */}
+        <Route
+          path="/admin"
+          element={<Navigate to="/admin/dashboard" replace />}
+        />
+
+        {/* ============================
+            ADMIN DASHBOARD
+        ============================ */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <PrivateRoute role="admin">
+              <AdminDashboard />
+            </PrivateRoute>
+          }
+        />
 
 
         {/* ============================
@@ -178,48 +195,37 @@ export default function AppRoutes() {
           }
         />
 
-      {/* ============================
-          PAYMENT
-      ============================ */}
-      <Route
-        path="/payment/:id"
-        element={
-          <PrivateRoute role="user">
-            <Payment />
-          </PrivateRoute>
-        }
-      />
+        {/* ============================
+            PAYMENT
+        ============================ */}
+        <Route
+          path="/payment/:id"
+          element={
+            <PrivateRoute role="user">
+              <Payment />
+            </PrivateRoute>
+          }
+        />
 
-      <Route
-        path="/admin/payments"
-        element={
-          <PrivateRoute role="admin">
-            <PaymentList />
-          </PrivateRoute>
-        }
-      />
+        <Route
+          path="/admin/payments"
+          element={
+            <PrivateRoute role="admin">
+              <PaymentList />
+            </PrivateRoute>
+          }
+        />
 
-      <Route
-        path="/admin/payments/edit/:id"
-        element={
-          <PrivateRoute role="admin">
-            <PaymentEdit />
-          </PrivateRoute>
-        }
-      />
+        <Route
+          path="/admin/payments/edit/:id"
+          element={
+            <PrivateRoute role="admin">
+              <PaymentEdit />
+            </PrivateRoute>
+          }
+        />
 
-      {/* ========== ADMIN DASHBOARD ========== */}
-      <Route
-        path="/admin/dashboard"
-        element={
-          <PrivateRoute role="admin">
-            <AdminDashboard />
-          </PrivateRoute>
-        }
-      />
-
-    </Routes>
-  </BrowserRouter>
-);
-
+      </Routes>
+    </BrowserRouter>
+  );
 }
