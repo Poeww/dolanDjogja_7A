@@ -16,7 +16,7 @@ class JadwalTrip extends Model
         'tanggal_berangkat',
         'tanggal_pulang',
         'kuota_tersedia',
-        'harga_per_orang'
+        'harga_per_orang',
     ];
 
     public function paket()

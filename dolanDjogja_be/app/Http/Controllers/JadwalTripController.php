@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\JadwalTrip;
-use App\Models\PaketWisata;
 use Illuminate\Http\Request;
 
 class JadwalTripController extends Controller
 {
     public function index()
     {
-        $jadwal = JadwalTrip::with('paket')->get();
-        return response()->json($jadwal);
+        return response()->json(
+            JadwalTrip::with('paket')->get()
+        );
     }
 
     public function show($id)
     {
-        $jadwal = JadwalTrip::with('paket')->findOrFail($id);
-        return response()->json($jadwal);
+        return response()->json(
+            JadwalTrip::with('paket')->findOrFail($id)
+        );
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'paket_id'          => 'required|exists:paket_wisata,id',
+            'paket_id'          => 'required|integer|exists:paket_wisata,id',
             'tanggal_berangkat' => 'required|date',
             'tanggal_pulang'    => 'required|date|after_or_equal:tanggal_berangkat',
             'kuota_tersedia'    => 'required|integer|min:0',
@@ -32,7 +33,10 @@ class JadwalTripController extends Controller
 
         $jadwal = JadwalTrip::create($validated);
 
-        return response()->json($jadwal->load('paket'), 201);
+        return response()->json(
+            $jadwal->load('paket'),
+            201
+        );
     }
 
     public function update(Request $request, $id)
@@ -40,7 +44,7 @@ class JadwalTripController extends Controller
         $jadwal = JadwalTrip::findOrFail($id);
 
         $validated = $request->validate([
-            'paket_id'          => 'sometimes|required|exists:paket_wisata,id',
+            'paket_id'          => 'sometimes|required|integer|exists:paket_wisata,id',
             'tanggal_berangkat' => 'sometimes|required|date',
             'tanggal_pulang'    => 'sometimes|required|date|after_or_equal:tanggal_berangkat',
             'kuota_tersedia'    => 'sometimes|required|integer|min:0',
@@ -49,12 +53,15 @@ class JadwalTripController extends Controller
 
         $jadwal->update($validated);
 
-        return response()->json($jadwal->load('paket'));
+        return response()->json(
+            $jadwal->load('paket')
+        );
     }
 
     public function destroy($id)
     {
         $jadwal = JadwalTrip::findOrFail($id);
+
         $jadwal->delete();
 
         return response()->json(['message' => 'Jadwal trip dihapus']);
