@@ -27,11 +27,11 @@ class BookingController extends Controller
         $total = $jadwal->harga_per_orang * $validated['jumlah_orang'];
 
         $booking = Booking::create([
-            'user_id'        => $request->user()->id,
-            'jadwal_trip_id' => $validated['jadwal_trip_id'],
-            'jumlah_orang' => $validated['jumlah_orang'],
-            'total_harga'    => $total,
-            'status'         => 'pending',
+            'user_id'           => $request->user()->id,
+            'jadwal_trip_id'    => $validated['jadwal_trip_id'],
+            'jumlah_orang'      => $validated['jumlah_orang'],
+            'total_harga'       => $total,
+            'status_pembayaran' => 'pending'
         ]);
 
         return response()->json(

@@ -16,7 +16,7 @@ class Booking extends Model
         'jadwal_trip_id',
         'jumlah_orang',
         'total_harga',
-        'status',
+        'status_pembayaran',
     ];
 
     public function user()
