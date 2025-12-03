@@ -10,6 +10,10 @@ import PaketList from "../pages/admin/paket/paketList";
 import PaketCreate from "../pages/admin/paket/paketCreate";
 import PaketEdit from "../pages/admin/paket/paketEdit";
 
+// ADMIN - Booking
+import BookingList from "../pages/admin/booking/bookingList";
+import BookingEdit from "../pages/admin/booking/bookingEdit";
+
 // ADMIN - Destinasi
 import DestinasiList from "../pages/admin/destinasi/destinasiList";
 import DestinasiCreate from "../pages/admin/destinasi/destinasiCreate";
@@ -111,6 +115,26 @@ export default function AppRoutes() {
           }
         />
 
+        {/* ============================
+    ADMIN - BOOKING LIST
+============================ */}
+        <Route
+          path="/admin/bookings"
+          element={
+            <PrivateRoute role="admin">
+              <BookingList />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/bookings/edit/:id"
+          element={
+            <PrivateRoute role="admin">
+              <BookingEdit />
+            </PrivateRoute>
+          }
+        />
 
         {/* ============================
             ADMIN - DESTINASI
