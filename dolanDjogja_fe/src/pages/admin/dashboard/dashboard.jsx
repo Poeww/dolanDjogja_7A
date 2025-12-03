@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./dashboard.css";
 
-// Assets
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
@@ -17,10 +16,8 @@ import ProfilIcon from "../../../assets/icon/profil.svg";
 import api from "../../../services/api";
 
 export default function AdminDashboard() {
-  const location = useLocation();
-
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const { pathname } = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
 
   const [stats, setStats] = useState({
     paket: 0,
@@ -29,8 +26,6 @@ export default function AdminDashboard() {
     booking: 0,
     payment: 0,
   });
-
-  const isActive = (path) => (location.pathname === path ? "active" : "");
 
   useEffect(() => {
     fetchStats();
@@ -52,76 +47,77 @@ export default function AdminDashboard() {
         payment: pay.data.length,
       });
     } catch (err) {
-      console.error("Error loading stats:", err);
+      console.error(err);
     }
   };
 
   return (
-    <div className={`dashboard-container ${sidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
+    <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
 
-      <aside className={`sidebar ${sidebarOpen ? "" : "collapsed"}`}>
+      <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+        
+        <button
+          className="toggle-btn"
+          onClick={() => setCollapsed(!collapsed)}
+        >
+          {collapsed ? "▶" : "◀"}
+        </button>
 
         <div className="sidebar-header">
-          <img src={logo} className="sidebar-logo" alt="Logo" />
-          {sidebarOpen && <h2>dolanDjogja</h2>}
+          <img src={logo} className="sidebar-logo" />
+          {!collapsed && <h2>dolanDjogja</h2>}
         </div>
 
         <nav className="sidebar-menu">
 
-          <Link to="/admin/dashboard" className={isActive("/admin/dashboard")}>
+          <Link to="/admin/dashboard" className={pathname.includes("/dashboard") ? "active" : ""}>
             <img src={DashboardIcon} className="menu-icon" />
-            {sidebarOpen && "Dashboard"}
+            {!collapsed && "Dashboard"}
           </Link>
 
-          <Link to="/admin/paket" className={isActive("/admin/paket")}>
+          <Link to="/admin/paket" className={pathname.includes("/paket") ? "active" : ""}>
             <img src={PaketIcon} className="menu-icon" />
-            {sidebarOpen && "Paket Wisata"}
+            {!collapsed && "Paket Wisata"}
           </Link>
 
-          <Link to="/admin/destinasi" className={isActive("/admin/destinasi")}>
+          <Link to="/admin/destinasi" className={pathname.includes("/destinasi") ? "active" : ""}>
             <img src={DestinasiIcon} className="menu-icon" />
-            {sidebarOpen && "Destinasi"}
+            {!collapsed && "Destinasi"}
           </Link>
 
-          <Link to="/admin/jadwal" className={isActive("/admin/jadwal")}>
+          <Link to="/admin/jadwal" className={pathname.includes("/jadwal") ? "active" : ""}>
             <img src={JadwalIcon} className="menu-icon" />
-            {sidebarOpen && "Jadwal Trip"}
+            {!collapsed && "Jadwal Trip"}
           </Link>
 
-          <Link to="/admin/bookings" className={isActive("/admin/bookings")}>
+          <Link to="/admin/bookings" className={pathname.includes("/bookings") ? "active" : ""}>
             <img src={BookingIcon} className="menu-icon" />
-            {sidebarOpen && "Booking"}
+            {!collapsed && "Booking"}
           </Link>
 
-          <Link to="/admin/payments" className={isActive("/admin/payments")}>
+          <Link to="/admin/payments" className={pathname.includes("/payments") ? "active" : ""}>
             <img src={PaymentIcon} className="menu-icon" />
-            {sidebarOpen && "Payments"}
+            {!collapsed && "Payments"}
           </Link>
 
         </nav>
 
         <button className="logout-btn">
           <img src={LogoutIcon} className="menu-icon" />
-          {sidebarOpen && "Logout"}
+          {!collapsed && "Logout"}
         </button>
+
       </aside>
 
       <main className="main-content">
-
-        <button className="toggle-btn" onClick={toggleSidebar}>
-          {sidebarOpen ? "⮜" : "⮞"}
-        </button>
-
         <header className="topbar">
           <div>
             <h1>Dashboard Admin</h1>
-            <p className="welcome-text">
-              Selamat datang, <strong>Admin</strong> 👋
-            </p>
+            <p className="welcome-text">Selamat datang, <strong>Admin</strong> 👋</p>
           </div>
 
           <div className="admin-profile">
-            <img src={ProfilIcon} className="profile-img" alt="Profil" />
+            <img src={ProfilIcon} alt="Profil" className="profile-img" />
             <span>Admin</span>
           </div>
         </header>
@@ -154,7 +150,6 @@ export default function AdminDashboard() {
             <p className="value">{stats.payment}</p>
           </div>
         </section>
-
       </main>
 
     </div>
