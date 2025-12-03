@@ -2,150 +2,173 @@
    PAGE WRAPPER
 ========================================= */
 .paket-page {
-  padding: 30px 40px;
-  font-family: "Poppins", sans-serif;
+    padding: 30px 40px;
+    font-family: "Poppins", sans-serif;
 }
 
 .paket-title {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #1a73e8;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #1a73e8;
 }
 
 /* =========================================
    ADD BUTTON
 ========================================= */
 .paket-add-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #1a73e8;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: 0.25s;
-  margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.25s;
+    margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 .paket-add-btn:hover {
-  background: #155fc9;
+    background: #0f5ac4;
+    color: white;
 }
 
 .icon-btn {
-  width: 18px;
-  height: 18px;
-  filter: brightness(0) invert(1);
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
 }
 
 .icon-btn-small {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) invert(1);
-  margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+    margin-right: 5px;
 }
 
 /* =========================================
    TABLE WRAPPER
 ========================================= */
 .paket-table-wrapper {
-  min-height: 250px; 
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 10px;
+    min-height: 200px;
 }
 
 .paket-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .paket-table th {
-  background: #1a73e8;
-  color: white;
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
+    background: #1a73e8;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.paket-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.paket-table th:last-child {
+    border-top-right-radius: 10px;
 }
 
 .paket-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  color: #333;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
 }
 
 .paket-table tr:hover td {
-  background: #f4f8ff;
+    background: #f4f8ff;
 }
 
 .paket-table-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: white;
-  padding: 16px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
 }
 
 .paket-empty {
-  text-align: center;
-  padding: 20px;
-  color: #777;
-  font-style: italic;
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
 }
 
 /* =========================================
    ACTION BUTTONS
 ========================================= */
 .paket-action-col {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .paket-edit {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  color: #1a73e8;
-  font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background: #ffcc00;
+    color: #000 !important;
+    padding: 5px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.paket-edit img {
+    filter: brightness(0);
+}
+
+.paket-edit:hover {
+    background: #e6b800;
+    color: #000 !important;
 }
 
 .paket-delete {
-  display: inline-flex;
-  align-items: center;
-  background: #e63946;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    background: #e63946;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .paket-delete:hover {
-  background: #c92c37;
+    background: #c92c37;
 }
 
 .paket-search {
-  width: 260px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 2px solid #1a73e8;
-  background: white;
-  color: black;
+    width: 260px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid #1a73e8;
+    background: white;
+    color: black;
 }
 
 .paket-search::placeholder {
-  color: #888;
+    color: #b9c3d0;
 }
 
 .paket-count-info {
-  margin-top: 15px;
-  text-align: right;
-  color: #666;
-  font-size: 14px;
-  padding-right: 4px;
+    margin-top: 25px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
 }
