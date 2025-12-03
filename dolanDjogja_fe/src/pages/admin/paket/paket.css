@@ -51,11 +51,7 @@
    TABLE WRAPPER
 ========================================= */
 .paket-table-wrapper {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  overflow-x: auto;
+  min-height: 250px; 
 }
 
 .paket-table {
@@ -83,9 +79,13 @@
 
 .paket-table-top {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  justify-content: space-between;
+  background: white;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 18px;
 }
 
 .paket-empty {
@@ -130,17 +130,16 @@
 }
 
 .paket-search {
-  width: 240px;
+  width: 260px;
   padding: 10px 14px;
   border-radius: 8px;
   border: 2px solid #1a73e8;
   background: white;
   color: black;
-  font-size: 14px;
 }
 
 .paket-search::placeholder {
-  color: #777; 
+  color: #888;
 }
 
 .paket-count-info {

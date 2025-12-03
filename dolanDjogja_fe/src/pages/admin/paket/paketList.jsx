@@ -14,9 +14,15 @@ export default function PaketList() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const filteredData = paket.filter((item) =>
-    item.nama_paket.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredData = paket.filter((item) => {
+    const s = search.toLowerCase();
+
+    return (
+      item.nama_paket.toLowerCase().includes(s) ||
+      item.durasi.toLowerCase().includes(s) ||
+      String(item.harga).toLowerCase().includes(s)
+    );
+  });
 
   useEffect(() => {
     const user = getUser();
