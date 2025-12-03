@@ -8,8 +8,9 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
+html, body {
   background: #f5f8ff;
+  overflow-x: hidden;
 }
 
 /* =============================
@@ -90,7 +91,7 @@ body {
 .sidebar-menu a:hover {
   background: rgba(255, 255, 255, 0.35);
   font-weight: 500;
-  transform: translateX(5px);
+  transform: translateX(3px);
 }
 
 .sidebar.collapsed {
