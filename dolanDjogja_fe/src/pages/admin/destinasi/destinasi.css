@@ -1,0 +1,202 @@
+/* =========================================
+   PAGE TITLE
+========================================= */
+.destinasi-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #1a73e8;
+}
+
+/* =========================================
+   ADD BUTTON
+========================================= */
+.destinasi-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1a73e8;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.destinasi-add-btn:hover {
+    background: #0f5ac4;
+    color: white;
+}
+
+.icon-btn {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+}
+
+.icon-btn-small {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+    margin-right: 5px;
+}
+
+/* =========================================
+   TABLE WRAPPER
+========================================= */
+.destinasi-table-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 10px;
+    min-height: 200px;
+}
+
+.destinasi-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.destinasi-table th {
+    background: #1a73e8;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.destinasi-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.destinasi-table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.destinasi-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.destinasi-table tr:hover td {
+    background: #f4f8ff;
+}
+
+.destinasi-table-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 20px;
+}
+
+.destinasi-empty {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+}
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+.destinasi-action-col {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.destinasi-edit {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background: #ffcc00;
+    color: #000 !important;
+    padding: 5px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.destinasi-edit img {
+    filter: brightness(0);
+}
+
+.destinasi-edit:hover {
+    background: #e6b800;
+    color: #000 !important;
+}
+
+.destinasi-delete {
+    display: inline-flex;
+    align-items: center;
+    background: #e63946;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.destinasi-delete:hover {
+    background: #c92c37;
+}
+
+/* =========================================
+   SEARCH INPUT
+========================================= */
+.destinasi-search {
+    width: 260px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid #1a73e8;
+    background: white;
+    color: black;
+}
+
+.destinasi-search::placeholder {
+    color: #b9c3d0;
+}
+
+.left-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.destinasi-export-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #ffcc00;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.destinasi-export-btn:hover {
+    background: #e6b800;
+}
+
+.black-icon {
+    filter: brightness(0);
+    margin-right: 5px;
+}
+
+/* =========================================
+   COUNT INFO
+========================================= */
+.destinasi-count-info {
+    margin-top: 25px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
