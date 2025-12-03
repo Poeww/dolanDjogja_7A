@@ -241,7 +241,7 @@ body {
 .cards-row {
   display: grid;
   grid-template-columns: repeat(5, 1fr); 
-  gap: 25px;
+  gap: 20px;
   width: 100%;
   margin-top: 20px;
 }
