@@ -89,6 +89,7 @@ body {
   background: rgba(255, 255, 255, 0.35);
   font-weight: 500;
   transform: translateX(5px);
+  color: #ffffff !important;
 }
 
 .sidebar.collapsed {
