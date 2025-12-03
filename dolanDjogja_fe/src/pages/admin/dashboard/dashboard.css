@@ -66,6 +66,7 @@ body {
   gap: 10px;
   align-items: center;
   transition: 0.25s;
+  color: white !important;
 }
 
 .sidebar-menu a.active {
@@ -111,6 +112,25 @@ body {
 .sidebar.collapsed .sidebar-menu a {
   justify-content: center;
   padding: 12px 0;
+}
+
+.sidebar.collapsed .sidebar-menu a::after {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar.collapsed .sidebar-menu a:hover::after {
+  opacity: 1;
+  left: 90px;
+}
+
+.sidebar.collapsed .logout-btn::after {
+  opacity: 0;
+}
+
+.sidebar.collapsed .logout-btn:hover::after {
+  opacity: 1;
+  left: 90px;
 }
 
 .sidebar.collapsed .logout-btn {
@@ -163,6 +183,7 @@ body {
 .sidebar.collapsed + .toggle-btn {
   left: 90px !important;
 }
+
 
 .toggle-btn:hover {
   background: #185ec9;
@@ -326,6 +347,12 @@ body {
 .sidebar-menu a:hover::after {
   opacity: 1;
   left: 90px;
+}
+
+.sidebar:not(.collapsed) .sidebar-menu a::after,
+.sidebar:not(.collapsed) .logout-btn::after {
+  display: none !important;
+  opacity: 0 !important;
 }
 
 .logout-btn {
