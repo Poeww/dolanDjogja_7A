@@ -14,3 +14,13 @@ export const getMyBookings = async () => {
   const res = await API.get("/my-bookings");
   return res.data;
 };
+
+export const getAllBookings = async () => {
+  const res = await API.get("/bookings");
+  return res.data;
+};
+
+export const updateBookingStatus = async (id, data) => {
+  const res = await API.put(`/bookings/${id}`, data);
+  return res.data;
+};
