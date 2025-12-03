@@ -13,11 +13,16 @@
   color: #1a73e8;
 }
 
+/* =========================================
+   ADD BUTTON
+========================================= */
 .paket-add-btn {
-  display: inline-block;
-  padding: 10px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: #1a73e8;
   color: white;
+  padding: 10px 16px;
   border-radius: 6px;
   font-weight: 500;
   text-decoration: none;
@@ -29,8 +34,21 @@
   background: #155fc9;
 }
 
+.icon-btn {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.icon-btn-small {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  margin-right: 5px;
+}
+
 /* =========================================
-   TABLE CONTAINER
+   TABLE WRAPPER
 ========================================= */
 .paket-table-wrapper {
   background: white;
@@ -48,9 +66,9 @@
 .paket-table th {
   background: #1a73e8;
   color: white;
-  font-weight: 600;
   padding: 12px;
   text-align: left;
+  font-weight: 600;
 }
 
 .paket-table td {
@@ -73,14 +91,23 @@
 /* =========================================
    ACTION BUTTONS
 ========================================= */
+.paket-action-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .paket-edit {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   color: #1a73e8;
   font-weight: 600;
-  margin-right: 8px;
-  text-decoration: none;
 }
 
 .paket-delete {
+  display: inline-flex;
+  align-items: center;
   background: #e63946;
   color: white;
   padding: 6px 12px;
