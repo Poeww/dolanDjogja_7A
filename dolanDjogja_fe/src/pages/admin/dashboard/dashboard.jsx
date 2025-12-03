@@ -16,8 +16,8 @@ import ProfilIcon from "../../../assets/icon/profil.svg";
 import api from "../../../services/api";
 
 export default function AdminDashboard() {
-  const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
 
   const [stats, setStats] = useState({
     paket: 0,
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
         payment: pay.data.length,
       });
     } catch (err) {
-      console.error(err);
+      console.error("Error loading stats:", err);
     }
   };
 
@@ -55,69 +55,83 @@ export default function AdminDashboard() {
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
 
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
-        
-        <button
-          className="toggle-btn"
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          {collapsed ? "▶" : "◀"}
-        </button>
-
         <div className="sidebar-header">
-          <img src={logo} className="sidebar-logo" />
+          <img src={logo} className="sidebar-logo" alt="Logo" />
           {!collapsed && <h2>dolanDjogja</h2>}
         </div>
 
         <nav className="sidebar-menu">
-
-          <Link to="/admin/dashboard" className={pathname.includes("/dashboard") ? "active" : ""}>
+          <Link
+            to="/admin/dashboard"
+            className={location.pathname === "/admin/dashboard" ? "active" : ""}
+          >
             <img src={DashboardIcon} className="menu-icon" />
             {!collapsed && "Dashboard"}
           </Link>
 
-          <Link to="/admin/paket" className={pathname.includes("/paket") ? "active" : ""}>
+          <Link
+            to="/admin/paket"
+            className={location.pathname.includes("/admin/paket") ? "active" : ""}
+          >
             <img src={PaketIcon} className="menu-icon" />
             {!collapsed && "Paket Wisata"}
           </Link>
 
-          <Link to="/admin/destinasi" className={pathname.includes("/destinasi") ? "active" : ""}>
+          <Link
+            to="/admin/destinasi"
+            className={location.pathname.includes("/admin/destinasi") ? "active" : ""}
+          >
             <img src={DestinasiIcon} className="menu-icon" />
             {!collapsed && "Destinasi"}
           </Link>
 
-          <Link to="/admin/jadwal" className={pathname.includes("/jadwal") ? "active" : ""}>
+          <Link
+            to="/admin/jadwal"
+            className={location.pathname.includes("/admin/jadwal") ? "active" : ""}
+          >
             <img src={JadwalIcon} className="menu-icon" />
             {!collapsed && "Jadwal Trip"}
           </Link>
 
-          <Link to="/admin/bookings" className={pathname.includes("/bookings") ? "active" : ""}>
+          <Link
+            to="/admin/bookings"
+            className={location.pathname.includes("/admin/bookings") ? "active" : ""}
+          >
             <img src={BookingIcon} className="menu-icon" />
             {!collapsed && "Booking"}
           </Link>
 
-          <Link to="/admin/payments" className={pathname.includes("/payments") ? "active" : ""}>
+          <Link
+            to="/admin/payments"
+            className={location.pathname.includes("/admin/payments") ? "active" : ""}
+          >
             <img src={PaymentIcon} className="menu-icon" />
             {!collapsed && "Payments"}
           </Link>
-
         </nav>
 
         <button className="logout-btn">
           <img src={LogoutIcon} className="menu-icon" />
           {!collapsed && "Logout"}
         </button>
-
       </aside>
 
+      <button className="toggle-btn" onClick={() => setCollapsed(!collapsed)}>
+        {collapsed ? "▶" : "◀"}
+      </button>
+
+      {/* MAIN CONTENT */}
       <main className="main-content">
         <header className="topbar">
           <div>
             <h1>Dashboard Admin</h1>
-            <p className="welcome-text">Selamat datang, <strong>Admin</strong> 👋</p>
+            <p className="welcome-text">
+              Selamat datang, <strong>Admin</strong> 👋
+            </p>
           </div>
 
           <div className="admin-profile">
-            <img src={ProfilIcon} alt="Profil" className="profile-img" />
+            <img src={ProfilIcon} className="profile-img" />
             <span>Admin</span>
           </div>
         </header>
@@ -151,7 +165,6 @@ export default function AdminDashboard() {
           </div>
         </section>
       </main>
-
     </div>
   );
 }

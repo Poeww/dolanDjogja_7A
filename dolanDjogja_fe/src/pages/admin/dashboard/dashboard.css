@@ -34,6 +34,7 @@ body {
   position: fixed;
   top: 0;
   bottom: 0;
+  transition: width 0.3s ease;
 }
 
 .sidebar-header {
@@ -148,7 +149,7 @@ body {
 .toggle-btn {
   position: absolute;
   top: 15px;
-  left: 270px;
+  left: 260px;
   padding: 8px 12px;
   background: #1e6feb;
   color: white;
@@ -156,11 +157,11 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-size: 18px;
-  transition: 0.25s;
+  transition: left 0.3s ease, background 0.3s ease;
 }
 
-.sidebar-closed .toggle-btn {
-  left: 100px;
+.sidebar.collapsed + .toggle-btn {
+  left: 90px !important;
 }
 
 .toggle-btn:hover {
@@ -174,9 +175,19 @@ body {
 .main-content {
   margin-left: 260px;
   flex: 1;
-  padding: 50px;
+  padding: 90px 60px;
+  transition: margin-left 0.3s ease;
 }
 
+.dashboard-container.collapsed .main-content {
+  margin-left: 90px !important;
+  padding: 90px 60px !important;
+}
+
+.dashboard-container.collapsed .cards-row {
+  grid-template-columns: repeat(5, minmax(240px, 1fr));
+  gap: 30px;
+}
 /* =============================
     TOPBAR
 ============================= */
