@@ -26,7 +26,7 @@ body {
 ============================= */
 .sidebar {
   width: 260px;
-  background: #1a73e8;
+  background: #1e6feb;
   color: white;
   padding: 25px 20px;
   display: flex;
@@ -68,7 +68,31 @@ body {
 }
 
 .sidebar-menu a:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  transform: translateX(5px);
+}
+
+.sidebar.collapsed {
+  width: 90px;
+  transition: 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-header h2 {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-menu a {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.sidebar.collapsed .logout-btn {
+  justify-content: center;
+}
+
+.sidebar.collapsed .menu-icon {
+  margin: auto;
 }
 
 .menu-icon {
@@ -95,6 +119,29 @@ body {
 .logout-btn:hover {
   background: #c92c37;
 }
+
+.toggle-btn {
+  position: absolute;
+  top: 15px;
+  left: 270px;
+  padding: 8px 12px;
+  background: #1e6feb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.25s;
+}
+
+.sidebar-closed .toggle-btn {
+  left: 100px;
+}
+
+.toggle-btn:hover {
+  background: #185ec9;
+}
+
 
 /* =============================
     MAIN CONTENT
