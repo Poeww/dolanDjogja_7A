@@ -22,13 +22,11 @@
     gap: 6px;
     background: #1a73e8;
     color: white;
-    padding: 10px 15px;
+    padding: 5px 15px;
     border-radius: 6px;
     font-weight: 500;
     text-decoration: none;
     transition: 0.25s;
-    margin-bottom: 5px;
-    border-radius: 10px;
 }
 
 .paket-add-btn:hover {
@@ -172,4 +170,32 @@
     text-align: center;
     color: #666;
     font-size: 14px;
+}
+
+.left-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.paket-export-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #ffcc00;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.paket-export-btn:hover {
+    background: #e6b800;
+}
+
+.black-icon {
+    filter: brightness(0);
+    margin-right: 5px;
 }

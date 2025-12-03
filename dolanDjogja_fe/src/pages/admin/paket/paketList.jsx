@@ -6,6 +6,10 @@ import { getUser } from "../../../services/authService";
 import "../dashboard/dashboard.css";
 import "./paket.css";
 
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
+import LogoPDF from "../../../assets/img/logo-dolandjogja.png";
+
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
@@ -18,6 +22,7 @@ import LogoutIcon from "../../../assets/icon/logout.svg";
 import IconAdd from "../../../assets/icon/tambah.svg";
 import IconEdit from "../../../assets/icon/edit.svg";
 import IconDelete from "../../../assets/icon/hapus.svg";
+import IconExport from "../../../assets/icon/export.svg";
 
 export default function PaketList() {
   const [collapsed, setCollapsed] = useState(false);
@@ -57,9 +62,65 @@ export default function PaketList() {
     loadData();
   };
 
+  const exportPDF = () => {
+    const doc = new jsPDF("p", "mm", "a4");
+
+    doc.addImage(LogoPDF, "PNG", 14, 10, 22, 22);
+
+    doc.setFontSize(18);
+    doc.setTextColor(26, 115, 232);
+    doc.text("Daftar Paket Wisata", 40, 20);
+
+    const today = new Date().toLocaleString("id-ID", {
+      dateStyle: "long",
+      timeStyle: "short",
+    });
+
+    doc.setFontSize(11);
+    doc.setTextColor(80, 80, 80);
+    doc.text(`Tanggal Export: ${today}`, 40, 28);
+
+    autoTable(doc, {
+      startY: 40,
+      head: [["ID", "Nama Paket", "Harga", "Durasi"]],
+      body: filteredData.map((p) => [
+        p.id,
+        p.nama_paket,
+        "Rp " + Number(p.harga).toLocaleString("id-ID"),
+        p.durasi,
+      ]),
+      theme: "grid",
+
+      styles: {
+        fontSize: 11,
+        cellPadding: 4,
+        halign: "left",
+        valign: "middle",
+      },
+
+      headStyles: {
+        fillColor: [26, 115, 232],
+        textColor: 255,
+        fontSize: 12,
+        halign: "center",
+      },
+
+      alternateRowStyles: {
+        fillColor: [245, 248, 255],
+      },
+
+      tableLineColor: [220, 220, 220],
+      tableLineWidth: 0.3,
+    });
+
+    const pdfURL = doc.output("bloburl");
+    window.open(pdfURL, "_blank");
+  };
+
+
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
-      
+
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} className="sidebar-logo" alt="Logo" />
@@ -67,64 +128,33 @@ export default function PaketList() {
         </div>
 
         <nav className="sidebar-menu">
-          <Link
-            to="/admin/dashboard"
-            data-title="Dashboard"
-            className={location.pathname === "/admin/dashboard" ? "active" : ""}
-          >
-            <img src={DashboardIcon} className="menu-icon" />
-            {!collapsed && "Dashboard"}
+          <Link to="/admin/dashboard" className={location.pathname === "/admin/dashboard" ? "active" : ""}>
+            <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
           </Link>
 
-          <Link
-            to="/admin/paket"
-            data-title="Paket Wisata"
-            className={location.pathname.includes("/admin/paket") ? "active" : ""}
-          >
-            <img src={PaketIcon} className="menu-icon" />
-            {!collapsed && "Paket Wisata"}
+          <Link to="/admin/paket" className={location.pathname.includes("/admin/paket") ? "active" : ""}>
+            <img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}
           </Link>
 
-          <Link
-            to="/admin/destinasi"
-            data-title="Destinasi"
-            className={location.pathname.includes("/admin/destinasi") ? "active" : ""}
-          >
-            <img src={DestinasiIcon} className="menu-icon" />
-            {!collapsed && "Destinasi"}
+          <Link to="/admin/destinasi" className={location.pathname.includes("/admin/destinasi") ? "active" : ""}>
+            <img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}
           </Link>
 
-          <Link
-            to="/admin/jadwal"
-            data-title="Jadwal Trip"
-            className={location.pathname.includes("/admin/jadwal") ? "active" : ""}
-          >
-            <img src={JadwalIcon} className="menu-icon" />
-            {!collapsed && "Jadwal Trip"}
+          <Link to="/admin/jadwal" className={location.pathname.includes("/admin/jadwal") ? "active" : ""}>
+            <img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}
           </Link>
 
-          <Link
-            to="/admin/bookings"
-            data-title="Booking"
-            className={location.pathname.includes("/admin/bookings") ? "active" : ""}
-          >
-            <img src={BookingIcon} className="menu-icon" />
-            {!collapsed && "Booking"}
+          <Link to="/admin/bookings" className={location.pathname.includes("/admin/bookings") ? "active" : ""}>
+            <img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}
           </Link>
 
-          <Link
-            to="/admin/payments"
-            data-title="Payments"
-            className={location.pathname.includes("/admin/payments") ? "active" : ""}
-          >
-            <img src={PaymentIcon} className="menu-icon" />
-            {!collapsed && "Payments"}
+          <Link to="/admin/payments" className={location.pathname.includes("/admin/payments") ? "active" : ""}>
+            <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
           </Link>
         </nav>
 
         <button className="logout-btn">
-          <img src={LogoutIcon} className="menu-icon" />
-          {!collapsed && "Logout"}
+          <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
         </button>
       </aside>
 
@@ -137,9 +167,16 @@ export default function PaketList() {
         <h2 className="paket-title">Daftar Paket Wisata</h2>
 
         <div className="paket-table-top">
-          <Link to="/admin/paket/create" className="paket-add-btn">
-            <img src={IconAdd} className="icon-btn" /> Tambah Paket
-          </Link>
+
+          <div className="left-actions">
+            <Link to="/admin/paket/create" className="paket-add-btn">
+              <img src={IconAdd} className="icon-btn" /> Tambah Paket
+            </Link>
+
+            <button className="paket-export-btn" onClick={exportPDF}>
+              <img src={IconExport} className="icon-btn-small black-icon" /> Export
+            </button>
+          </div>
 
           <input
             type="text"
@@ -148,6 +185,7 @@ export default function PaketList() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+
         </div>
 
         <div className="paket-table-wrapper">
@@ -165,9 +203,7 @@ export default function PaketList() {
             <tbody>
               {filteredData.length === 0 ? (
                 <tr>
-                  <td colSpan="5" className="paket-empty">
-                    Tidak ada data ditemukan.
-                  </td>
+                  <td colSpan="5" className="paket-empty">Tidak ada data ditemukan.</td>
                 </tr>
               ) : (
                 filteredData.map((p) => (
