@@ -67,6 +67,24 @@ body {
   transition: 0.25s;
 }
 
+.sidebar-menu a.active {
+  background: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 10px;
+  border-left: 5px solid #ffdd57;
+  padding-left: 10px;
+  transform: translateX(5px);
+}
+
+.sidebar-menu a.active:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.sidebar-menu a.active .menu-icon {
+  filter: brightness(2);
+}
+
 .sidebar-menu a:hover {
   background: rgba(255, 255, 255, 0.35);
   font-weight: 500;
@@ -77,6 +95,13 @@ body {
   width: 90px;
   transition: 0.3s ease;
 }
+
+.sidebar.collapsed .sidebar-menu a.active {
+  border-left: none;
+  background: rgba(255, 255, 255, 0.35);
+  transform: none;
+}
+
 
 .sidebar.collapsed .sidebar-header h2 {
   display: none;
