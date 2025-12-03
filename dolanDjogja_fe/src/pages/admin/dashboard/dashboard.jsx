@@ -54,7 +54,6 @@ export default function AdminDashboard() {
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
       
-      {/* SIDEBAR */}
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} className="sidebar-logo" alt="Logo" />
