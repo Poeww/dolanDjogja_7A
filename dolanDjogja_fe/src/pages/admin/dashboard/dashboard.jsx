@@ -53,7 +53,8 @@ export default function AdminDashboard() {
 
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
-
+      
+      {/* SIDEBAR */}
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} className="sidebar-logo" alt="Logo" />
@@ -61,8 +62,10 @@ export default function AdminDashboard() {
         </div>
 
         <nav className="sidebar-menu">
+
           <Link
             to="/admin/dashboard"
+            data-title="Dashboard"
             className={location.pathname === "/admin/dashboard" ? "active" : ""}
           >
             <img src={DashboardIcon} className="menu-icon" />
@@ -71,6 +74,7 @@ export default function AdminDashboard() {
 
           <Link
             to="/admin/paket"
+            data-title="Paket Wisata"
             className={location.pathname.includes("/admin/paket") ? "active" : ""}
           >
             <img src={PaketIcon} className="menu-icon" />
@@ -79,6 +83,7 @@ export default function AdminDashboard() {
 
           <Link
             to="/admin/destinasi"
+            data-title="Destinasi"
             className={location.pathname.includes("/admin/destinasi") ? "active" : ""}
           >
             <img src={DestinasiIcon} className="menu-icon" />
@@ -87,6 +92,7 @@ export default function AdminDashboard() {
 
           <Link
             to="/admin/jadwal"
+            data-title="Jadwal Trip"
             className={location.pathname.includes("/admin/jadwal") ? "active" : ""}
           >
             <img src={JadwalIcon} className="menu-icon" />
@@ -95,6 +101,7 @@ export default function AdminDashboard() {
 
           <Link
             to="/admin/bookings"
+            data-title="Booking"
             className={location.pathname.includes("/admin/bookings") ? "active" : ""}
           >
             <img src={BookingIcon} className="menu-icon" />
@@ -103,6 +110,7 @@ export default function AdminDashboard() {
 
           <Link
             to="/admin/payments"
+            data-title="Payments"
             className={location.pathname.includes("/admin/payments") ? "active" : ""}
           >
             <img src={PaymentIcon} className="menu-icon" />
@@ -110,7 +118,7 @@ export default function AdminDashboard() {
           </Link>
         </nav>
 
-        <button className="logout-btn">
+        <button className="logout-btn" data-title="Logout">
           <img src={LogoutIcon} className="menu-icon" />
           {!collapsed && "Logout"}
         </button>
@@ -120,7 +128,6 @@ export default function AdminDashboard() {
         {collapsed ? "▶" : "◀"}
       </button>
 
-      {/* MAIN CONTENT */}
       <main className="main-content">
         <header className="topbar">
           <div>

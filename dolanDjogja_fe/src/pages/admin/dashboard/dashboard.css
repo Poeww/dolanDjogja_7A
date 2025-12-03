@@ -275,22 +275,100 @@ body {
 }
 
 /* =============================
-    RESPONSIVE
+    RESPONSIVE SIDEBAR (TABLET, HP)
 ============================= */
-@media (max-width: 1100px) {
-  .cards-row {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 900px) {
+  .sidebar {
+    width: 90px;
+    padding: 25px 10px;
+  }
+
+  .sidebar-header h2 {
+    display: none;
+  }
+
+  .sidebar-menu a {
+    justify-content: center;
+    padding: 14px 0;
+  }
+
+  .main-content {
+    margin-left: 90px !important;
+    padding: 70px 20px !important;
+  }
+
+  .toggle-btn {
+    display: none !important;
   }
 }
 
-@media (max-width: 800px) {
+.sidebar-menu a {
+  position: relative;
+}
+
+.sidebar-menu a::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 70px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  top: 50%;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.sidebar-menu a:hover::after {
+  opacity: 1;
+  left: 90px;
+}
+
+.logout-btn {
+  position: relative;
+}
+
+.logout-btn::after {
+  content: "Logout";
+  position: absolute;
+  left: 70px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  top: 50%;
+  transition: 0.2s;
+}
+
+.logout-btn:hover::after {
+  opacity: 1;
+  left: 90px;
+}
+
+/* =============================
+    CARD RESPONSIVE
+============================= */
+@media (max-width: 900px) {
   .cards-row {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
 @media (max-width: 600px) {
   .cards-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .large-card {
+    padding: 20px;
   }
 }
