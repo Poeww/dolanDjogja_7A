@@ -11,7 +11,12 @@ import "./paket.css";
 
 export default function PaketList() {
   const [paket, setPaket] = useState([]);
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
+
+  const filteredData = paket.filter((item) =>
+    item.nama_paket.toLowerCase().includes(search.toLowerCase())
+  );
 
   useEffect(() => {
     const user = getUser();
@@ -19,7 +24,6 @@ export default function PaketList() {
       navigate("/login");
       return;
     }
-
     loadData();
   }, []);
 
@@ -38,9 +42,21 @@ export default function PaketList() {
     <div className="paket-page">
       <h2 className="paket-title">Daftar Paket Wisata</h2>
 
-      <Link to="/admin/paket/create" className="paket-add-btn">
-        <img src={IconAdd} className="icon-btn" /> Tambah Paket
-      </Link>
+      <div className="paket-table-top">
+
+        <Link to="/admin/paket/create" className="paket-add-btn">
+          <img src={IconAdd} className="icon-btn" /> Tambah Paket
+        </Link>
+
+        <input
+          type="text"
+          placeholder="Cari di sini..."
+          className="paket-search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+      </div>
 
       <div className="paket-table-wrapper">
         <table className="paket-table">
@@ -55,14 +71,14 @@ export default function PaketList() {
           </thead>
 
           <tbody>
-            {paket.length === 0 ? (
+            {filteredData.length === 0 ? (
               <tr>
                 <td colSpan="5" className="paket-empty">
-                  Belum ada paket wisata.
+                  Tidak ada data ditemukan.
                 </td>
               </tr>
             ) : (
-              paket.map((p) => (
+              filteredData.map((p) => (
                 <tr key={p.id}>
                   <td>{p.id}</td>
                   <td>{p.nama_paket}</td>
@@ -88,6 +104,10 @@ export default function PaketList() {
             )}
           </tbody>
         </table>
+
+        <div className="paket-count-info">
+          Menampilkan {filteredData.length} dari {paket.length} data
+        </div>
       </div>
     </div>
   );

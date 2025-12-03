@@ -81,6 +81,13 @@
   background: #f4f8ff;
 }
 
+.paket-table-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
 .paket-empty {
   text-align: center;
   padding: 20px;
@@ -120,4 +127,26 @@
 
 .paket-delete:hover {
   background: #c92c37;
+}
+
+.paket-search {
+  width: 240px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 2px solid #1a73e8;
+  background: white;
+  color: black;
+  font-size: 14px;
+}
+
+.paket-search::placeholder {
+  color: #777; 
+}
+
+.paket-count-info {
+  margin-top: 15px;
+  text-align: right;
+  color: #666;
+  font-size: 14px;
+  padding-right: 4px;
 }
