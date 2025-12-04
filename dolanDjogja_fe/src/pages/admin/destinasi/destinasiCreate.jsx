@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { createDestinasi } from "../../../services/destinasiService";
-import { getUser } from "../../../services/authService";
 
 import "../dashboard/dashboard.css";
 import "./destinasiCreateEdit.css";
@@ -35,29 +34,18 @@ export default function DestinasiCreate() {
   const [showSaveModal, setShowSaveModal] = useState(false);
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setForm({ ...form, gambar: file });
-    setPreviewImg(URL.createObjectURL(file));
+    setPreviewImg(file ? URL.createObjectURL(file) : null);
   };
 
   const isFormDirty = () => {
     const { nama_destinasi, lokasi, deskripsi, harga_tiket, jam_buka, gambar } = form;
-
-    return (
-      nama_destinasi ||
-      lokasi ||
-      deskripsi ||
-      harga_tiket ||
-      jam_buka ||
-      gambar
-    );
+    return nama_destinasi || lokasi || deskripsi || harga_tiket || jam_buka || gambar;
   };
 
   const submitNow = async () => {
@@ -68,10 +56,7 @@ export default function DestinasiCreate() {
     fd.append("deskripsi", form.deskripsi);
     fd.append("harga_tiket", form.harga_tiket);
     fd.append("jam_buka", form.jam_buka);
-
-    if (form.gambar) {
-      fd.append("gambar", form.gambar);
-    }
+    if (form.gambar) fd.append("gambar", form.gambar);
 
     await createDestinasi(fd);
     navigate("/admin/destinasi");
@@ -122,6 +107,7 @@ export default function DestinasiCreate() {
       </button>
 
       <main className="main-content">
+
         <Link to="/admin/destinasi" className="back-btn">
           <img src={BackIcon} className="back-icon" />
           Kembali
@@ -193,7 +179,6 @@ export default function DestinasiCreate() {
                 {previewImg ? (
                   <>
                     <img src={previewImg} className="upload-preview" alt="preview" />
-
                     <button
                       type="button"
                       className="remove-img-btn"
@@ -207,9 +192,7 @@ export default function DestinasiCreate() {
                     </button>
                   </>
                 ) : (
-                  <div className="upload-preview placeholder">
-                    <span>Belum ada gambar</span>
-                  </div>
+                  <div className="upload-preview placeholder">Belum ada gambar</div>
                 )}
               </div>
 
@@ -234,8 +217,8 @@ export default function DestinasiCreate() {
                   id="fileInput"
                   type="file"
                   accept="image/*"
-                  onChange={handleFileChange}
                   style={{ display: "none" }}
+                  onChange={handleFileChange}
                 />
               </div>
             </div>
@@ -249,11 +232,8 @@ export default function DestinasiCreate() {
                 type="button"
                 className="btn-cancel"
                 onClick={() => {
-                  if (isFormDirty()) {
-                    setShowCancelModal(true);
-                  } else {
-                    navigate("/admin/destinasi");
-                  }
+                  if (isFormDirty()) setShowCancelModal(true);
+                  else navigate("/admin/destinasi");
                 }}
               >
                 Cancel
