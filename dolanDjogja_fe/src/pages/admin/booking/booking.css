@@ -10,6 +10,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-top: 10px;
+    min-height: 200px;
 }
 
 .booking-table {
@@ -22,11 +23,21 @@
     color: white;
     padding: 12px;
     text-align: left;
+    font-weight: 600;
+}
+
+.booking-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.booking-table th:last-child {
+    border-top-right-radius: 10px;
 }
 
 .booking-table td {
     padding: 12px;
     border-bottom: 1px solid #eee;
+    color: #333;
 }
 
 .booking-table tr:hover td {
@@ -35,9 +46,10 @@
 
 .booking-table-top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 12px;
+    gap: 20px;
 }
 
 .booking-search {
@@ -53,43 +65,73 @@
     color: #b9c3d0;
 }
 
-.booking-edit {
-    display: inline-flex;
+.left-actions {
+    display: flex;
     align-items: center;
-    background: #ffcc00;
-    padding: 6px 16px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    color: black;
-}
-
-.booking-edit:hover {
-    background: #e6b800;
-}
-
-.booking-empty {
-    text-align: center;
-    color: #777;
-    padding: 20px;
-    font-style: italic;
-}
-
-.booking-count-info {
-    padding: 15px 0;
-    text-align: center;
-    color: #666;
+    gap: 10px;
 }
 
 .booking-export-btn {
+    display: inline-flex;
+    align-items: center;
     background: #ffcc00;
+    color: #000;
     padding: 8px 16px;
-    border: none;
     border-radius: 6px;
-    font-weight: 600;
+    border: none;
     cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .booking-export-btn:hover {
     background: #e6b800;
+}
+
+.booking-export-btn img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0);
+    margin-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.booking-edit {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background: #ffcc00;
+    color: #000 !important;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.booking-edit img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0);
+    margin-right: 6px;
+}
+
+.booking-edit:hover {
+    background: #e6b800;
+    color: #000 !important;
+}
+
+.booking-empty {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+}
+
+.booking-count-info {
+    margin-top: 25px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
 }
