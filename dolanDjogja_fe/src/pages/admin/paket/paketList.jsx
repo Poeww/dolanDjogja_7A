@@ -32,13 +32,15 @@ export default function PaketList() {
   const [paket, setPaket] = useState([]);
   const [search, setSearch] = useState("");
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
   useEffect(() => {
     const user = getUser();
     if (!user || user.role !== "admin") {
       navigate("/login");
       return;
     }
-
     loadData();
   }, []);
 
@@ -56,9 +58,15 @@ export default function PaketList() {
     );
   });
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Yakin hapus paket ini?")) return;
-    await deletePaket(id);
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
+    await deletePaket(deleteId);
+    setShowDeleteModal(false);
+    setDeleteId(null);
     loadData();
   };
 
@@ -66,7 +74,6 @@ export default function PaketList() {
     const doc = new jsPDF("p", "mm", "a4");
 
     doc.addImage(LogoPDF, "PNG", 14, 10, 22, 22);
-
     doc.setFontSize(18);
     doc.setTextColor(26, 115, 232);
     doc.text("Daftar Paket Wisata", 40, 20);
@@ -90,25 +97,21 @@ export default function PaketList() {
         p.durasi,
       ]),
       theme: "grid",
-
       styles: {
         fontSize: 11,
         cellPadding: 4,
         halign: "left",
         valign: "middle",
       },
-
       headStyles: {
         fillColor: [26, 115, 232],
         textColor: 255,
         fontSize: 12,
         halign: "center",
       },
-
       alternateRowStyles: {
         fillColor: [245, 248, 255],
       },
-
       tableLineColor: [220, 220, 220],
       tableLineWidth: 0.3,
     });
@@ -116,7 +119,6 @@ export default function PaketList() {
     const pdfURL = doc.output("bloburl");
     window.open(pdfURL, "_blank");
   };
-
 
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
@@ -136,19 +138,19 @@ export default function PaketList() {
             <img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}
           </Link>
 
-          <Link to="/admin/destinasi" className={location.pathname.includes("/admin/destinasi") ? "active" : ""}>
+          <Link to="/admin/destinasi">
             <img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}
           </Link>
 
-          <Link to="/admin/jadwal" className={location.pathname.includes("/admin/jadwal") ? "active" : ""}>
+          <Link to="/admin/jadwal">
             <img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}
           </Link>
 
-          <Link to="/admin/bookings" className={location.pathname.includes("/admin/bookings") ? "active" : ""}>
+          <Link to="/admin/bookings">
             <img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}
           </Link>
 
-          <Link to="/admin/payments" className={location.pathname.includes("/admin/payments") ? "active" : ""}>
+          <Link to="/admin/payments">
             <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
           </Link>
         </nav>
@@ -213,13 +215,18 @@ export default function PaketList() {
                     <td>Rp {Number(p.harga).toLocaleString()}</td>
                     <td>{p.durasi}</td>
                     <td className="paket-action-col">
+                      
                       <Link className="paket-edit" to={`/admin/paket/edit/${p.id}`}>
                         <img src={IconEdit} className="icon-btn-small" /> Edit
                       </Link>
 
-                      <button className="paket-delete" onClick={() => handleDelete(p.id)}>
+                      <button
+                        className="paket-delete"
+                        onClick={() => handleDeleteClick(p.id)}
+                      >
                         <img src={IconDelete} className="icon-btn-small" /> Hapus
                       </button>
+
                     </td>
                   </tr>
                 ))
@@ -232,6 +239,21 @@ export default function PaketList() {
           </div>
         </div>
       </main>
+
+      {showDeleteModal && (
+        <div className="paket-modal-overlay">
+          <div className="paket-modal-box">
+            <h3>Hapus Paket?</h3>
+            <p>Paket yang dihapus tidak dapat dikembalikan.</p>
+
+            <div className="paket-modal-actions">
+              <button className="paket-modal-confirm" onClick={confirmDelete}>Ya, Hapus</button>
+              <button className="paket-modal-cancel" onClick={() => setShowDeleteModal(false)}>Batal</button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

@@ -199,3 +199,86 @@
     filter: brightness(0);
     margin-right: 5px;
 }
+
+/* ============================
+   MODAL DELETE
+============================ */
+.paket-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.paket-modal-box {
+    background: #fff;
+    width: 340px;
+    padding: 22px 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: paketModalFade 0.2s ease;
+}
+
+.paket-modal-box h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.paket-modal-box p {
+    color: #555;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.paket-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.paket-modal-confirm {
+    background: #d9534f;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.paket-modal-confirm:hover {
+    background: #c9302c;
+}
+
+.paket-modal-cancel {
+    background: #6c757d;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.paket-modal-cancel:hover {
+    background: #5a6268;
+}
+
+@keyframes paketModalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
