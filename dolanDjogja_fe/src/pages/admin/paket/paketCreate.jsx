@@ -15,7 +15,6 @@ import JadwalIcon from "../../../assets/icon/jadwal.svg";
 import BookingIcon from "../../../assets/icon/booking.svg";
 import PaymentIcon from "../../../assets/icon/payment.svg";
 import LogoutIcon from "../../../assets/icon/logout.svg";
-
 import BackIcon from "../../../assets/icon/back.svg";
 
 export default function PaketCreate() {
@@ -37,11 +36,11 @@ export default function PaketCreate() {
   });
 
   const [previewImg, setPreviewImg] = useState(null);
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   useEffect(() => {
     const user = getUser();
     if (!user || user.role !== "admin") navigate("/login");
-
     loadDestinasi();
   }, []);
 
@@ -74,6 +73,20 @@ export default function PaketCreate() {
     setPreviewImg(URL.createObjectURL(file));
   };
 
+  const isFormDirty = () => {
+    const { nama_paket, deskripsi, harga, durasi, lokasi_tujuan, kuota, destinasi_ids, gambar_thumbnail } = form;
+    return (
+      nama_paket ||
+      deskripsi ||
+      harga ||
+      durasi ||
+      lokasi_tujuan ||
+      kuota ||
+      destinasi_ids.length > 0 ||
+      gambar_thumbnail
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -85,9 +98,7 @@ export default function PaketCreate() {
     payload.append("lokasi_tujuan", form.lokasi_tujuan);
     payload.append("kuota", form.kuota);
 
-    form.destinasi_ids.forEach((id) =>
-      payload.append("destinasi_ids[]", id)
-    );
+    form.destinasi_ids.forEach((id) => payload.append("destinasi_ids[]", id));
 
     if (form.gambar_thumbnail) {
       payload.append("gambar_thumbnail", form.gambar_thumbnail);
@@ -106,7 +117,10 @@ export default function PaketCreate() {
         </div>
 
         <nav className="sidebar-menu">
-          <Link to="/admin/dashboard" className={location.pathname === "/admin/dashboard" ? "active" : ""}>
+          <Link
+            to="/admin/dashboard"
+            className={location.pathname === "/admin/dashboard" ? "active" : ""}
+          >
             <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
           </Link>
 
@@ -141,7 +155,6 @@ export default function PaketCreate() {
       </button>
 
       <main className="main-content">
-
         <Link to="/admin/paket" className="back-btn">
           <img src={BackIcon} className="back-icon" />
           Kembali
@@ -151,7 +164,6 @@ export default function PaketCreate() {
 
         <div className="paket-form-card">
           <form onSubmit={handleSubmit} className="form-grid">
-
             <div className="form-group form-left">
               <input
                 className="form-input"
@@ -187,7 +199,9 @@ export default function PaketCreate() {
                 className="form-input"
                 placeholder=" "
                 value={form.lokasi_tujuan}
-                onChange={(e) => setForm({ ...form, lokasi_tujuan: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, lokasi_tujuan: e.target.value })
+                }
               />
               <label className="form-label">Lokasi Tujuan</label>
             </div>
@@ -215,7 +229,6 @@ export default function PaketCreate() {
             </div>
 
             <div className="upload-row form-full">
-
               <div className="preview-wrapper">
                 {previewImg ? (
                   <>
@@ -265,10 +278,7 @@ export default function PaketCreate() {
                   style={{ display: "none" }}
                 />
               </div>
-
             </div>
-
-
 
             <div className="destinasi-box form-full">
               {destinasiList.map((d) => (
@@ -284,13 +294,52 @@ export default function PaketCreate() {
             </div>
 
             <div className="form-buttons">
-              <button type="submit" className="submit-btn-basic">Simpan</button>
-              <button type="button" className="btn-cancel" onClick={() => navigate('/admin/paket')}>Cancel</button>
-            </div>
+              <button type="submit" className="submit-btn-basic">
+                Simpan
+              </button>
 
+              <button
+                type="button"
+                className="btn-cancel"
+                onClick={() => {
+                  if (isFormDirty()) {
+                    setShowCancelModal(true);
+                  } else {
+                    navigate("/admin/paket");
+                  }
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </main>
+
+      {showCancelModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Batalkan Perubahan?</h3>
+            <p>Data yang sudah diisi akan hilang. Yakin ingin keluar?</p>
+
+            <div className="modal-actions">
+              <button
+                className="modal-confirm"
+                onClick={() => navigate("/admin/paket")}
+              >
+                Ya, Batalkan
+              </button>
+
+              <button
+                className="modal-cancel"
+                onClick={() => setShowCancelModal(false)}
+              >
+                Kembali
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

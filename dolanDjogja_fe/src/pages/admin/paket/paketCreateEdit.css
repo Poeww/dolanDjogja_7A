@@ -351,3 +351,94 @@ input[type="file"] {
         transform: rotate(360deg);
     }
 }
+
+/* ===============================
+   MODAL OVERLAY
+================================*/
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* ===============================
+   BOX UTAMA
+================================*/
+.modal-box {
+  background: #ffffff;
+  padding: 25px 30px;
+  width: 360px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: modalFade 0.2s ease-in-out;
+}
+
+.modal-box h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.modal-box p {
+  color: #444;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* ===============================
+   MODAL BUTTONS
+================================*/
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.modal-confirm {
+  background: #d9534f;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.modal-confirm:hover {
+  background: #c9302c;
+}
+
+.modal-cancel {
+  background: #6c757d;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.modal-cancel:hover {
+  background: #5a6268;
+}
+
+/* ==============================
+   ANIMATION
+==============================*/
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
