@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { getPaketById, updatePaket } from "../../../services/paketService";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import "../dashboard/dashboard.css";
 import "./paketCreateEdit.css";
 
+import logo from "../../../assets/img/logo-dolandjogja.svg";
+import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import PaketIcon from "../../../assets/icon/paket.svg";
+import DestinasiIcon from "../../../assets/icon/destinasi.svg";
+import JadwalIcon from "../../../assets/icon/jadwal.svg";
+import BookingIcon from "../../../assets/icon/booking.svg";
+import PaymentIcon from "../../../assets/icon/payment.svg";
+import LogoutIcon from "../../../assets/icon/logout.svg";
 import BackIcon from "../../../assets/icon/back.svg";
 
 export default function PaketEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [collapsed, setCollapsed] = useState(false);
 
   const [form, setForm] = useState({
     nama_paket: "",
@@ -69,17 +80,17 @@ export default function PaketEdit() {
     setLoading(true);
     setErrors({});
 
-    const payload = new FormData();
-    Object.keys(form).forEach((key) => payload.append(key, form[key]));
+    const fd = new FormData();
+    Object.keys(form).forEach((key) => fd.append(key, form[key]));
 
     if (thumbnail) {
-      payload.append("gambar_thumbnail", thumbnail);
+      fd.append("gambar_thumbnail", thumbnail);
     }
 
-    payload.append("_method", "PUT");
+    fd.append("_method", "PUT");
 
     try {
-      await updatePaket(id, payload);
+      await updatePaket(id, fd);
       navigate("/admin/paket");
     } catch (err) {
       if (err.response?.data?.errors) {
@@ -94,9 +105,50 @@ export default function PaketEdit() {
     angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
   return (
-    <div className="dashboard-container">
-      <main className="main-content">
+    <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
 
+      <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+        <div className="sidebar-header">
+          <img src={logo} className="sidebar-logo" alt="Logo" />
+          {!collapsed && <h2>dolanDjogja</h2>}
+        </div>
+
+        <nav className="sidebar-menu">
+          <Link to="/admin/dashboard" className={location.pathname === "/admin/dashboard" ? "active" : ""}>
+            <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+          </Link>
+
+          <Link to="/admin/paket" className="active">
+            <img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}
+          </Link>
+
+          <Link to="/admin/destinasi">
+            <img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}
+          </Link>
+
+          <Link to="/admin/jadwal">
+            <img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}
+          </Link>
+
+          <Link to="/admin/bookings">
+            <img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}
+          </Link>
+
+          <Link to="/admin/payments">
+            <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
+          </Link>
+        </nav>
+
+        <button className="logout-btn">
+          <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
+        </button>
+      </aside>
+
+      <button className="toggle-btn" onClick={() => setCollapsed(!collapsed)}>
+        {collapsed ? "▶" : "◀"}
+      </button>
+
+      <main className="main-content">
         <Link to="/admin/paket" className="back-btn">
           <img src={BackIcon} className="back-icon" />
           Kembali
@@ -116,7 +168,6 @@ export default function PaketEdit() {
                 onChange={handleChange}
               />
               <label className="form-label">Nama Paket</label>
-              {errors.nama_paket && <p className="form-error">{errors.nama_paket[0]}</p>}
             </div>
 
             <div className="form-group form-right">
@@ -128,7 +179,6 @@ export default function PaketEdit() {
                 onChange={handleChange}
               />
               <label className="form-label">Durasi</label>
-              {errors.durasi && <p className="form-error">{errors.durasi[0]}</p>}
             </div>
 
             <div className="form-group form-left">
@@ -140,7 +190,6 @@ export default function PaketEdit() {
                 onChange={handleChange}
               />
               <label className="form-label">Deskripsi</label>
-              {errors.deskripsi && <p className="form-error">{errors.deskripsi[0]}</p>}
             </div>
 
             <div className="form-group form-right">
@@ -152,7 +201,6 @@ export default function PaketEdit() {
                 onChange={handleChange}
               />
               <label className="form-label">Lokasi Tujuan</label>
-              {errors.lokasi_tujuan && <p className="form-error">{errors.lokasi_tujuan[0]}</p>}
             </div>
 
             <div className="form-group form-left">
@@ -164,7 +212,6 @@ export default function PaketEdit() {
                 onChange={handleChange}
               />
               <label className="form-label">Harga</label>
-              {errors.harga && <p className="form-error">{errors.harga[0]}</p>}
             </div>
 
             <div className="form-group form-right">
@@ -177,7 +224,6 @@ export default function PaketEdit() {
                 onChange={handleChange}
               />
               <label className="form-label">Kuota</label>
-              {errors.kuota && <p className="form-error">{errors.kuota[0]}</p>}
             </div>
 
             <div className="upload-row form-full">
@@ -210,7 +256,7 @@ export default function PaketEdit() {
 
                 {!oldThumbnail && !previewImg && (
                   <div className="upload-preview placeholder">
-                    <span>Belum ada gambar</span>
+                    Belum ada gambar
                   </div>
                 )}
               </div>
@@ -230,13 +276,7 @@ export default function PaketEdit() {
                 >
                   Pilih Gambar
                 </button>
-                <input
-                  id="fileInput"
-                  type="file"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
-                />
+                <input id="fileInput" type="file" accept="image/*" onChange={handleFileChange} />
               </div>
             </div>
 
@@ -244,6 +284,7 @@ export default function PaketEdit() {
               <button type="submit" className="submit-btn-basic" disabled={loading}>
                 {loading ? "Menyimpan..." : "Update"}
               </button>
+
               <button type="button" className="btn-cancel" onClick={() => navigate("/admin/paket")}>
                 Cancel
               </button>
