@@ -1,0 +1,320 @@
+/* =========================================================
+   FORM CARD WRAPPER
+========================================================= */
+.paket-form-card {
+    background: #ffffff;
+    padding: 40px 50px;
+    border-radius: 20px;
+    max-width: 1450px;
+    width: 100%;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   FORM GRID - CUSTOM LAYOUT
+========================================================= */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 30px;
+}
+
+.form-left {
+    grid-column: 1;
+}
+
+.form-right {
+    grid-column: 2;
+}
+
+.form-full {
+    grid-column: span 2;
+}
+
+/* =========================================================
+   FLOATING LABEL INPUT
+========================================================= */
+.form-group {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #d9ddea;
+    border-radius: 14px;
+    font-size: 16px;
+    background: #fff;
+    outline: none;
+    transition: .25s ease;
+}
+
+.form-input:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.17);
+}
+
+.form-label {
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    padding: 0 6px;
+    background: #fff;
+    color: #8390a5;
+    font-size: 15px;
+    pointer-events: none;
+    transition: .2s;
+}
+
+.form-input:focus+.form-label,
+.form-input:not(:placeholder-shown)+.form-label {
+    top: -10px;
+    left: 14px;
+    font-size: 13px;
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+.form-textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+/* =========================================================
+   UPLOAD IMAGE
+========================================================= */
+.upload-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 10px;
+}
+
+.upload-preview {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #dce2ee;
+    background: #f4f6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-preview.placeholder {
+    color: #8b93a1;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.preview-wrapper {
+    position: relative;
+    width: 200px;
+    height: 150px;
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: 6px;
+    right: -15px;
+    background: #e63946;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.remove-img-btn:hover {
+    background: #c92c37;
+    transform: scale(1.1);
+}
+
+.upload-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.upload-display {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid #d9ddea;
+    border-radius: 12px;
+    background: white;
+    font-size: 15px;
+    color: #555;
+}
+
+.file-input-custom {
+    padding: 12px 20px;
+    background: #28a745;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.file-input-custom:hover {
+    background: #1e7e34;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.form-buttons {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.submit-btn-basic,
+.btn-cancel {
+    padding: 14px 38px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.submit-btn-basic {
+    background: #1a73e8;
+    color: white;
+}
+
+.submit-btn-basic:hover {
+    background: #0f5ac4;
+}
+
+.btn-cancel {
+    background: #d62828;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #b71d1d;
+}
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    text-decoration: none;
+    color: #1a73e8;
+    transition: .2s;
+}
+
+.back-btn:hover {
+    transform: translateX(-2px);
+}
+
+.back-icon {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) saturate(100%) invert(32%) sepia(85%) saturate(2763%) hue-rotate(202deg) brightness(95%) contrast(91%);
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+.form-error {
+    color: #d62828;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 25px 30px;
+    width: 360px;
+    border-radius: 12px;
+    text-align: center;
+    animation: modalFade .25s ease;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.modal-confirm {
+    background: #d9534f;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-cancel {
+    background: #6c757d;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
