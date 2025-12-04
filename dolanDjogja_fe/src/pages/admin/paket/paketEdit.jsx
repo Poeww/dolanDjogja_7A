@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { getPaketById, updatePaket } from "../../../services/paketService";
 import { useNavigate, useParams } from "react-router-dom";
 
+import "../dashboard/dashboard.css";
+import "./paketCreateEdit.css";
+
 export default function PaketEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -13,8 +16,14 @@ export default function PaketEdit() {
     durasi: "",
     lokasi_tujuan: "",
     kuota: "",
-    gambar_thumbnail: "",
   });
+
+  const [oldThumbnail, setOldThumbnail] = useState(null);
+  const [thumbnail, setThumbnail] = useState(null);
+  const [preview, setPreview] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     loadData();
@@ -22,106 +31,178 @@ export default function PaketEdit() {
 
   const loadData = async () => {
     const data = await getPaketById(id);
+
     setForm({
-      nama_paket: data.nama_paket || "",
-      deskripsi: data.deskripsi || "",
-      harga: data.harga || "",
-      durasi: data.durasi || "",
-      lokasi_tujuan: data.lokasi_tujuan || "",
-      kuota: data.kuota || "",
-      gambar_thumbnail: data.gambar_thumbnail || "",
+      nama_paket: data.nama_paket ?? "",
+      deskripsi: data.deskripsi ?? "",
+      harga: String(data.harga ?? ""),
+      durasi: data.durasi ?? "",
+      lokasi_tujuan: data.lokasi_tujuan ?? "",
+      kuota: String(data.kuota ?? ""),
     });
+
+    setOldThumbnail(data.gambar_thumbnail);
   };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "harga") {
+      const onlyNumber = value.replace(/\D/g, "");
+      setForm({
+        ...form,
+        harga: onlyNumber,
+      });
+      return;
+    }
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+  };
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setThumbnail(file);
+    if (file) setPreview(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErrors({});
 
-    const payload = {
-      ...form,
-      harga: Number(form.harga),
-      kuota: Number(form.kuota),
-    };
+    const fd = new FormData();
 
-    await updatePaket(id, payload);
-    navigate("/admin/paket");
+    Object.keys(form).forEach((key) => fd.append(key, form[key]));
+
+    if (thumbnail) {
+      fd.append("gambar_thumbnail", thumbnail);
+    }
+
+    fd.append("_method", "PUT");
+
+    try {
+      await updatePaket(id, fd);
+      navigate("/admin/paket");
+    } catch (err) {
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      }
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>Edit Paket Wisata</h2>
+    <div className="dashboard-container">
+      <main className="main-content">
+        <div className="form-wrapper">
+          <h2 className="form-title">Edit Paket Wisata</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="nama_paket"
-          placeholder="Nama Paket"
-          value={form.nama_paket}
-          onChange={handleChange}
-        />
-        <br />
+          <form onSubmit={handleSubmit} className="form-card">
 
-        <textarea
-          name="deskripsi"
-          placeholder="Deskripsi"
-          value={form.deskripsi}
-          onChange={handleChange}
-        />
-        <br />
+            <div className="input-group">
+              <input
+                type="text"
+                name="nama_paket"
+                value={form.nama_paket}
+                onChange={handleChange}
+                required
+              />
+              <label>Nama Paket</label>
+              {errors.nama_paket && <p className="error">{errors.nama_paket[0]}</p>}
+            </div>
 
-        <input
-          type="number"
-          name="harga"
-          placeholder="Harga"
-          value={form.harga}
-          onChange={handleChange}
-        />
-        <br />
+            <div className="input-group">
+              <textarea
+                name="deskripsi"
+                value={form.deskripsi}
+                onChange={handleChange}
+              />
+              <label>Deskripsi</label>
+              {errors.deskripsi && <p className="error">{errors.deskripsi[0]}</p>}
+            </div>
 
-        <input
-          type="text"
-          name="durasi"
-          placeholder="Durasi"
-          value={form.durasi}
-          onChange={handleChange}
-        />
-        <br />
+            <div className="input-group">
+              <input
+                type="text"
+                name="harga"
+                value={
+                  form.harga
+                    ? "Rp " +
+                    Number(form.harga).toLocaleString("id-ID")
+                    : ""
+                }
+                onChange={handleChange}
+                required
+              />
+              <label>Harga</label>
+              {errors.harga && <p className="error">{errors.harga[0]}</p>}
+            </div>
 
-        <input
-          type="text"
-          name="lokasi_tujuan"
-          placeholder="Lokasi Tujuan"
-          value={form.lokasi_tujuan}
-          onChange={handleChange}
-        />
-        <br />
+            <div className="input-group">
+              <input
+                type="text"
+                name="durasi"
+                value={form.durasi}
+                onChange={handleChange}
+                required
+              />
+              <label>Durasi</label>
+              {errors.durasi && <p className="error">{errors.durasi[0]}</p>}
+            </div>
 
-        <input
-          type="number"
-          name="kuota"
-          placeholder="Kuota"
-          value={form.kuota}
-          onChange={handleChange}
-        />
-        <br />
+            <div className="input-group">
+              <input
+                type="text"
+                name="lokasi_tujuan"
+                value={form.lokasi_tujuan}
+                onChange={handleChange}
+                required
+              />
+              <label>Lokasi Tujuan</label>
+              {errors.lokasi_tujuan && <p className="error">{errors.lokasi_tujuan[0]}</p>}
+            </div>
 
-        <input
-          type="text"
-          name="gambar_thumbnail"
-          placeholder="URL Gambar"
-          value={form.gambar_thumbnail}
-          onChange={handleChange}
-        />
-        <br />
+            <div className="input-group">
+              <input
+                type="number"
+                name="kuota"
+                value={form.kuota}
+                onChange={handleChange}
+                required
+              />
+              <label>Kuota</label>
+              {errors.kuota && <p className="error">{errors.kuota[0]}</p>}
+            </div>
 
-        <button type="submit">Update</button>
-      </form>
+            <div className="image-upload-area">
+              <label className="upload-label">Thumbnail Paket</label>
+
+              {oldThumbnail && !preview && (
+                <img
+                  src={`/storage/${oldThumbnail}`}
+                  className="image-preview"
+                  alt="thumbnail"
+                />
+              )}
+
+              {preview && (
+                <img src={preview} className="image-preview" alt="preview" />
+              )}
+
+              <input type="file" accept="image/*" onChange={handleImage} />
+            </div>
+
+            <button type="submit" className="submit-btn" disabled={loading}>
+              {loading ? "Menyimpan..." : "Update"}
+            </button>
+
+          </form>
+        </div>
+      </main>
     </div>
   );
 }
