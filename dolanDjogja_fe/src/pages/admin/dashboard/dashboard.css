@@ -17,7 +17,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-html, body {
+html,
+body {
   background: #f5f8ff;
   overflow-x: hidden;
 }
@@ -130,20 +131,7 @@ html, body {
 
 .sidebar.collapsed .sidebar-menu a::after {
   content: attr(data-title);
-  position: absolute;
   left: 70px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.75);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  opacity: 0;
-  white-space: nowrap;
-  transition: 0.2s;
-  pointer-events: none;
-  z-index: 99999;
 }
 
 .sidebar.collapsed .sidebar-menu a:hover::after {
@@ -189,6 +177,22 @@ html, body {
   position: relative;
 }
 
+.tooltip-base {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
+  z-index: 99999;
+}
+
 .logout-btn:hover {
   background: #c92c37;
 }
@@ -208,7 +212,7 @@ html, body {
   z-index: 99999;
 }
 
-.sidebar.collapsed + .toggle-btn {
+.sidebar.collapsed+.toggle-btn {
   left: var(--sidebar-narrow) !important;
 }
 
@@ -228,7 +232,7 @@ html, body {
   transition: margin-left 0.3s ease;
 }
 
-.sidebar.collapsed ~ .main-content {
+.sidebar.collapsed~.main-content {
   margin-left: calc(var(--sidebar-narrow) + var(--toggle-offset)) !important;
 }
 
@@ -241,6 +245,7 @@ html, body {
   grid-template-columns: repeat(5, minmax(240px, 1fr));
   gap: 30px;
 }
+
 /* =============================
     TOPBAR
 ============================= */
@@ -293,7 +298,7 @@ html, body {
 ============================= */
 .cards-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); 
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   width: 100%;
   margin-top: 20px;
@@ -306,7 +311,7 @@ html, body {
   text-align: center;
   border-radius: 12px;
   border-left: 6px solid #1a73e8;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transition: 0.25s;
 }
 
@@ -358,20 +363,19 @@ html, body {
 }
 
 .sidebar-menu a::after {
-  content: attr(data-title);
   position: absolute;
-  left: 70px;
-  background: rgba(0,0,0,0.75);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.75);
   color: white;
-  padding: 6px 10px;
+  padding: 6px 14px;
   border-radius: 6px;
   font-size: 13px;
+  white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-50%);
-  top: 50%;
-  white-space: nowrap;
   transition: 0.2s ease;
+  z-index: 99999;
 }
 
 .sidebar-menu a:hover::after {
@@ -391,17 +395,19 @@ html, body {
 
 .logout-btn::after {
   content: "Logout";
-  position: absolute;
   left: 70px;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.75);
-  padding: 6px 12px;
-  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.75);
   color: white;
-  opacity: 0;
-  transition: 0.2s;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
   white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
   z-index: 99999;
 }
 
