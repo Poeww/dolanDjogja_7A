@@ -139,7 +139,7 @@ export default function BookingList() {
                                     <tr key={b.id}>
                                         <td>{b.id}</td>
                                         <td>{b.user?.name}</td>
-                                        <td>{b.jadwalTrip?.paket?.nama_paket}</td>
+                                        <td>{b.jadwal_trip?.paket?.nama_paket}</td>
                                         <td>{b.jumlah_orang}</td>
                                         <td>Rp {Number(b.total_harga).toLocaleString("id-ID")}</td>
                                         <td>{b.status_pembayaran}</td>
