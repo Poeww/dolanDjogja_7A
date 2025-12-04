@@ -37,6 +37,7 @@ export default function PaketCreate() {
 
   const [previewImg, setPreviewImg] = useState(null);
   const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
 
   useEffect(() => {
     const user = getUser();
@@ -87,9 +88,7 @@ export default function PaketCreate() {
     );
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const submitNow = async () => {
     const payload = new FormData();
     payload.append("nama_paket", form.nama_paket);
     payload.append("deskripsi", form.deskripsi);
@@ -97,13 +96,10 @@ export default function PaketCreate() {
     payload.append("durasi", form.durasi);
     payload.append("lokasi_tujuan", form.lokasi_tujuan);
     payload.append("kuota", form.kuota);
-
     form.destinasi_ids.forEach((id) => payload.append("destinasi_ids[]", id));
-
     if (form.gambar_thumbnail) {
       payload.append("gambar_thumbnail", form.gambar_thumbnail);
     }
-
     await createPaket(payload);
     navigate("/admin/paket");
   };
@@ -163,7 +159,7 @@ export default function PaketCreate() {
         <h2 className="paket-title">Tambah Paket Wisata</h2>
 
         <div className="paket-form-card">
-          <form onSubmit={handleSubmit} className="form-grid">
+          <form onSubmit={(e) => e.preventDefault()} className="form-grid">
             <div className="form-group form-left">
               <input
                 className="form-input"
@@ -294,7 +290,11 @@ export default function PaketCreate() {
             </div>
 
             <div className="form-buttons">
-              <button type="submit" className="submit-btn-basic">
+              <button
+                type="button"
+                className="submit-btn-basic"
+                onClick={() => setShowSaveModal(true)}
+              >
                 Simpan
               </button>
 
@@ -333,6 +333,31 @@ export default function PaketCreate() {
               <button
                 className="modal-cancel"
                 onClick={() => setShowCancelModal(false)}
+              >
+                Kembali
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSaveModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Simpan Paket?</h3>
+            <p>Periksa kembali data Anda sebelum menyimpan.</p>
+
+            <div className="modal-actions">
+              <button
+                className="modal-confirm"
+                onClick={submitNow}
+              >
+                Ya, Simpan
+              </button>
+
+              <button
+                className="modal-cancel"
+                onClick={() => setShowSaveModal(false)}
               >
                 Kembali
               </button>
