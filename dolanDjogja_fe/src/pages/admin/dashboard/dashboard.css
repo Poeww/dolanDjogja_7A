@@ -1,3 +1,12 @@
+/* ====================================
+    ROOT VARIABLE (PENTING!)
+==================================== */
+:root {
+  --sidebar-wide: 260px;
+  --sidebar-narrow: 90px;
+  --toggle-offset: 10px;
+}
+
 /* =============================
     GLOBAL STYLE
 ============================= */
@@ -20,13 +29,14 @@ html, body {
   display: flex;
   min-height: 100vh;
   background: #f5f8ff;
+  position: relative;
 }
 
 /* =============================
     SIDEBAR
 ============================= */
 .sidebar {
-  width: 260px;
+  width: var(--sidebar-wide);
   background: #1e6feb;
   color: white;
   padding: 25px 20px;
@@ -36,6 +46,7 @@ html, body {
   top: 0;
   bottom: 0;
   transition: width 0.3s ease;
+  z-index: 9990;
 }
 
 .sidebar-header {
@@ -58,16 +69,17 @@ html, body {
 }
 
 .sidebar-menu a {
-  color: white;
   padding: 12px 15px;
   margin: 5px 0;
   border-radius: 8px;
-  text-decoration: none;
   display: flex;
   gap: 10px;
   align-items: center;
-  transition: 0.25s;
   color: white !important;
+  text-decoration: none;
+  transition: 0.25s;
+  position: relative;
+  z-index: 9995;
 }
 
 .sidebar-menu a.active {
@@ -95,7 +107,7 @@ html, body {
 }
 
 .sidebar.collapsed {
-  width: 90px;
+  width: var(--sidebar-narrow);
   transition: 0.3s ease;
 }
 
@@ -105,8 +117,9 @@ html, body {
   transform: none;
 }
 
-
-.sidebar.collapsed .sidebar-header h2 {
+.sidebar.collapsed .sidebar-header h2,
+.sidebar.collapsed .sidebar-menu a span,
+.sidebar.collapsed .logout-btn span {
   display: none;
 }
 
@@ -116,13 +129,26 @@ html, body {
 }
 
 .sidebar.collapsed .sidebar-menu a::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.75);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
   opacity: 0;
+  white-space: nowrap;
+  transition: 0.2s;
   pointer-events: none;
+  z-index: 99999;
 }
 
 .sidebar.collapsed .sidebar-menu a:hover::after {
   opacity: 1;
-  left: 90px;
+  left: calc(var(--sidebar-narrow) + 10px);
 }
 
 .sidebar.collapsed .logout-btn::after {
@@ -131,7 +157,7 @@ html, body {
 
 .sidebar.collapsed .logout-btn:hover::after {
   opacity: 1;
-  left: 90px;
+  left: calc(var(--sidebar-narrow) + 10px);
 }
 
 .sidebar.collapsed .logout-btn {
@@ -151,16 +177,16 @@ html, body {
 .logout-btn {
   margin-top: auto;
   padding: 12px 15px;
-  font-size: 16px;
-  border: none;
   background: #e63946;
   color: white;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
   transition: 0.25s;
+  position: relative;
 }
 
 .logout-btn:hover {
@@ -170,7 +196,7 @@ html, body {
 .toggle-btn {
   position: absolute;
   top: 15px;
-  left: 260px;
+  left: var(--sidebar-wide);
   padding: 8px 12px;
   background: #1e6feb;
   color: white;
@@ -178,11 +204,12 @@ html, body {
   border-radius: 6px;
   cursor: pointer;
   font-size: 18px;
-  transition: left 0.3s ease, background 0.3s ease;
+  transition: left 0.3s ease;
+  z-index: 99999;
 }
 
 .sidebar.collapsed + .toggle-btn {
-  left: 90px !important;
+  left: var(--sidebar-narrow) !important;
 }
 
 
@@ -195,10 +222,14 @@ html, body {
     MAIN CONTENT
 ============================= */
 .main-content {
-  margin-left: 260px;
+  margin-left: calc(var(--sidebar-wide) + var(--toggle-offset));
   flex: 1;
   padding: 90px 60px;
   transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .main-content {
+  margin-left: calc(var(--sidebar-narrow) + var(--toggle-offset)) !important;
 }
 
 .dashboard-container.collapsed .main-content {
@@ -301,8 +332,7 @@ html, body {
 ============================= */
 @media (max-width: 900px) {
   .sidebar {
-    width: 90px;
-    padding: 25px 10px;
+    width: var(--sidebar-narrow);
   }
 
   .sidebar-header h2 {
@@ -315,12 +345,11 @@ html, body {
   }
 
   .main-content {
-    margin-left: 90px !important;
-    padding: 70px 20px !important;
+    margin-left: var(--sidebar-narrow);
   }
 
   .toggle-btn {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -364,16 +393,16 @@ html, body {
   content: "Logout";
   position: absolute;
   left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
   background: rgba(0,0,0,0.75);
-  color: white;
   padding: 6px 12px;
   border-radius: 6px;
-  font-size: 13px;
+  color: white;
   opacity: 0;
-  pointer-events: none;
-  transform: translateY(-50%);
-  top: 50%;
   transition: 0.2s;
+  white-space: nowrap;
+  z-index: 99999;
 }
 
 .logout-btn:hover::after {
