@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPaket } from "../../../services/paketService";
-import { useNavigate } from "react-router-dom";
+import { getAllDestinasi } from "../../../services/destinasiService";
+import { getUser } from "../../../services/authService";
+
 import "../dashboard/dashboard.css";
 import "./paketCreateEdit.css";
 
+import logo from "../../../assets/img/logo-dolandjogja.svg";
+import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import PaketIcon from "../../../assets/icon/paket.svg";
+import DestinasiIcon from "../../../assets/icon/destinasi.svg";
+import JadwalIcon from "../../../assets/icon/jadwal.svg";
+import BookingIcon from "../../../assets/icon/booking.svg";
+import PaymentIcon from "../../../assets/icon/payment.svg";
+import LogoutIcon from "../../../assets/icon/logout.svg";
+
+import BackIcon from "../../../assets/icon/back.svg";
+
 export default function PaketCreate() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
+
+  const [destinasiList, setDestinasiList] = useState([]);
 
   const [form, setForm] = useState({
     nama_paket: "",
@@ -14,159 +32,170 @@ export default function PaketCreate() {
     durasi: "",
     lokasi_tujuan: "",
     kuota: "",
+    destinasi_ids: [],
+    gambar_thumbnail: null,
   });
 
-  const [thumbnail, setThumbnail] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [previewImg, setPreviewImg] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    const user = getUser();
+    if (!user || user.role !== "admin") navigate("/login");
 
-    if (name === "harga") {
-      const onlyNumber = value.replace(/\D/g, "");
-      setForm({
-        ...form,
-        harga: onlyNumber,
-      });
-      return;
-    }
+    loadDestinasi();
+  }, []);
 
-    setForm({
-      ...form,
-      [name]: value,
-    });
+  const loadDestinasi = async () => {
+    const data = await getAllDestinasi();
+    setDestinasiList(data);
   };
 
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    setThumbnail(file);
+  const formatRupiah = (angka) =>
+    angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-    if (file) {
-      setPreview(URL.createObjectURL(file));
+  const handleHargaChange = (e) => {
+    const raw = e.target.value.replace(/\D/g, "");
+    setForm({ ...form, harga: raw });
+  };
+
+  const toggleDestinasi = (id) => {
+    let updated = [...form.destinasi_ids];
+    if (updated.includes(id)) {
+      updated = updated.filter((x) => x !== id);
+    } else {
+      updated.push(id);
     }
+    setForm({ ...form, destinasi_ids: updated });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setForm({ ...form, gambar_thumbnail: file });
+    setPreviewImg(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setErrors({});
 
-    const fd = new FormData();
-    Object.keys(form).forEach((key) => fd.append(key, form[key]));
+    const payload = new FormData();
+    payload.append("nama_paket", form.nama_paket);
+    payload.append("deskripsi", form.deskripsi);
+    payload.append("harga", form.harga);
+    payload.append("durasi", form.durasi);
+    payload.append("lokasi_tujuan", form.lokasi_tujuan);
+    payload.append("kuota", form.kuota);
 
-    if (thumbnail) {
-      fd.append("gambar_thumbnail", thumbnail);
+    form.destinasi_ids.forEach((id) =>
+      payload.append("destinasi_ids[]", id)
+    );
+
+    if (form.gambar_thumbnail) {
+      payload.append("gambar_thumbnail", form.gambar_thumbnail);
     }
 
-    try {
-      await createPaket(fd);
-      navigate("/admin/paket");
-    } catch (err) {
-      if (err.response?.data?.errors) {
-        setErrors(err.response.data.errors);
-      }
-    }
-
-    setLoading(false);
+    await createPaket(payload);
+    navigate("/admin/paket");
   };
 
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
+      <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+        <div className="sidebar-header">
+          <img src={logo} className="sidebar-logo" alt="Logo" />
+          {!collapsed && <h2>dolanDjogja</h2>}
+        </div>
+
+        <nav className="sidebar-menu">
+          <Link to="/admin/dashboard" className={location.pathname === "/admin/dashboard" ? "active" : ""}>
+            <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+          </Link>
+
+          <Link to="/admin/paket" className="active">
+            <img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}
+          </Link>
+
+          <Link to="/admin/destinasi">
+            <img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}
+          </Link>
+
+          <Link to="/admin/jadwal">
+            <img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}
+          </Link>
+
+          <Link to="/admin/bookings">
+            <img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}
+          </Link>
+
+          <Link to="/admin/payments">
+            <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
+          </Link>
+        </nav>
+
+        <button className="logout-btn">
+          <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
+        </button>
+      </aside>
+
+      <button className="toggle-btn" onClick={() => setCollapsed(!collapsed)}>
+        {collapsed ? "▶" : "◀"}
+      </button>
+
       <main className="main-content">
-        <div className="form-wrapper">
-          <h2 className="form-title">Tambah Paket Wisata</h2>
 
-          <form onSubmit={handleSubmit} className="form-card">
+        <Link to="/admin/paket" className="back-btn">
+          <img src={BackIcon} className="back-icon" />
+          Kembali
+        </Link>
 
-            <div className="input-group">
-              <input
-                type="text"
-                name="nama_paket"
-                value={form.nama_paket}
-                onChange={handleChange}
-                required
-              />
-              <label>Nama Paket</label>
-              {errors.nama_paket && <p className="error">{errors.nama_paket[0]}</p>}
+        <h2 className="paket-title">Tambah Paket Wisata</h2>
+
+        <div className="paket-form-card">
+          <form onSubmit={handleSubmit} className="form-grid">
+
+            <div className="form-group form-left">
+              <input className="form-input" placeholder=" " />
+              <label className="form-label">Nama Paket</label>
             </div>
 
-            <div className="input-group">
-              <textarea
-                name="deskripsi"
-                value={form.deskripsi}
-                onChange={handleChange}
-              ></textarea>
-              <label>Deskripsi</label>
-              {errors.deskripsi && <p className="error">{errors.deskripsi[0]}</p>}
+            <div className="form-group form-right">
+              <input className="form-input" placeholder=" " />
+              <label className="form-label">Durasi</label>
             </div>
 
-            <div className="input-group">
-              <input
-                type="text"
-                name="harga"
-                value={
-                  form.harga
-                    ? "Rp " +
-                    Number(form.harga).toLocaleString("id-ID")
-                    : ""
-                }
-                onChange={handleChange}
-                required
-              />
-              <label>Harga</label>
-              {errors.harga && <p className="error">{errors.harga[0]}</p>}
+            <div className="form-group form-left">
+              <textarea className="form-input form-textarea" placeholder=" " />
+              <label className="form-label">Deskripsi</label>
             </div>
 
-            <div className="input-group">
-              <input
-                type="text"
-                name="durasi"
-                value={form.durasi}
-                onChange={handleChange}
-                required
-              />
-              <label>Durasi (misal: 3 Hari 2 Malam)</label>
-              {errors.durasi && <p className="error">{errors.durasi[0]}</p>}
+            <div className="form-group form-right">
+              <input className="form-input" placeholder=" " />
+              <label className="form-label">Lokasi Tujuan</label>
             </div>
 
-            <div className="input-group">
-              <input
-                type="text"
-                name="lokasi_tujuan"
-                value={form.lokasi_tujuan}
-                onChange={handleChange}
-                required
-              />
-              <label>Lokasi Tujuan</label>
-              {errors.lokasi_tujuan && <p className="error">{errors.lokasi_tujuan[0]}</p>}
+            <div className="form-group form-left">
+              <input className="form-input" placeholder=" " />
+              <label className="form-label">Harga</label>
             </div>
 
-            <div className="input-group">
-              <input
-                type="number"
-                name="kuota"
-                value={form.kuota}
-                onChange={handleChange}
-                required
-              />
-              <label>Kuota</label>
-              {errors.kuota && <p className="error">{errors.kuota[0]}</p>}
+            <div className="form-group form-right">
+              <input className="form-input" placeholder=" " />
+              <label className="form-label">Kuota</label>
             </div>
 
-            <div className="image-upload-area">
-              <label className="upload-label">Upload Gambar</label>
-              <input type="file" accept="image/*" onChange={handleImage} />
-
-              {preview && (
-                <img src={preview} className="image-preview" alt="preview" />
-              )}
+            <div className="destinasi-box form-full">
+              {destinasiList.map(d => (
+                <label key={d.id} className="destinasi-item">
+                  <input type="checkbox" />
+                  {d.nama_destinasi}
+                </label>
+              ))}
             </div>
 
-            <button className="submit-btn" type="submit" disabled={loading}>
-              {loading ? "Menyimpan..." : "Simpan"}
-            </button>
+            <div className="form-buttons">
+              <button type="submit" className="submit-btn-basic">Simpan</button>
+              <button type="button" onClick={() => navigate('/admin/paket')} className="btn-cancel">Cancel</button>
+            </div>
+
           </form>
         </div>
       </main>
