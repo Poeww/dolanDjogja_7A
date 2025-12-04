@@ -93,6 +93,95 @@
     resize: vertical;
 }
 
+.upload-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 10px;
+}
+
+.upload-preview {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #dce2ee;
+    background: #f4f6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-preview.placeholder {
+    color: #8b93a1;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.preview-wrapper {
+    position: relative;
+    width: 200px;
+    height: 150px;
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: 6px;
+    right: -15px;
+    background: #e63946;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.remove-img-btn:hover {
+    background: #c92c37;
+    transform: scale(1.1);
+}
+
+.upload-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.upload-display {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid #d9ddea;
+    border-radius: 12px;
+    background: white;
+    font-size: 15px;
+    color: #555;
+}
+
+.file-input-custom {
+    padding: 12px 20px;
+    background: #28a745;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.file-input-custom:hover {
+    background: #1e7e34;
+}
+
+
 /* =========================================================
    DESTINASI CHECKBOX GRID (2 kolom)
 ========================================================= */

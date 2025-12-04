@@ -153,39 +153,131 @@ export default function PaketCreate() {
           <form onSubmit={handleSubmit} className="form-grid">
 
             <div className="form-group form-left">
-              <input className="form-input" placeholder=" " />
+              <input
+                className="form-input"
+                placeholder=" "
+                value={form.nama_paket}
+                onChange={(e) => setForm({ ...form, nama_paket: e.target.value })}
+              />
               <label className="form-label">Nama Paket</label>
             </div>
 
             <div className="form-group form-right">
-              <input className="form-input" placeholder=" " />
+              <input
+                className="form-input"
+                placeholder=" "
+                value={form.durasi}
+                onChange={(e) => setForm({ ...form, durasi: e.target.value })}
+              />
               <label className="form-label">Durasi</label>
             </div>
 
             <div className="form-group form-left">
-              <textarea className="form-input form-textarea" placeholder=" " />
+              <textarea
+                className="form-input form-textarea"
+                placeholder=" "
+                value={form.deskripsi}
+                onChange={(e) => setForm({ ...form, deskripsi: e.target.value })}
+              />
               <label className="form-label">Deskripsi</label>
             </div>
 
             <div className="form-group form-right">
-              <input className="form-input" placeholder=" " />
+              <input
+                className="form-input"
+                placeholder=" "
+                value={form.lokasi_tujuan}
+                onChange={(e) => setForm({ ...form, lokasi_tujuan: e.target.value })}
+              />
               <label className="form-label">Lokasi Tujuan</label>
             </div>
 
             <div className="form-group form-left">
-              <input className="form-input" placeholder=" " />
+              <input
+                className="form-input"
+                placeholder=" "
+                value={form.harga ? "Rp " + formatRupiah(form.harga) : ""}
+                onChange={handleHargaChange}
+              />
               <label className="form-label">Harga</label>
             </div>
 
             <div className="form-group form-right">
-              <input className="form-input" placeholder=" " />
+              <input
+                type="number"
+                className="form-input"
+                placeholder=" "
+                min="0"
+                value={form.kuota}
+                onChange={(e) => setForm({ ...form, kuota: e.target.value })}
+              />
               <label className="form-label">Kuota</label>
             </div>
 
+            <div className="upload-row form-full">
+
+              <div className="preview-wrapper">
+                {previewImg ? (
+                  <>
+                    <img src={previewImg} className="upload-preview" alt="preview" />
+
+                    <button
+                      type="button"
+                      className="remove-img-btn"
+                      onClick={() => {
+                        setPreviewImg(null);
+                        setForm({ ...form, gambar_thumbnail: null });
+                        document.getElementById("fileInput").value = "";
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </>
+                ) : (
+                  <div className="upload-preview placeholder">
+                    <span>Belum ada gambar</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="upload-right">
+                <input
+                  className="form-input upload-display"
+                  type="text"
+                  readOnly
+                  value={form.gambar_thumbnail ? form.gambar_thumbnail.name : ""}
+                  placeholder="Belum ada file dipilih"
+                />
+
+                <button
+                  type="button"
+                  className="file-input-custom"
+                  onClick={() => document.getElementById("fileInput").click()}
+                >
+                  Pilih Gambar
+                </button>
+
+                <input
+                  id="fileInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                />
+              </div>
+
+            </div>
+
+
+
             <div className="destinasi-box form-full">
-              {destinasiList.map(d => (
+              {destinasiList.map((d) => (
                 <label key={d.id} className="destinasi-item">
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={form.destinasi_ids.includes(d.id)}
+                    onChange={() => toggleDestinasi(d.id)}
+                  />
                   {d.nama_destinasi}
                 </label>
               ))}
@@ -193,7 +285,7 @@ export default function PaketCreate() {
 
             <div className="form-buttons">
               <button type="submit" className="submit-btn-basic">Simpan</button>
-              <button type="button" onClick={() => navigate('/admin/paket')} className="btn-cancel">Cancel</button>
+              <button type="button" className="btn-cancel" onClick={() => navigate('/admin/paket')}>Cancel</button>
             </div>
 
           </form>
