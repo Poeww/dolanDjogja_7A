@@ -29,6 +29,9 @@ export default function DestinasiList() {
   const [destinasi, setDestinasi] = useState([]);
   const [search, setSearch] = useState("");
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -55,9 +58,15 @@ export default function DestinasiList() {
     );
   });
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Yakin ingin menghapus destinasi ini?")) return;
-    await deleteDestinasi(id);
+  const openDeleteModal = (item) => {
+    setDeleteTarget(item);
+    setShowDeleteModal(true);
+  };
+
+  const deleteNow = async () => {
+    await deleteDestinasi(deleteTarget.id);
+    setShowDeleteModal(false);
+    setDeleteTarget(null);
     loadData();
   };
 
@@ -108,6 +117,7 @@ export default function DestinasiList() {
 
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
+
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} className="sidebar-logo" alt="Logo" />
@@ -157,6 +167,7 @@ export default function DestinasiList() {
       </button>
 
       <main className="main-content">
+
         <h2 className="destinasi-title">Daftar Destinasi Wisata</h2>
 
         <div className="destinasi-table-top">
@@ -211,7 +222,10 @@ export default function DestinasiList() {
                         <img src={IconEdit} className="icon-btn-small" /> Edit
                       </Link>
 
-                      <button className="destinasi-delete" onClick={() => handleDelete(d.id)}>
+                      <button
+                        className="destinasi-delete"
+                        onClick={() => openDeleteModal(d)}
+                      >
                         <img src={IconDelete} className="icon-btn-small" /> Hapus
                       </button>
                     </td>
@@ -226,6 +240,31 @@ export default function DestinasiList() {
           </div>
         </div>
       </main>
+
+      {showDeleteModal && (
+        <div className="paket-modal-overlay">
+          <div className="paket-modal-box">
+            <h3>Hapus Destinasi?</h3>
+
+            <p>
+              Yakin ingin menghapus destinasi
+              <br />
+              <b>{deleteTarget?.nama_destinasi}</b> ?
+            </p>
+
+            <div className="paket-modal-actions">
+              <button className="paket-modal-confirm" onClick={deleteNow}>
+                Ya, Hapus
+              </button>
+
+              <button className="paket-modal-cancel" onClick={() => setShowDeleteModal(false)}>
+                Batal
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
