@@ -29,6 +29,9 @@ export default function JadwalList() {
   const [jadwal, setJadwal] = useState([]);
   const [search, setSearch] = useState("");
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -46,18 +49,30 @@ export default function JadwalList() {
     setJadwal(res);
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "-";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("id-ID");
+  };
+
   const filteredData = jadwal.filter((item) => {
     const s = search.toLowerCase();
     return (
       item.paket?.nama_paket?.toLowerCase().includes(s) ||
-      item.tanggal_berangkat.toLowerCase().includes(s) ||
-      item.tanggal_pulang.toLowerCase().includes(s)
+      formatDate(item.tanggal_berangkat).toLowerCase().includes(s) ||
+      formatDate(item.tanggal_pulang).toLowerCase().includes(s)
     );
   });
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Hapus jadwal trip ini?")) return;
-    await deleteJadwal(id);
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
+    await deleteJadwal(deleteId);
+    setShowDeleteModal(false);
+    setDeleteId(null);
     loadData();
   };
 
@@ -81,14 +96,12 @@ export default function JadwalList() {
 
     autoTable(doc, {
       startY: 40,
-      head: [
-        ["ID", "Paket", "Tgl Berangkat", "Tgl Pulang", "Kuota Tersedia"],
-      ],
+      head: [["ID", "Paket", "Tgl Berangkat", "Tgl Pulang", "Kuota"]],
       body: filteredData.map((j) => [
         j.id,
         j.paket?.nama_paket,
-        j.tanggal_berangkat,
-        j.tanggal_pulang,
+        formatDate(j.tanggal_berangkat),
+        formatDate(j.tanggal_pulang),
         j.kuota_tersedia,
       ]),
       theme: "grid",
@@ -119,40 +132,16 @@ export default function JadwalList() {
         </div>
 
         <nav className="sidebar-menu">
-          <Link to="/admin/dashboard">
-            <img src={DashboardIcon} className="menu-icon" />
-            {!collapsed && "Dashboard"}
-          </Link>
-
-          <Link to="/admin/paket">
-            <img src={PaketIcon} className="menu-icon" />
-            {!collapsed && "Paket Wisata"}
-          </Link>
-
-          <Link to="/admin/destinasi">
-            <img src={DestinasiIcon} className="menu-icon" />
-            {!collapsed && "Destinasi"}
-          </Link>
-
-          <Link to="/admin/jadwal" className="active">
-            <img src={JadwalIcon} className="menu-icon" />
-            {!collapsed && "Jadwal Trip"}
-          </Link>
-
-          <Link to="/admin/bookings">
-            <img src={BookingIcon} className="menu-icon" />
-            {!collapsed && "Booking"}
-          </Link>
-
-          <Link to="/admin/payments">
-            <img src={PaymentIcon} className="menu-icon" />
-            {!collapsed && "Payments"}
-          </Link>
+          <Link to="/admin/dashboard"><img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}</Link>
+          <Link to="/admin/paket"><img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}</Link>
+          <Link to="/admin/destinasi"><img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}</Link>
+          <Link to="/admin/jadwal" className="active"><img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}</Link>
+          <Link to="/admin/bookings"><img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}</Link>
+          <Link to="/admin/payments"><img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}</Link>
         </nav>
 
         <button className="logout-btn">
-          <img src={LogoutIcon} className="menu-icon" />
-          {!collapsed && "Logout"}
+          <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
         </button>
       </aside>
 
@@ -170,8 +159,7 @@ export default function JadwalList() {
             </Link>
 
             <button className="jadwal-export-btn" onClick={exportPDF}>
-              <img src={IconExport} className="icon-btn-small black-icon" />
-              Export
+              <img src={IconExport} className="icon-btn-small black-icon" /> Export
             </button>
           </div>
 
@@ -192,7 +180,7 @@ export default function JadwalList() {
                 <th>Paket</th>
                 <th>Tgl Berangkat</th>
                 <th>Tgl Pulang</th>
-                <th>Kuota Tersedia</th>
+                <th>Kuota</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -207,8 +195,8 @@ export default function JadwalList() {
                   <tr key={j.id}>
                     <td>{j.id}</td>
                     <td>{j.paket?.nama_paket}</td>
-                    <td>{j.tanggal_berangkat}</td>
-                    <td>{j.tanggal_pulang}</td>
+                    <td>{formatDate(j.tanggal_berangkat)}</td>
+                    <td>{formatDate(j.tanggal_pulang)}</td>
                     <td>{j.kuota_tersedia}</td>
 
                     <td className="jadwal-action-col">
@@ -216,7 +204,7 @@ export default function JadwalList() {
                         <img src={IconEdit} className="icon-btn-small" /> Edit
                       </Link>
 
-                      <button className="jadwal-delete" onClick={() => handleDelete(j.id)}>
+                      <button className="jadwal-delete" onClick={() => handleDeleteClick(j.id)}>
                         <img src={IconDelete} className="icon-btn-small" /> Hapus
                       </button>
                     </td>
@@ -231,6 +219,25 @@ export default function JadwalList() {
           </div>
         </div>
       </main>
+
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Hapus Jadwal?</h3>
+            <p>Data jadwal akan dihapus permanen.</p>
+
+            <div className="modal-actions">
+              <button className="modal-confirm" onClick={confirmDelete}>
+                Ya, Hapus
+              </button>
+              <button className="modal-cancel" onClick={() => setShowDeleteModal(false)}>
+                Batal
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
