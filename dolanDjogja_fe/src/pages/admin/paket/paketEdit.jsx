@@ -38,13 +38,15 @@ export default function PaketEdit() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
     const data = await getPaketById(id);
-
     setForm({
       nama_paket: data.nama_paket ?? "",
       deskripsi: data.deskripsi ?? "",
@@ -53,19 +55,16 @@ export default function PaketEdit() {
       lokasi_tujuan: data.lokasi_tujuan ?? "",
       kuota: String(data.kuota ?? ""),
     });
-
     setOldThumbnail(data.gambar_thumbnail);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if (name === "harga") {
       const numeric = value.replace(/\D/g, "");
       setForm({ ...form, harga: numeric });
       return;
     }
-
     setForm({ ...form, [name]: value });
   };
 
@@ -75,8 +74,20 @@ export default function PaketEdit() {
     if (file) setPreviewImg(URL.createObjectURL(file));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const isFormDirty = () => {
+    const { nama_paket, deskripsi, harga, durasi, lokasi_tujuan, kuota } = form;
+    return (
+      nama_paket ||
+      deskripsi ||
+      harga ||
+      durasi ||
+      lokasi_tujuan ||
+      kuota ||
+      thumbnail
+    );
+  };
+
+  const submitNow = async () => {
     setLoading(true);
     setErrors({});
 
@@ -157,7 +168,7 @@ export default function PaketEdit() {
         <h2 className="paket-title">Edit Paket Wisata</h2>
 
         <div className="paket-form-card">
-          <form onSubmit={handleSubmit} className="form-grid">
+          <form onSubmit={(e) => e.preventDefault()} className="form-grid">
 
             <div className="form-group form-left">
               <input
@@ -281,11 +292,26 @@ export default function PaketEdit() {
             </div>
 
             <div className="form-buttons">
-              <button type="submit" className="submit-btn-basic" disabled={loading}>
+              <button
+                type="button"
+                className="submit-btn-basic"
+                disabled={loading}
+                onClick={() => setShowSaveModal(true)}
+              >
                 {loading ? "Menyimpan..." : "Update"}
               </button>
 
-              <button type="button" className="btn-cancel" onClick={() => navigate("/admin/paket")}>
+              <button
+                type="button"
+                className="btn-cancel"
+                onClick={() => {
+                  if (isFormDirty()) {
+                    setShowCancelModal(true);
+                  } else {
+                    navigate("/admin/paket");
+                  }
+                }}
+              >
                 Cancel
               </button>
             </div>
@@ -293,6 +319,33 @@ export default function PaketEdit() {
           </form>
         </div>
       </main>
+
+      {showCancelModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Batalkan Perubahan?</h3>
+            <p>Data yang sudah diubah akan hilang. Yakin ingin keluar?</p>
+            <div className="modal-actions">
+              <button className="modal-confirm" onClick={() => navigate("/admin/paket")}>Ya, Batalkan</button>
+              <button className="modal-cancel" onClick={() => setShowCancelModal(false)}>Kembali</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSaveModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Simpan Perubahan?</h3>
+            <p>Periksa kembali data sebelum menyimpan.</p>
+            <div className="modal-actions">
+              <button className="modal-confirm" onClick={submitNow}>Ya, Simpan</button>
+              <button className="modal-cancel" onClick={() => setShowSaveModal(false)}>Kembali</button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
