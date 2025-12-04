@@ -1,0 +1,81 @@
+.booking-card {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
+    max-width: 850px;
+    margin-top: 20px;
+}
+
+.booking-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid #e6e9f0;
+}
+
+.booking-row span {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.booking-row p {
+    font-weight: 500;
+    color: #111;
+    font-size: 16px;
+}
+
+.status-row {
+    align-items: center;
+}
+
+.status-badge {
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.status-badge.paid {
+    background: #28a745;
+    color: #fff;
+}
+
+.status-badge.cancelled {
+    background: #dc3545;
+    color: #fff;
+}
+
+.booking-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 16px;
+}
+
+.btn-paid,
+.btn-cancel-book {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.btn-paid {
+    background: #1a73e8;
+    color: white;
+}
+
+.btn-cancel-book {
+    background: #d62828;
+    color: white;
+}
+
+.btn-paid:hover {
+    background: #0f5ac4;
+}
+
+.btn-cancel-book:hover {
+    background: #b71d1d;
+}
