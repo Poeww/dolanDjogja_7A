@@ -11,12 +11,16 @@ export const getPaketById = async (id) => {
 };
 
 export const createPaket = async (data) => {
-  const res = await API.post("/paket-wisata", data);
+  const res = await API.post("/paket-wisata", data, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
   return res.data;
 };
 
 export const updatePaket = async (id, data) => {
-  const res = await API.put(`/paket-wisata/${id}`, data);
+  const res = await API.post(`/paket-wisata/${id}?_method=PUT`, data, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
   return res.data;
 };
 
