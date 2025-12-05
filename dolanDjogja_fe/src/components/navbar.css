@@ -1,0 +1,74 @@
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e4e4e4;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e6feb;
+    text-decoration: none;
+}
+
+.nav-right a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-login {
+    padding: 7px 14px;
+    background: #1e6feb;
+    color: white !important;
+    border-radius: 6px;
+}
+
+.dropdown {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 150px;
+    border: 1px solid #ddd;
+    margin-top: 6px;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    display: block;
+    padding: 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.logout-btn {
+    color: red;
+}
