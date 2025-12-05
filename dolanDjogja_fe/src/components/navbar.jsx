@@ -26,19 +26,17 @@ export default function Navbar() {
                     <Link to="/login" className="btn-login">Login</Link>
                 )}
 
-                {user && role === "customer" && (
+                {user && role === "user" && (
                     <>
                         <Link to="/booking">Booking</Link>
 
                         <div className="dropdown">
                             <button className="dropbtn">Akun ▾</button>
                             <div className="dropdown-content">
+                                <Link to="/profile">Profil</Link>
                                 <Link to="/mybookings">Riwayat Booking</Link>
 
-                                <button
-                                    onClick={handleLogout}
-                                    className="logout-btn"
-                                >
+                                <button onClick={handleLogout} className="logout-btn">
                                     Logout
                                 </button>
                             </div>
