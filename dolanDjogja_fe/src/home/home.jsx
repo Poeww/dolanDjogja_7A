@@ -1,26 +1,24 @@
-import { Link } from "react-router-dom";
+import Navbar from "../components/navbar";
 
 export default function Home() {
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Selamat Datang di dolanDjogja!</h1>
-      <p>Ini halaman Home.</p>
+    <>
+      <Navbar />
 
-      <Link to="/login">
-        <button
-          style={{
-            padding: "10px 20px",
-            marginTop: "20px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer"
-          }}
-        >
-          Login
-        </button>
-      </Link>
-    </div>
+      <div style={{ padding: "60px 40px" }}>
+        <h1 style={{ fontSize: "36px", fontWeight: "700", marginBottom: "10px" }}>
+          Selamat Datang di dolanDjogja!
+        </h1>
+
+        <p style={{ fontSize: "18px", color: "#555", marginBottom: "20px" }}>
+          Nyoba halaman beranda utama^^
+        </p>
+
+        <p style={{ fontSize: "16px", color: "#777", maxWidth: "600px" }}>
+          Jelajahi berbagai destinasi menarik dan paket wisata terbaik dari Jogja.
+          Silakan login untuk melakukan booking atau melihat pemesanan Anda^^
+        </p>
+      </div>
+    </>
   );
 }
