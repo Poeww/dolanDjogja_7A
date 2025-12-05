@@ -26,11 +26,17 @@ export default function Login() {
         try {
             const res = await login(form);
 
-            if (res.user.role === "admin") {
-                navigate("/admin");
+            const user = res.user;
+
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("token", res.token);
+
+            if (user.role === "admin") {
+                navigate("/admin/dashboard");
             } else {
                 navigate("/");
             }
+
         } catch (err) {
             setError("Email atau password salah.");
         }
