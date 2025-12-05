@@ -7,6 +7,7 @@ export default function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
         window.location.href = "/";
     };
 
@@ -33,7 +34,11 @@ export default function Navbar() {
                             <button className="dropbtn">Akun ▾</button>
                             <div className="dropdown-content">
                                 <Link to="/mybookings">Riwayat Booking</Link>
-                                <button onClick={handleLogout} className="logout-btn">
+
+                                <button
+                                    onClick={handleLogout}
+                                    className="logout-btn"
+                                >
                                     Logout
                                 </button>
                             </div>
