@@ -39,7 +39,10 @@ class UserController extends Controller
             'role'     => $validated['role'],
         ]);
 
-        return response()->json($user, 201);
+        return response()->json([
+            'message' => 'User berhasil dibuat',
+            'user' => $user
+        ], 201);
     }
 
     public function update(Request $request, $id)
@@ -53,7 +56,7 @@ class UserController extends Controller
             'role'     => 'sometimes|required|in:admin,user',
         ]);
 
-        if (isset($validated['password'])) {
+        if (isset($validated['password']) && $validated['password']) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
             unset($validated['password']);
@@ -61,12 +64,21 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return response()->json($user);
+        return response()->json([
+            'message' => 'User berhasil diperbarui',
+            'user' => $user
+        ]);
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        if (auth()->id() == $user->id) {
+            return response()->json([
+                'message' => 'Tidak dapat menghapus akun sendiri'
+            ], 403);
+        }
 
         $user->tokens()->delete();
 
