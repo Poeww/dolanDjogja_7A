@@ -55,52 +55,64 @@ export default function Register() {
 
                 <h2 className="title">Buat Akun Baru</h2>
                 <p className="subtitle">
-                    Temukan pengalaman wisata, penawaran menarik, dan destinasi terbaik di Yogyakarta.
+                    Temukan pengalaman wisata, penawaran menarik, dan destinasi terbaik di Yogyakarta^^
                 </p>
 
                 {message && <p className="error-text">{message}</p>}
 
                 <form onSubmit={handleSubmit}>
 
-                    <label className="label">Nama Lengkap</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Masukkan nama lengkap..."
-                        value={form.name}
-                        onChange={handleChange}
-                        className="input"
-                    />
+                    <div className="floating-group">
+                        <input
+                            type="text"
+                            name="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            className="floating-input"
+                            placeholder=" "
+                            required
+                        />
+                        <label className="floating-label">Nama Lengkap</label>
+                    </div>
 
-                    <label className="label">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Masukkan email..."
-                        value={form.email}
-                        onChange={handleChange}
-                        className="input"
-                    />
+                    <div className="floating-group">
+                        <input
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            className="floating-input"
+                            placeholder=" "
+                            required
+                        />
+                        <label className="floating-label">Email</label>
+                    </div>
 
-                    <label className="label">Kata Sandi</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Masukkan kata sandi..."
-                        value={form.password}
-                        onChange={handleChange}
-                        className="input"
-                    />
+                    <div className="floating-group">
+                        <input
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={handleChange}
+                            className="floating-input"
+                            placeholder=" "
+                            required
+                        />
+                        <label className="floating-label">Kata Sandi</label>
+                    </div>
 
-                    <label className="label">Konfirmasi Kata Sandi</label>
-                    <input
-                        type="password"
-                        name="password_confirmation"
-                        placeholder="Ulangi kata sandi..."
-                        value={form.password_confirmation}
-                        onChange={handleChange}
-                        className="input"
-                    />
+                    <div className="floating-group">
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            value={form.password_confirmation}
+                            onChange={handleChange}
+                            className="floating-input"
+                            placeholder=" "
+                            required
+                        />
+                        <label className="floating-label">Konfirmasi Kata Sandi</label>
+                    </div>
 
                     <button type="submit" className="btn">
                         Daftar
