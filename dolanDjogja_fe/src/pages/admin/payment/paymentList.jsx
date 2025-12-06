@@ -12,6 +12,7 @@ import LogoPDF from "../../../assets/img/logo-dolandjogja.png";
 
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
 import DestinasiIcon from "../../../assets/icon/destinasi.svg";
 import JadwalIcon from "../../../assets/icon/jadwal.svg";
@@ -134,7 +135,6 @@ export default function PaymentList() {
             {!collapsed && "Payments"}
           </Link>
         </nav>
-
         <button className="logout-btn">
           <img src={LogoutIcon} className="menu-icon" />
           {!collapsed && "Logout"}
