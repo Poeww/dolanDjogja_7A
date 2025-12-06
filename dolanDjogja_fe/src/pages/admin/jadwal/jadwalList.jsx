@@ -12,6 +12,7 @@ import LogoPDF from "../../../assets/img/logo-dolandjogja.png";
 
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
 import DestinasiIcon from "../../../assets/icon/destinasi.svg";
 import JadwalIcon from "../../../assets/icon/jadwal.svg";
@@ -132,13 +133,50 @@ export default function JadwalList() {
         </div>
 
         <nav className="sidebar-menu">
-          <Link to="/admin/dashboard"><img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}</Link>
-          <Link to="/admin/paket"><img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}</Link>
-          <Link to="/admin/destinasi"><img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}</Link>
-          <Link to="/admin/jadwal" className="active"><img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}</Link>
-          <Link to="/admin/bookings"><img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}</Link>
-          <Link to="/admin/payments"><img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}</Link>
+
+          <Link to="/admin/dashboard">
+            <img src={DashboardIcon} className="menu-icon" />
+            {!collapsed && "Dashboard"}
+          </Link>
+
+          <Link
+            to="/admin/users"
+            className={location.pathname.includes("/admin/users") ? "active" : ""}
+          >
+            <img src={ProfilIcon} className="menu-icon" />
+            {!collapsed && "Kelola User"}
+          </Link>
+
+          <Link to="/admin/paket">
+            <img src={PaketIcon} className="menu-icon" />
+            {!collapsed && "Paket Wisata"}
+          </Link>
+
+          <Link to="/admin/destinasi">
+            <img src={DestinasiIcon} className="menu-icon" />
+            {!collapsed && "Destinasi"}
+          </Link>
+
+          <Link
+            to="/admin/jadwal"
+            className="active"
+          >
+            <img src={JadwalIcon} className="menu-icon" />
+            {!collapsed && "Jadwal Trip"}
+          </Link>
+
+          <Link to="/admin/bookings">
+            <img src={BookingIcon} className="menu-icon" />
+            {!collapsed && "Booking"}
+          </Link>
+
+          <Link to="/admin/payments">
+            <img src={PaymentIcon} className="menu-icon" />
+            {!collapsed && "Payments"}
+          </Link>
+
         </nav>
+
 
         <button className="logout-btn">
           <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
