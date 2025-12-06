@@ -65,27 +65,33 @@ export default function Login() {
 
                 {error && <p className="error-text">{error}</p>}
 
-                <form onSubmit={handleSubmit} className="login-form">
+                <form onSubmit={handleSubmit}>
 
-                    <label className="label">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Masukkan email..."
-                        value={form.email}
-                        onChange={handleChange}
-                        className="input"
-                    />
+                    <div className="floating-group">
+                        <input
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            className="floating-input"
+                            placeholder=" "
+                            required
+                        />
+                        <label className="floating-label">Email</label>
+                    </div>
 
-                    <label className="label">Kata Sandi</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Masukkan kata sandi..."
-                        value={form.password}
-                        onChange={handleChange}
-                        className="input"
-                    />
+                    <div className="floating-group">
+                        <input
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={handleChange}
+                            className="floating-input"
+                            placeholder=" "
+                            required
+                        />
+                        <label className="floating-label">Kata Sandi</label>
+                    </div>
 
                     <button type="submit" className="btn">
                         Masuk
