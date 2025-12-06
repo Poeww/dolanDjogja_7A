@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { login } from "../services/authService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "./auth.css";
+
+import TuguIcon from "../assets/img/logo-dolandjogja.svg";
+import BgIllustration from "../assets/img/bg-login.svg";
+import FrameAtas from "../assets/img/frame-atas-login.svg";
+import FrameBawah from "../assets/img/frame-bawah-login.svg";
 
 export default function Login() {
+
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -25,7 +32,6 @@ export default function Login() {
 
         try {
             const res = await login(form);
-
             const user = res.user;
 
             localStorage.setItem("user", JSON.stringify(user));
@@ -38,37 +44,64 @@ export default function Login() {
             }
 
         } catch (err) {
-            setError("Email atau password salah.");
+            setError("Email atau kata sandi yang Anda masukkan tidak valid!");
         }
     };
 
     return (
-        <div style={{ padding: "40px" }}>
-            <h2>Login</h2>
+        <div className="card-container">
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            <img src={FrameAtas} alt="Hiasan Atas" className="decor-top" />
+            <img src={FrameBawah} alt="Hiasan Bawah" className="decor-bottom" />
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
-                <br />
+            <div className="form-section">
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={form.password}
-                    onChange={handleChange}
-                />
-                <br />
+                <img src={TuguIcon} alt="Logo Dolan Djogja" className="logo" />
 
-                <button type="submit">Login</button>
-            </form>
+                <h2 className="title">Masuk</h2>
+                <p className="subtitle">
+                    Lanjutkan perjalananmu dan jelajahi keindahan Yogyakarta bersama kami.
+                </p>
+
+                {error && <p className="error-text">{error}</p>}
+
+                <form onSubmit={handleSubmit} className="login-form">
+
+                    <label className="label">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Masukkan email Anda..."
+                        value={form.email}
+                        onChange={handleChange}
+                        className="input"
+                    />
+
+                    <label className="label">Kata Sandi</label>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Masukkan kata sandi Anda..."
+                        value={form.password}
+                        onChange={handleChange}
+                        className="input"
+                    />
+
+                    <button type="submit" className="btn">
+                        Masuk
+                    </button>
+                </form>
+
+                <p className="register-text">
+                    Belum memiliki akun?
+                    <Link to="/register" className="register-link"> Daftar sekarang</Link>
+                </p>
+            </div>
+
+            <div className="image-section">
+                <img src={BgIllustration} alt="Ilustrasi Yogyakarta" />
+            </div>
+
         </div>
     );
 }
