@@ -12,6 +12,7 @@ import LogoPDF from "../../../assets/img/logo-dolandjogja.png";
 
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
 import DestinasiIcon from "../../../assets/icon/destinasi.svg";
 import JadwalIcon from "../../../assets/icon/jadwal.svg";
@@ -125,12 +126,24 @@ export default function DestinasiList() {
         </div>
 
         <nav className="sidebar-menu">
+
           <Link to="/admin/dashboard">
             <img src={DashboardIcon} className="menu-icon" />
             {!collapsed && "Dashboard"}
           </Link>
 
-          <Link to="/admin/paket">
+          <Link
+            to="/admin/users"
+            className={location.pathname.includes("/admin/users") ? "active" : ""}
+          >
+            <img src={ProfilIcon} className="menu-icon" />
+            {!collapsed && "Kelola User"}
+          </Link>
+
+          <Link
+            to="/admin/paket"
+            className={location.pathname.includes("/admin/paket") ? "active" : ""}
+          >
             <img src={PaketIcon} className="menu-icon" />
             {!collapsed && "Paket Wisata"}
           </Link>
@@ -154,6 +167,7 @@ export default function DestinasiList() {
             <img src={PaymentIcon} className="menu-icon" />
             {!collapsed && "Payments"}
           </Link>
+
         </nav>
 
         <button className="logout-btn">
