@@ -434,3 +434,37 @@ body {
     padding: 20px;
   }
 }
+
+/* ============================
+   CHART LAYOUT
+============================ */
+
+.charts-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.chart-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a73e8;
+  margin-bottom: 12px;
+}
+
+.chart-inner {
+  flex: 1;
+  width: 100%;
+  min-height: 240px;
+}

@@ -13,7 +13,6 @@ use App\Http\Controllers\PaymentController;
 
 use App\Http\Controllers\ChartController;
 
-
 /*
 |--------------------------------------------------------------------------
 | PUBLIC ROUTES
@@ -39,6 +38,19 @@ Route::get('/jadwal-trip/{id}',    [JadwalTripController::class, 'show']);
 
 /*
 |--------------------------------------------------------------------------
+| CHART ROUTES
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/chart/bookings-monthly',   [ChartController::class, 'bookingMonthly']);
+Route::get('/chart/revenue-monthly',    [ChartController::class, 'revenueMonthly']);
+Route::get('/chart/paket-popular',      [ChartController::class, 'paketPopular']);
+Route::get('/chart/destinasi-popular',  [ChartController::class, 'destinasiPopular']);
+Route::get('/chart/kuota-trip',         [ChartController::class, 'kuotaTrip']);
+
+
+/*
+|--------------------------------------------------------------------------
 | PROTECTED ROUTES
 |--------------------------------------------------------------------------
 */
@@ -48,20 +60,22 @@ Route::middleware('auth:sanctum')->group(function () {
     // Logout
     Route::post('/logout', [AuthController::class, 'logout']);
 
+
     /*
     |--------------------------------------------------------------------------
     | CUSTOMER ROUTES
     |--------------------------------------------------------------------------
     */
 
-    // Booking (customer)
     Route::post('/bookings', [BookingController::class, 'store']);
+
     Route::get('/my-bookings', function (Request $request) {
         return $request->user()->bookings()->with('jadwalTrip.paket')->get();
     });
+
     Route::get('/bookings/{id}', [BookingController::class, 'show']);
 
-    // Payment (customer)
+
     Route::post('/payments', [PaymentController::class, 'store']);
 
 
@@ -73,7 +87,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('admin')->group(function () {
 
-        // CRUD User (admin manage user)
+        // CRUD User
         Route::get('/users',        [UserController::class, 'index']);
         Route::get('/users/{id}',   [UserController::class, 'show']);
         Route::post('/users',       [UserController::class, 'store']);
@@ -95,22 +109,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/jadwal-trip/{id}',    [JadwalTripController::class, 'update']);
         Route::delete('/jadwal-trip/{id}', [JadwalTripController::class, 'destroy']);
 
-        // Booking (admin manage all)
+        // Booking (admin)
         Route::get('/bookings',          [BookingController::class, 'index']);
         Route::put('/bookings/{id}',     [BookingController::class, 'update']);
         Route::delete('/bookings/{id}',  [BookingController::class, 'destroy']);
 
-        // Payment (admin verify)
+        // Payments (admin verify)
         Route::get('/payments',          [PaymentController::class, 'index']);
         Route::get('/payments/{id}',     [PaymentController::class, 'show']);
         Route::put('/payments/{id}',     [PaymentController::class, 'update']);
         Route::delete('/payments/{id}',  [PaymentController::class, 'destroy']);
     });
-
-    Route::get('/chart/bookings-monthly', [ChartController::class, 'bookingMonthly']);
-    Route::get('/chart/revenue-monthly', [ChartController::class, 'revenueMonthly']);
-    Route::get('/chart/paket-popular', [ChartController::class, 'paketPopular']);
-    Route::get('/chart/destinasi-popular', [ChartController::class, 'destinasiPopular']);
-    Route::get('/chart/kuota-trip', [ChartController::class, 'kuotaTrip']);
-
 });
