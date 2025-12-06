@@ -12,6 +12,7 @@ import LogoPDF from "../../../assets/img/logo-dolandjogja.png";
 
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
 import DestinasiIcon from "../../../assets/icon/destinasi.svg";
 import JadwalIcon from "../../../assets/icon/jadwal.svg";
@@ -130,8 +131,17 @@ export default function PaketList() {
         </div>
 
         <nav className="sidebar-menu">
+
           <Link to="/admin/dashboard" className={location.pathname === "/admin/dashboard" ? "active" : ""}>
             <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+          </Link>
+
+          <Link
+            to="/admin/users"
+            className={location.pathname.includes("/admin/users") ? "active" : ""}
+          >
+            <img src={ProfilIcon} className="menu-icon" />
+            {!collapsed && "Kelola User"}
           </Link>
 
           <Link to="/admin/paket" className={location.pathname.includes("/admin/paket") ? "active" : ""}>
@@ -215,7 +225,7 @@ export default function PaketList() {
                     <td>Rp {Number(p.harga).toLocaleString()}</td>
                     <td>{p.durasi}</td>
                     <td className="paket-action-col">
-                      
+
                       <Link className="paket-edit" to={`/admin/paket/edit/${p.id}`}>
                         <img src={IconEdit} className="icon-btn-small" /> Edit
                       </Link>
