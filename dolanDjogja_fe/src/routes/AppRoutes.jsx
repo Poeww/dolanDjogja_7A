@@ -5,6 +5,10 @@ import Login from "../home/login";
 import Register from "../home/register";
 import Home from "../home/home";
 
+import UserList from "../pages/admin/user/userList";
+import UserCreate from "../pages/admin/user/userCreate";
+import UserEdit from "../pages/admin/user/userEdit";
+
 // ADMIN - Paket
 import PaketList from "../pages/admin/paket/paketList";
 import PaketCreate from "../pages/admin/paket/paketCreate";
@@ -84,6 +88,10 @@ export default function AppRoutes() {
           }
         />
 
+        <Route path="/admin/users" element={<UserList />} />
+        <Route path="/admin/users/create" element={<UserCreate />} />
+        <Route path="/admin/users/edit/:id" element={<UserEdit />} />
+
 
         {/* ============================
             ADMIN - PAKET WISATA
@@ -115,26 +123,26 @@ export default function AppRoutes() {
           }
         />
 
-{/* ============================
+        {/* ============================
     ADMIN - BOOKING
 ============================ */}
-<Route
-  path="/admin/bookings"
-  element={
-    <PrivateRoute role="admin">
-      <BookingList />
-    </PrivateRoute>
-  }
-/>
+        <Route
+          path="/admin/bookings"
+          element={
+            <PrivateRoute role="admin">
+              <BookingList />
+            </PrivateRoute>
+          }
+        />
 
-<Route
-  path="/admin/bookings/edit/:id"
-  element={
-    <PrivateRoute role="admin">
-      <BookingEdit />
-    </PrivateRoute>
-  }
-/>
+        <Route
+          path="/admin/bookings/edit/:id"
+          element={
+            <PrivateRoute role="admin">
+              <BookingEdit />
+            </PrivateRoute>
+          }
+        />
 
         {/* ============================
             ADMIN - DESTINASI
