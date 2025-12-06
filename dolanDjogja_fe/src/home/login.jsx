@@ -71,7 +71,7 @@ export default function Login() {
                     <input
                         type="email"
                         name="email"
-                        placeholder="Masukkan email Anda..."
+                        placeholder="Masukkan email..."
                         value={form.email}
                         onChange={handleChange}
                         className="input"
@@ -81,7 +81,7 @@ export default function Login() {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Masukkan kata sandi Anda..."
+                        placeholder="Masukkan kata sandi..."
                         value={form.password}
                         onChange={handleChange}
                         className="input"
