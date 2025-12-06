@@ -1,23 +1,38 @@
 import Navbar from "../components/navbar";
+import "./home.css";
+import bg from "../assets/img/highlight-home.png";
 
 export default function Home() {
   return (
     <>
       <Navbar />
 
-      <div style={{ padding: "60px 40px" }}>
-        <h1 style={{ fontSize: "36px", fontWeight: "700", marginBottom: "10px" }}>
-          Selamat Datang di dolanDjogja!
-        </h1>
+<div 
+    className="home-hero"
+    style={{ backgroundImage: `url(${bg})` }}
+>
+    <div className="home-overlay"></div>
 
-        <p style={{ fontSize: "18px", color: "#555", marginBottom: "20px" }}>
-          Nyoba halaman beranda utama^^
-        </p>
+    <div className="home-container">
+   
+        <div className="left-text">
+            <h3 className="region">YOGYAKARTA</h3>
+            <h1 className="welcome-title">Sugeng Rawuh</h1>
+            <p className="desc">
+                Kamu akan jatuh cinta pada ketenangan alamnya, hangatnya warganya
+                dan kenangan yang tumbuh dari setiap perjalanan!
+            </p>
 
-        <p style={{ fontSize: "16px", color: "#777", maxWidth: "600px" }}>
-          Jelajahi berbagai destinasi menarik dan paket wisata terbaik dari Jogja.
-          Silakan login untuk melakukan booking atau melihat pemesanan Anda^^
-        </p>
+            <button className="btn-hero">Jelajahi</button>
+        </div>
+
+        <div className="right-cards">
+            <div className="card-placeholder big"></div>
+            <div className="card-placeholder small"></div>
+        </div>
+
+        </div>
+
       </div>
     </>
   );
