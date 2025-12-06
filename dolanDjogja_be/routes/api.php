@@ -11,6 +11,8 @@ use App\Http\Controllers\JadwalTripController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
 
+use App\Http\Controllers\ChartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -104,5 +106,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/payments/{id}',     [PaymentController::class, 'update']);
         Route::delete('/payments/{id}',  [PaymentController::class, 'destroy']);
     });
+
+    Route::get('/chart/bookings-monthly', [ChartController::class, 'bookingMonthly']);
+    Route::get('/chart/revenue-monthly', [ChartController::class, 'revenueMonthly']);
+    Route::get('/chart/paket-popular', [ChartController::class, 'paketPopular']);
+    Route::get('/chart/destinasi-popular', [ChartController::class, 'destinasiPopular']);
+    Route::get('/chart/kuota-trip', [ChartController::class, 'kuotaTrip']);
 
 });
