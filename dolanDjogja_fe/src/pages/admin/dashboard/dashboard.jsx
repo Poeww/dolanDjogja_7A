@@ -53,7 +53,7 @@ export default function AdminDashboard() {
 
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
-
+      
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} className="sidebar-logo" alt="Logo" />
@@ -70,16 +70,6 @@ export default function AdminDashboard() {
             <img src={DashboardIcon} className="menu-icon" />
             {!collapsed && "Dashboard"}
           </Link>
-
-          <Link
-            to="/admin/users"
-            data-title="Kelola User"
-            className={location.pathname.includes("/admin/users") ? "active" : ""}
-          >
-            <img src={ProfilIcon} className="menu-icon" />
-            {!collapsed && "Kelola User"}
-          </Link>
-
 
           <Link
             to="/admin/paket"
