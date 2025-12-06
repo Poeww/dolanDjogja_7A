@@ -105,36 +105,63 @@ export default function PaymentList() {
         </div>
 
         <nav className="sidebar-menu">
-          <Link to="/admin/dashboard">
+          <Link
+            to="/admin/dashboard"
+            className={location.pathname === "/admin/dashboard" ? "active" : ""}
+          >
             <img src={DashboardIcon} className="menu-icon" />
             {!collapsed && "Dashboard"}
           </Link>
 
-          <Link to="/admin/paket">
+          <Link
+            to="/admin/users"
+            className={location.pathname.includes("/admin/users") ? "active" : ""}
+          >
+            <img src={ProfilIcon} className="menu-icon" />
+            {!collapsed && "Kelola User"}
+          </Link>
+
+          <Link
+            to="/admin/paket"
+            className={location.pathname.includes("/admin/paket") ? "active" : ""}
+          >
             <img src={PaketIcon} className="menu-icon" />
             {!collapsed && "Paket Wisata"}
           </Link>
 
-          <Link to="/admin/destinasi">
+          <Link
+            to="/admin/destinasi"
+            className={location.pathname.includes("/admin/destinasi") ? "active" : ""}
+          >
             <img src={DestinasiIcon} className="menu-icon" />
             {!collapsed && "Destinasi"}
           </Link>
 
-          <Link to="/admin/jadwal">
+          <Link
+            to="/admin/jadwal"
+            className={location.pathname.includes("/admin/jadwal") ? "active" : ""}
+          >
             <img src={JadwalIcon} className="menu-icon" />
             {!collapsed && "Jadwal Trip"}
           </Link>
 
-          <Link to="/admin/bookings">
+          <Link
+            to="/admin/bookings"
+            className={location.pathname.includes("/admin/bookings") ? "active" : ""}
+          >
             <img src={BookingIcon} className="menu-icon" />
             {!collapsed && "Booking"}
           </Link>
 
-          <Link to="/admin/payments" className="active">
+          <Link
+            to="/admin/payments"
+            className={location.pathname.includes("/admin/payments") ? "active" : ""}
+          >
             <img src={PaymentIcon} className="menu-icon" />
             {!collapsed && "Payments"}
           </Link>
         </nav>
+
         <button className="logout-btn">
           <img src={LogoutIcon} className="menu-icon" />
           {!collapsed && "Logout"}
