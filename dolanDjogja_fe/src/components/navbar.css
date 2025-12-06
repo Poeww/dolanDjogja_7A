@@ -1,74 +1,205 @@
-.navbar {
-    width: 100%;
-    padding: 15px 40px;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e4e4e4;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-.nav-logo {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1e6feb;
-    text-decoration: none;
+/* ================= NAVBAR ================= */
+.navbar {
+    background: #0866d9;
+    width: 100%;
+    height: 70px;
+    padding: 0 40px;
+
+    border-radius: 0 0 28px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.logo-img {
+    height: 50px;
+    user-select: none;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 50px;
 }
 
 .nav-right a {
-    margin-left: 25px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
+    position: relative;
+    transition: 0.25s ease;
+}
+
+.nav-right a:hover {
+    color: #FFD35A;
+}
+
+.nav-right a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #FFC436;
+    transition: width 0.25s ease;
+}
+
+.nav-right a:hover::after {
+    width: 100%;
 }
 
 .btn-login {
-    padding: 7px 14px;
-    background: #1e6feb;
-    color: white !important;
-    border-radius: 6px;
+    background: #ffffff;
+    color: #0866d9 !important;
+    padding: 7px 22px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
+.btn-login:hover {
+    background: #FFD35A;
+    color: #0866d9 !important;
+}
+
+/* ================= DROPDOWN ================= */
 .dropdown {
-    display: inline-block;
-    margin-left: 20px;
+    position: relative;
 }
 
 .dropbtn {
     background: none;
     border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 16px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.dropbtn:hover {
+    color: #FFD35A;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
+    right: 0;
+    top: 42px;
+
     background: white;
-    min-width: 150px;
-    border: 1px solid #ddd;
-    margin-top: 6px;
+    min-width: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content a,
 .dropdown-content button {
-    display: block;
-    padding: 10px;
-    text-align: left;
+    padding: 12px 18px;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
     background: none;
     border: none;
-    color: #333;
+    text-align: left;
     cursor: pointer;
-    width: 100%;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background: #FFF2CC;
+}
+
+.logout-btn {
+    color: red;
+    font-weight: 600;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-.logout-btn {
-    color: red;
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+    .nav-right {
+        gap: 25px;
+    }
+
+    .nav-right a {
+        font-size: 16px;
+    }
+
+    .btn-login {
+        font-size: 14px;
+        padding: 6px 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        height: 58px;
+        padding: 0 20px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .nav-right {
+        gap: 12px;
+    }
+
+    .nav-right a {
+        font-size: 13px;
+    }
+
+    .btn-login {
+        padding: 5px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        height: 52px;
+        padding: 0 12px;
+    }
+
+    .logo-img {
+        height: 40px;
+    }
+
+    .nav-right a {
+        margin: 0 5px;
+        font-size: 12px;
+    }
+
+    .btn-login {
+        padding: 4px 10px;
+        font-size: 11px;
+        border-radius: 14px;
+    }
 }

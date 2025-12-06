@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import Logo from "../assets/img/logo-dolandjogja.svg";
 
 export default function Navbar() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -13,8 +14,11 @@ export default function Navbar() {
 
     return (
         <nav className="navbar">
+
             <div className="nav-left">
-                <Link to="/" className="nav-logo">dolanDjogja</Link>
+                <Link to="/">
+                    <img src={Logo} alt="DolanDjogja" className="logo-img" />
+                </Link>
             </div>
 
             <div className="nav-right">
@@ -23,7 +27,9 @@ export default function Navbar() {
                 <Link to="/paket">Paket</Link>
 
                 {!user && (
-                    <Link to="/login" className="btn-login">Login</Link>
+                    <Link to="/login" className="btn-login">
+                        Login
+                    </Link>
                 )}
 
                 {user && role === "user" && (
@@ -36,12 +42,19 @@ export default function Navbar() {
                                 <Link to="/profile">Profil</Link>
                                 <Link to="/mybookings">Riwayat Booking</Link>
 
-                                <button onClick={handleLogout} className="logout-btn">
+                                <button
+                                    onClick={handleLogout}
+                                    className="logout-btn"
+                                >
                                     Logout
                                 </button>
                             </div>
                         </div>
                     </>
+                )}
+
+                {user && role === "admin" && (
+                    <Link to="/admin">Dashboard</Link>
                 )}
             </div>
         </nav>
