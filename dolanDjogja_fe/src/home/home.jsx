@@ -22,6 +22,25 @@ import img4 from "../assets/img/carousel-home4.png";
 import img5 from "../assets/img/carousel-home5.png";
 import img6 from "../assets/img/carousel-home6.png";
 
+const handleBookingButton = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    window.location.href = "/login";
+    return;
+  }
+
+  if (user.role === "user") {
+    window.location.href = "/booking";
+    return;
+  }
+
+  if (user.role === "admin") {
+    window.location.href = "/admin";
+    return;
+  }
+};
+
 
 // =========================================
 // COUNT UP HOOK
@@ -352,10 +371,19 @@ export default function Home() {
                 </div>
 
                 <div className="paket-btn-row">
-                  <button className="btn-detail" onClick={() => handleOpenDetailPaket(p)}>
+                  <button
+                    className="btn-detail"
+                    onClick={() => handleOpenDetailPaket(p)}
+                  >
                     Detail
                   </button>
-                  <button className="btn-booking">Booking</button>
+
+                  <button
+                    className="btn-booking"
+                    onClick={handleBookingButton}
+                  >
+                    Booking
+                  </button>
                 </div>
               </div>
             </div>
@@ -460,7 +488,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
       <section className="cta-section" style={{ backgroundImage: `url(${senjaTugu})` }}>
         <div className="cta-overlay"></div>
 
@@ -473,13 +500,7 @@ export default function Home() {
           <div className="cta-buttons">
             <button
               className="btn-cta-primary"
-              onClick={() => {
-                const user = JSON.parse(localStorage.getItem("user"));
-
-                if (!user) return (window.location.href = "/login");
-                if (user.role === "user") return (window.location.href = "/booking");
-                if (user.role === "admin") return (window.location.href = "/admin");
-              }}
+              onClick={handleBookingButton}
             >
               Mulai Booking
             </button>
