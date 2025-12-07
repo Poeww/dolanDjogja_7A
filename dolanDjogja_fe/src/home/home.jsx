@@ -319,8 +319,29 @@ export default function Home() {
           </p>
 
           <div className="cta-buttons">
-            <button className="btn-cta-primary">Mulai Booking →</button>
-            <button className="btn-cta-outline">Jelajahi Paket</button>
+            <button
+              className="btn-cta-primary"
+              onClick={() => {
+                const user = JSON.parse(localStorage.getItem("user"));
+
+                if (!user) {
+                  window.location.href = "/login";
+                  return;
+                }
+
+                if (user.role === "user") {
+                  window.location.href = "/booking";
+                  return;
+                }
+
+                if (user.role === "admin") {
+                  window.location.href = "/admin";
+                  return;
+                }
+              }}
+            >
+              Mulai Booking
+            </button>
           </div>
 
           <div className="cta-stats">
