@@ -13,6 +13,7 @@ import iconGuide from "../assets/icon/guide.svg";
 import iconCustom from "../assets/icon/custom.svg";
 import iconMoney from "../assets/icon/money.svg";
 import iconMaps from "../assets/icon/maps.svg";
+import senjaTugu from "../assets/img/senja-tugu.png";
 
 
 import img1 from "../assets/img/carousel-home1.png";
@@ -223,6 +224,47 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        className="cta-section"
+        style={{ backgroundImage: `url(${senjaTugu})` }}
+      >
+        <div className="cta-overlay"></div>
+
+        <div className="cta-content">
+          <h1 className="cta-title">Siap Jalan-Jalan di Jogja?</h1>
+          <p className="cta-subtitle">
+            Jangan lewatkan kesempatan untuk merasakan pengalaman wisata yang tak terlupakan.
+            Booking sekarang dan mulai petualanganmu!
+          </p>
+
+          <div className="cta-buttons">
+            <button className="btn-cta-primary">
+              Mulai Booking →
+            </button>
+
+            <button className="btn-cta-outline">
+              Jelajahi Paket
+            </button>
+          </div>
+
+          <div className="cta-stats">
+            <div className="stat-item">
+              <h2>500+</h2>
+              <p>Pelanggan Puas</p>
+            </div>
+
+            <div className="stat-item">
+              <h2>100+</h2>
+              <p>Destinasi</p>
+            </div>
+
+            <div className="stat-item">
+              <h2>50+</h2>
+              <p>Paket Wisata</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </>
   );
