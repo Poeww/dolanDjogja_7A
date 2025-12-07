@@ -1,9 +1,13 @@
+import { useState, useEffect, useRef } from "react";
 import "./navbar.css";
 import Logo from "../assets/img/logo-dolandjogja.svg";
 
 export default function Navbar() {
     const user = JSON.parse(localStorage.getItem("user"));
     const role = user?.role;
+
+    const [openDropdown, setOpenDropdown] = useState(false);
+    const dropdownRef = useRef(null);
 
     const handleLogout = () => {
         localStorage.removeItem("user");
@@ -18,9 +22,26 @@ export default function Navbar() {
         }
     };
 
+    const toggleDropdown = () => {
+        setOpenDropdown((prev) => !prev);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpenDropdown(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <nav className="navbar">
-
             <div className="nav-left">
                 <a className="nav-item" onClick={() => scrollToSection("home")}>
                     <img src={Logo} alt="DolanDjogja" className="logo-img" />
@@ -41,10 +62,12 @@ export default function Navbar() {
                     <>
                         <a href="/booking" className="nav-item">Booking</a>
 
-                        <div className="dropdown">
-                            <button className="dropbtn">Akun ▾</button>
+                        <div className="dropdown" ref={dropdownRef}>
+                            <button className="dropbtn" onClick={toggleDropdown}>
+                                Akun ▾
+                            </button>
 
-                            <div className="dropdown-content">
+                            <div className={`dropdown-content ${openDropdown ? "show" : ""}`}>
                                 <a href="/profile">Profil</a>
                                 <a href="/mybookings">Riwayat Booking</a>
 
