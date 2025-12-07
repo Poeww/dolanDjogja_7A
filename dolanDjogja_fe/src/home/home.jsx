@@ -22,7 +22,6 @@ import img4 from "../assets/img/carousel-home4.png";
 import img5 from "../assets/img/carousel-home5.png";
 import img6 from "../assets/img/carousel-home6.png";
 
-
 // =========================================
 // COUNT UP HOOK
 // =========================================
@@ -41,7 +40,6 @@ function useCountUp(end, duration = 1500) {
         if (isVisible) {
           let start = 0;
           setValue(0);
-
           const increment = end / (duration / 16);
 
           const counter = setInterval(() => {
@@ -64,7 +62,6 @@ function useCountUp(end, duration = 1500) {
   return [value, ref];
 }
 
-
 // =========================================
 // MAIN COMPONENT
 // =========================================
@@ -75,9 +72,17 @@ export default function Home() {
   const [destinasi, setDestinasi] = useState([]);
   const [paket, setPaket] = useState([]);
 
+  // Counter
   const [pelanggan, pelangganRef] = useCountUp(500);
   const [jumlahDestinasi, destinasiRef] = useCountUp(100);
   const [jumlahPaket, paketRef] = useCountUp(50);
+
+  // =========================================
+  // MODAL STATE
+  // =========================================
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDestinasi, setSelectedDestinasi] = useState(null);
+  const [relatedPaket, setRelatedPaket] = useState([]);
 
   useEffect(() => {
     loadDestinasi();
@@ -100,6 +105,27 @@ export default function Home() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // =========================================
+  // OPEN MODAL
+  // =========================================
+  const handleOpenDetail = (dest) => {
+    setSelectedDestinasi(dest);
+
+    const paketTerkait = paket.filter((p) =>
+      p.destinasi?.some((d) => d.id === dest.id)
+    );
+
+    setRelatedPaket(paketTerkait);
+    setShowModal(true);
+  };
+
+  // CLOSE MODAL
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedDestinasi(null);
+    setRelatedPaket([]);
   };
 
   // =========================================
@@ -147,10 +173,13 @@ export default function Home() {
               Kamu akan jatuh cinta pada ketenangan alamnya, hangatnya warganya,
               dan kenangan yang tumbuh dari setiap perjalanan!
             </p>
+
             <button
               className="btn-hero"
               onClick={() =>
-                document.getElementById("destinasi").scrollIntoView({ behavior: "smooth" })
+                document.getElementById("destinasi").scrollIntoView({
+                  behavior: "smooth",
+                })
               }
             >
               Jelajahi
@@ -195,19 +224,64 @@ export default function Home() {
                 </div>
 
                 <p className="desc">{d.deskripsi}</p>
-                <button className="btn-detail">Detail</button>
+
+                <button
+                  className="btn-detail"
+                  onClick={() => handleOpenDetail(d)}
+                >
+                  Detail
+                </button>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* PAKET SECTION */}
+      {/* ================================
+          MODAL DESTINASI
+      ================================= */}
+      {showModal && selectedDestinasi && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={handleCloseModal}>×</button>
+
+            <img
+              className="modal-img"
+              src={`${import.meta.env.VITE_API_URL}/${selectedDestinasi.gambar}`}
+              alt={selectedDestinasi.nama_destinasi}
+            />
+
+            <h2 className="modal-title">{selectedDestinasi.nama_destinasi}</h2>
+            <p className="modal-location">{selectedDestinasi.lokasi}</p>
+
+            <div className="modal-info">
+              <p><strong>Harga Tiket:</strong> Rp {selectedDestinasi.harga_tiket}</p>
+              <p><strong>Jam Buka:</strong> {selectedDestinasi.jam_buka}</p>
+            </div>
+
+            <p className="modal-desc">{selectedDestinasi.deskripsi}</p>
+
+            <h3 className="modal-subtitle">Paket Wisata Terkait</h3>
+
+            {relatedPaket.length > 0 ? (
+              <ul className="modal-paket-list">
+                {relatedPaket.map((p) => (
+                  <li key={p.id}>{p.nama_paket}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="modal-no-paket">Belum ada paket terkait.</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* =========================================
+         PAKET SECTION
+      ========================================= */}
       <section id="paket" className="paket-section">
         <h1 className="section-title">Paket Wisata Rekomendasi</h1>
-        <p className="section-subtitle">
-          Pilihan paket terbaik untuk liburan yang seru!
-        </p>
+        <p className="section-subtitle">Pilihan paket terbaik untuk liburan yang seru!</p>
 
         <div className="paket-grid">
           {paket.map((p) => (
@@ -217,6 +291,7 @@ export default function Home() {
                   src={`${import.meta.env.VITE_API_URL}/${p.gambar_thumbnail}`}
                   alt={p.nama_paket}
                 />
+
                 <div className="paket-price-badge">
                   Rp {Number(p.harga).toLocaleString("id-ID")}
                 </div>
@@ -281,9 +356,7 @@ export default function Home() {
               <img src={iconCustom} alt="custom trip" />
             </div>
             <h3>Custom Trip</h3>
-            <p>
-              Bikin itinerary sesuai gaya liburanmu! Fleksibel, bebas request ke mana saja!
-            </p>
+            <p>Bikin itinerary sesuai gaya liburanmu! Fleksibel, bebas request ke mana saja!</p>
           </div>
 
           <div className="why-card">
@@ -291,9 +364,7 @@ export default function Home() {
               <img src={iconMoney} alt="harga murah" />
             </div>
             <h3>Harga Murce</h3>
-            <p>
-              Paket wisata terjangkau tanpa mengurangi kualitas pengalaman.
-            </p>
+            <p>Paket wisata terjangkau tanpa mengurangi kualitas pengalaman.</p>
           </div>
 
           <div className="why-card">
@@ -301,9 +372,7 @@ export default function Home() {
               <img src={iconMaps} alt="hidden gem" />
             </div>
             <h3>Destinasi Hidden Gem</h3>
-            <p>
-              Jelajahi spot anti-mainstream yang jarang diketahui wisatawan.
-            </p>
+            <p>Jelajahi spot anti-mainstream yang jarang diketahui wisatawan.</p>
           </div>
         </div>
       </section>
@@ -345,7 +414,6 @@ export default function Home() {
           </div>
 
           <div className="cta-stats">
-
             <div className="stat-item" ref={pelangganRef}>
               <h2>{pelanggan}+</h2>
               <p>Pelanggan Puas</p>
@@ -360,7 +428,6 @@ export default function Home() {
               <h2>{jumlahPaket}+</h2>
               <p>Paket Wisata</p>
             </div>
-
           </div>
         </div>
       </section>
