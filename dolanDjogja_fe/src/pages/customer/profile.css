@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "DM Sans", sans-serif;
+}
+
+body {
+    background: #fffdf6;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    width: 900px;
+    max-width: 95%;
+    height: auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    position: relative;
+    padding: 40px 60px;
+}
+
+.decor-right-top {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 160px;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.decor-right-bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.message-text {
+    color: #0084c9;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.floating-group {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.floating-input {
+    width: 100%;
+    height: 45px;
+    padding: 12px 14px;
+    border-radius: 15px;
+    border: 1px solid #00a9ff;
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+.floating-input:focus {
+    border-color: #0090da;
+}
+
+.floating-label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 6px;
+    color: #808080;
+    transition: 0.25s ease;
+    pointer-events: none;
+}
+
+.floating-input:focus+.floating-label,
+.floating-input:not(:placeholder-shown)+.floating-label {
+    top: -4px;
+    font-size: 12px;
+    color: #00a9ff;
+}
+
+.btn {
+    width: 100%;
+    height: 42px;
+    background: #00a9ff;
+    color: #fff;
+    border-radius: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background: #0090da;
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        padding: 30px 25px;
+    }
+
+    .decor-right-top,
+    .decor-right-bottom {
+        display: none;
+    }
+}

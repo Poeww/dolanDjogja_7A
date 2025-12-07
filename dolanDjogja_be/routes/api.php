@@ -79,6 +79,34 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/payments', [PaymentController::class, 'store']);
 
 
+    // =======================
+    // USER PROFILE (SELF)
+    // =======================
+    Route::get('/me', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::put('/me', function (Request $request) {
+        $user = $request->user();
+
+        $data = $request->validate([
+            'name'     => 'string|max:255',
+            'email'    => 'email|max:255',
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+        $user->update($data);
+
+        return $user;
+    });
+
+
     /*
     |--------------------------------------------------------------------------
     | ADMIN ROUTES
