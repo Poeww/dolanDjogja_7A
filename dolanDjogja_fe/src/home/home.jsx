@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getAllDestinasi } from "../services/destinasiService";
 import { getAllPaket } from "../services/paketService";
 
@@ -15,7 +15,6 @@ import iconMoney from "../assets/icon/money.svg";
 import iconMaps from "../assets/icon/maps.svg";
 import senjaTugu from "../assets/img/senja-tugu.jpg";
 
-
 import img1 from "../assets/img/carousel-home1.png";
 import img2 from "../assets/img/carousel-home2.png";
 import img3 from "../assets/img/carousel-home3.png";
@@ -23,12 +22,62 @@ import img4 from "../assets/img/carousel-home4.png";
 import img5 from "../assets/img/carousel-home5.png";
 import img6 from "../assets/img/carousel-home6.png";
 
+
+// =========================================
+// COUNT UP HOOK
+// =========================================
+function useCountUp(end, duration = 1500) {
+  const [value, setValue] = useState(0);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let observer = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries[0].isIntersecting;
+
+        if (isVisible) {
+          let start = 0;
+          setValue(0);
+
+          const increment = end / (duration / 16);
+
+          const counter = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              start = end;
+              clearInterval(counter);
+            }
+            setValue(Math.floor(start));
+          }, 16);
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return [value, ref];
+}
+
+
+// =========================================
+// MAIN COMPONENT
+// =========================================
 export default function Home() {
   const images = [img1, img2, img3, img4, img5, img6];
   const duplicated = [...images, ...images];
 
   const [destinasi, setDestinasi] = useState([]);
   const [paket, setPaket] = useState([]);
+
+  const [pelanggan, pelangganRef] = useCountUp(500);
+  const [jumlahDestinasi, destinasiRef] = useCountUp(100);
+  const [jumlahPaket, paketRef] = useCountUp(50);
 
   useEffect(() => {
     loadDestinasi();
@@ -57,10 +106,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <section
-        className="home-hero"
-        style={{ backgroundImage: `url(${bg})` }}
-      >
+      <section className="home-hero" style={{ backgroundImage: `url(${bg})` }}>
         <div className="home-overlay"></div>
 
         <div className="home-container">
@@ -87,8 +133,8 @@ export default function Home() {
       </section>
 
       <section className="destinasi-section">
-        <h1 className="destinasi-title">Destinasi Populer</h1>
-        <p className="destinasi-subtitle">
+        <h1 className="section-title">Destinasi Populer</h1>
+        <p className="section-subtitle">
           Tempat-tempat favorit yang wajib dikunjungi di Jogja
         </p>
 
@@ -104,10 +150,12 @@ export default function Home() {
 
               <div className="destinasi-content">
                 <h3>{d.nama_destinasi}</h3>
+
                 <div className="lokasi">
                   <img src={iconMap} alt="location" />
                   {d.lokasi}
                 </div>
+
                 <p className="desc">{d.deskripsi}</p>
                 <button className="btn-detail">Detail</button>
               </div>
@@ -117,15 +165,14 @@ export default function Home() {
       </section>
 
       <section className="paket-section">
-        <h1 className="paket-title">Paket Wisata Rekomendasi</h1>
-        <p className="paket-subtitle">
-          Pilihan paket terbaik untuk liburan sempurna Anda
+        <h1 className="section-title">Paket Wisata Rekomendasi</h1>
+        <p className="section-subtitle">
+          Pilihan paket terbaik untuk liburan yang seru!
         </p>
 
         <div className="paket-grid">
           {paket.map((p) => (
             <div className="paket-card" key={p.id}>
-
               <div className="img-wrapper paket-img">
                 <img
                   src={`${import.meta.env.VITE_API_URL}/${p.gambar_thumbnail}`}
@@ -167,16 +214,15 @@ export default function Home() {
                   <button className="btn-booking">Booking</button>
                 </div>
               </div>
-
             </div>
           ))}
         </div>
       </section>
 
       <section className="why-section">
-        <h1 className="why-title">Kenapa Harus DolanDjogja?</h1>
-        <p className="why-subtitle">
-          Nikmati pengalaman liburan terbaik dengan layanan yang ramah dan pastinya seru!
+        <h1 className="section-title">Kenapa Harus DolanDjogja?</h1>
+        <p className="section-subtitle">
+          Nikmati pengalaman liburan terbaik dengan layanan ramah dan pastinya seru!
         </p>
 
         <div className="why-grid">
@@ -187,7 +233,7 @@ export default function Home() {
             </div>
             <h3>Tour Guide Lokal</h3>
             <p>
-              Dipandu langsung oleh warga lokal yang paham budaya dan tahu banyak spot unik di Jogja lho!
+              Dipandu langsung oleh warga lokal yang paham budaya dan tahu banyak spot unik.
             </p>
           </div>
 
@@ -197,7 +243,7 @@ export default function Home() {
             </div>
             <h3>Custom Trip</h3>
             <p>
-              Bikin itinerary sesuai gaya liburanmu! Fleksibel banget dan bebas request ke mana pun!
+              Bikin itinerary sesuai gaya liburanmu! Fleksibel, bebas request ke mana saja!
             </p>
           </div>
 
@@ -207,7 +253,7 @@ export default function Home() {
             </div>
             <h3>Harga Murce</h3>
             <p>
-              Paket wisata terjangkau tanpa mengurangi kualitas pengalaman liburanmu.
+              Paket wisata terjangkau tanpa mengurangi kualitas pengalaman.
             </p>
           </div>
 
@@ -217,58 +263,52 @@ export default function Home() {
             </div>
             <h3>Destinasi Hidden Gem</h3>
             <p>
-              Jelajahi spot anti-mainstream yang jarang diketahui wisatawan lainnya. Eksklusif banget!
+              Jelajahi spot anti-mainstream yang jarang diketahui wisatawan.
             </p>
           </div>
 
         </div>
       </section>
 
-      <section
-        className="cta-section"
-        style={{ backgroundImage: `url(${senjaTugu})` }}
-      >
+
+      <section className="cta-section" style={{ backgroundImage: `url(${senjaTugu})` }}>
         <div className="cta-overlay"></div>
 
         <div className="cta-content">
           <h1 className="cta-title">Siap Jalan-Jalan di Jogja?</h1>
           <p className="cta-subtitle">
-            Jangan lewatkan kesempatan untuk merasakan pengalaman wisata yang tak terlupakan.
-            Booking sekarang dan mulai petualanganmu!
+            Jangan lewatkan kesempatan wisata tak terlupakan. Mulai petualanganmu sekarang!
           </p>
 
           <div className="cta-buttons">
-            <button className="btn-cta-primary">
-              Mulai Booking →
-            </button>
-
-            <button className="btn-cta-outline">
-              Jelajahi Paket
-            </button>
+            <button className="btn-cta-primary">Mulai Booking →</button>
+            <button className="btn-cta-outline">Jelajahi Paket</button>
           </div>
 
           <div className="cta-stats">
-            <div className="stat-item">
-              <h2>500+</h2>
+
+            <div className="stat-item" ref={pelangganRef}>
+              <h2>{pelanggan}+</h2>
               <p>Pelanggan Puas</p>
             </div>
 
-            <div className="stat-item">
-              <h2>100+</h2>
+            <div className="stat-item" ref={destinasiRef}>
+              <h2>{jumlahDestinasi}+</h2>
               <p>Destinasi</p>
             </div>
 
-            <div className="stat-item">
-              <h2>50+</h2>
+            <div className="stat-item" ref={paketRef}>
+              <h2>{jumlahPaket}+</h2>
               <p>Paket Wisata</p>
             </div>
+
           </div>
         </div>
       </section>
-      <footer className="footer-simple">
-        © {new Date().getFullYear()} <span>dolanDjogja</span>. All rights reserved.
-      </footer>
 
+      <footer className="footer-simple">
+        © {new Date().getFullYear()} <span>DolanDjogja</span>. All rights reserved.
+      </footer>
     </>
   );
 }
