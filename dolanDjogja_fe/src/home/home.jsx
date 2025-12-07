@@ -22,6 +22,7 @@ import img4 from "../assets/img/carousel-home4.png";
 import img5 from "../assets/img/carousel-home5.png";
 import img6 from "../assets/img/carousel-home6.png";
 
+
 // =========================================
 // COUNT UP HOOK
 // =========================================
@@ -66,24 +67,37 @@ function useCountUp(end, duration = 1500) {
 // MAIN COMPONENT
 // =========================================
 export default function Home() {
+
+  // CAROUSEL IMAGES
   const images = [img1, img2, img3, img4, img5, img6];
   const duplicated = [...images, ...images];
 
+  // DATA
   const [destinasi, setDestinasi] = useState([]);
   const [paket, setPaket] = useState([]);
 
-  // Counter
+  // COUNTER
   const [pelanggan, pelangganRef] = useCountUp(500);
   const [jumlahDestinasi, destinasiRef] = useCountUp(100);
   const [jumlahPaket, paketRef] = useCountUp(50);
 
   // =========================================
-  // MODAL STATE
+  // MODAL DESTINASI
   // =========================================
-  const [showModal, setShowModal] = useState(false);
+  const [showModalDestinasi, setShowModalDestinasi] = useState(false);
   const [selectedDestinasi, setSelectedDestinasi] = useState(null);
   const [relatedPaket, setRelatedPaket] = useState([]);
 
+  // =========================================
+  // MODAL PAKET
+  // =========================================
+  const [showModalPaket, setShowModalPaket] = useState(false);
+  const [selectedPaket, setSelectedPaket] = useState(null);
+
+
+  // =========================================
+  // LOAD DATA
+  // =========================================
   useEffect(() => {
     loadDestinasi();
     loadPaket();
@@ -107,10 +121,11 @@ export default function Home() {
     }
   };
 
+
   // =========================================
-  // OPEN MODAL
+  // DESTINASI MODAL OPEN
   // =========================================
-  const handleOpenDetail = (dest) => {
+  const handleOpenDetailDestinasi = (dest) => {
     setSelectedDestinasi(dest);
 
     const paketTerkait = paket.filter((p) =>
@@ -118,15 +133,29 @@ export default function Home() {
     );
 
     setRelatedPaket(paketTerkait);
-    setShowModal(true);
+    setShowModalDestinasi(true);
   };
 
-  // CLOSE MODAL
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const closeModalDestinasi = () => {
+    setShowModalDestinasi(false);
     setSelectedDestinasi(null);
     setRelatedPaket([]);
   };
+
+
+  // =========================================
+  // PAKET MODAL OPEN
+  // =========================================
+  const handleOpenDetailPaket = (paket) => {
+    setSelectedPaket(paket);
+    setShowModalPaket(true);
+  };
+
+  const closeModalPaket = () => {
+    setShowModalPaket(false);
+    setSelectedPaket(null);
+  };
+
 
   // =========================================
   // AUTO ACTIVE NAVBAR
@@ -157,10 +186,11 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+
+
   return (
     <>
       <Navbar />
-
       {/* HERO SECTION */}
       <section id="home" className="home-hero" style={{ backgroundImage: `url(${bg})` }}>
         <div className="home-overlay"></div>
@@ -201,9 +231,7 @@ export default function Home() {
       {/* DESTINASI SECTION */}
       <section id="destinasi" className="destinasi-section">
         <h1 className="section-title">Destinasi Populer</h1>
-        <p className="section-subtitle">
-          Tempat-tempat favorit yang wajib dikunjungi di Jogja
-        </p>
+        <p className="section-subtitle">Tempat-tempat favorit yang wajib dikunjungi di Jogja</p>
 
         <div className="destinasi-grid">
           {destinasi.map((d) => (
@@ -227,7 +255,7 @@ export default function Home() {
 
                 <button
                   className="btn-detail"
-                  onClick={() => handleOpenDetail(d)}
+                  onClick={() => handleOpenDetailDestinasi(d)}
                 >
                   Detail
                 </button>
@@ -237,13 +265,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================================
+      {/* =======================================
           MODAL DESTINASI
-      ================================= */}
-      {showModal && selectedDestinasi && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
+      ======================================= */}
+      {showModalDestinasi && selectedDestinasi && (
+        <div className="modal-overlay" onClick={closeModalDestinasi}>
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleCloseModal}>×</button>
+            <button className="modal-close" onClick={closeModalDestinasi}>×</button>
 
             <img
               className="modal-img"
@@ -277,7 +305,7 @@ export default function Home() {
       )}
 
       {/* =========================================
-         PAKET SECTION
+          PAKET SECTION
       ========================================= */}
       <section id="paket" className="paket-section">
         <h1 className="section-title">Paket Wisata Rekomendasi</h1>
@@ -324,7 +352,9 @@ export default function Home() {
                 </div>
 
                 <div className="paket-btn-row">
-                  <button className="btn-detail">Detail</button>
+                  <button className="btn-detail" onClick={() => handleOpenDetailPaket(p)}>
+                    Detail
+                  </button>
                   <button className="btn-booking">Booking</button>
                 </div>
               </div>
@@ -332,6 +362,61 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* ==============================================
+          MODAL PAKET
+      ============================================== */}
+      {showModalPaket && selectedPaket && (
+        <div className="modal-overlay" onClick={closeModalPaket}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+
+            <button className="modal-close" onClick={closeModalPaket}>×</button>
+
+            <img
+              className="modal-img"
+              src={`${import.meta.env.VITE_API_URL}/${selectedPaket.gambar_thumbnail}`}
+              alt={selectedPaket.nama_paket}
+            />
+
+            <div className="modal-scroll">
+
+              <h2 className="modal-title">{selectedPaket.nama_paket}</h2>
+
+              <div className="modal-info">
+                <p><strong>Harga Paket:</strong> Rp {Number(selectedPaket.harga).toLocaleString("id-ID")}</p>
+                <p><strong>Durasi:</strong> {selectedPaket.durasi}</p>
+                <p><strong>Kuota Tersedia:</strong> {selectedPaket.kuota}</p>
+                <p><strong>Lokasi Tujuan:</strong> {selectedPaket.lokasi_tujuan}</p>
+              </div>
+
+              <p className="modal-desc">{selectedPaket.deskripsi}</p>
+
+              <h3 className="modal-subtitle">Destinasi yang Dikunjungi</h3>
+              {selectedPaket.destinasi?.length > 0 ? (
+                <ul className="modal-paket-list">
+                  {selectedPaket.destinasi.map((d) => (
+                    <li key={d.id}>{d.nama_destinasi}</li>
+                  ))}
+                </ul>
+              ) : <p className="modal-no-paket">Tidak ada destinasi terdaftar.</p>}
+
+              {selectedPaket.jadwal?.length > 0 && (
+                <>
+                  <h3 className="modal-subtitle">Jadwal Trip</h3>
+                  <ul className="modal-paket-list">
+                    {selectedPaket.jadwal.map((j) => (
+                      <li key={j.id}>
+                        Berangkat: {j.tanggal_berangkat} — Pulang: {j.tanggal_pulang}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* WHY SECTION */}
       <section className="why-section">
@@ -346,9 +431,7 @@ export default function Home() {
               <img src={iconGuide} alt="guide" />
             </div>
             <h3>Tour Guide Lokal</h3>
-            <p>
-              Dipandu langsung oleh warga lokal yang paham budaya dan tahu banyak spot unik.
-            </p>
+            <p>Dipandu langsung oleh warga lokal yang paham budaya dan tahu banyak spot unik.</p>
           </div>
 
           <div className="why-card">
@@ -393,20 +476,9 @@ export default function Home() {
               onClick={() => {
                 const user = JSON.parse(localStorage.getItem("user"));
 
-                if (!user) {
-                  window.location.href = "/login";
-                  return;
-                }
-
-                if (user.role === "user") {
-                  window.location.href = "/booking";
-                  return;
-                }
-
-                if (user.role === "admin") {
-                  window.location.href = "/admin";
-                  return;
-                }
+                if (!user) return (window.location.href = "/login");
+                if (user.role === "user") return (window.location.href = "/booking");
+                if (user.role === "admin") return (window.location.href = "/admin");
               }}
             >
               Mulai Booking
@@ -414,6 +486,7 @@ export default function Home() {
           </div>
 
           <div className="cta-stats">
+
             <div className="stat-item" ref={pelangganRef}>
               <h2>{pelanggan}+</h2>
               <p>Pelanggan Puas</p>
@@ -428,12 +501,15 @@ export default function Home() {
               <h2>{jumlahPaket}+</h2>
               <p>Paket Wisata</p>
             </div>
+
           </div>
         </div>
       </section>
 
+
+      {/* FOOTER */}
       <footer className="footer-simple">
-        © {new Date().getFullYear()} <span>dolanDjogja</span>. All rights reserved.
+        © {new Date().getFullYear()} <span>DolanDjogja</span>. All rights reserved.
       </footer>
     </>
   );
