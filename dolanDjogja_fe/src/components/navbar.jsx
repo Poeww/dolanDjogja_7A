@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../assets/img/logo-dolandjogja.svg";
 
@@ -12,40 +11,44 @@ export default function Navbar() {
         window.location.href = "/";
     };
 
+    const scrollToSection = (id) => {
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <nav className="navbar">
 
             <div className="nav-left">
-                <Link to="/">
+                <a className="nav-item" onClick={() => scrollToSection("home")}>
                     <img src={Logo} alt="DolanDjogja" className="logo-img" />
-                </Link>
+                </a>
             </div>
 
             <div className="nav-right">
-                <Link to="/">Home</Link>
-                <Link to="/destinasi">Destinasi</Link>
-                <Link to="/paket">Paket</Link>
+
+                <a className="nav-item" onClick={() => scrollToSection("home")}>Home</a>
+                <a className="nav-item" onClick={() => scrollToSection("destinasi")}>Destinasi</a>
+                <a className="nav-item" onClick={() => scrollToSection("paket")}>Paket</a>
 
                 {!user && (
-                    <Link to="/login" className="btn-login">
-                        Login
-                    </Link>
+                    <a href="/login" className="btn-login">Login</a>
                 )}
 
                 {user && role === "user" && (
                     <>
-                        <Link to="/booking">Booking</Link>
+                        <a href="/booking" className="nav-item">Booking</a>
 
                         <div className="dropdown">
                             <button className="dropbtn">Akun ▾</button>
-                            <div className="dropdown-content">
-                                <Link to="/profile">Profil</Link>
-                                <Link to="/mybookings">Riwayat Booking</Link>
 
-                                <button
-                                    onClick={handleLogout}
-                                    className="logout-btn"
-                                >
+                            <div className="dropdown-content">
+                                <a href="/profile">Profil</a>
+                                <a href="/mybookings">Riwayat Booking</a>
+
+                                <button onClick={handleLogout} className="logout-btn">
                                     Logout
                                 </button>
                             </div>
@@ -54,8 +57,9 @@ export default function Navbar() {
                 )}
 
                 {user && role === "admin" && (
-                    <Link to="/admin">Dashboard</Link>
+                    <a href="/admin" className="nav-item">Dashboard</a>
                 )}
+
             </div>
         </nav>
     );

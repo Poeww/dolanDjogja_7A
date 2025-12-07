@@ -102,11 +102,41 @@ export default function Home() {
     }
   };
 
+  // =========================================
+  // AUTO ACTIVE NAVBAR
+  // =========================================
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-item");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+
+            navLinks.forEach((link) => {
+              link.classList.remove("active");
+              if (link.textContent.toLowerCase() === id) {
+                link.classList.add("active");
+              }
+            });
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Navbar />
 
-      <section className="home-hero" style={{ backgroundImage: `url(${bg})` }}>
+      {/* HERO SECTION */}
+      <section id="home" className="home-hero" style={{ backgroundImage: `url(${bg})` }}>
         <div className="home-overlay"></div>
 
         <div className="home-container">
@@ -117,7 +147,14 @@ export default function Home() {
               Kamu akan jatuh cinta pada ketenangan alamnya, hangatnya warganya,
               dan kenangan yang tumbuh dari setiap perjalanan!
             </p>
-            <button className="btn-hero">Jelajahi</button>
+            <button
+              className="btn-hero"
+              onClick={() =>
+                document.getElementById("destinasi").scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Jelajahi
+            </button>
           </div>
 
           <div className="multi-slider">
@@ -132,7 +169,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="destinasi-section">
+      {/* DESTINASI SECTION */}
+      <section id="destinasi" className="destinasi-section">
         <h1 className="section-title">Destinasi Populer</h1>
         <p className="section-subtitle">
           Tempat-tempat favorit yang wajib dikunjungi di Jogja
@@ -164,7 +202,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="paket-section">
+      {/* PAKET SECTION */}
+      <section id="paket" className="paket-section">
         <h1 className="section-title">Paket Wisata Rekomendasi</h1>
         <p className="section-subtitle">
           Pilihan paket terbaik untuk liburan yang seru!
@@ -219,6 +258,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHY SECTION */}
       <section className="why-section">
         <h1 className="section-title">Kenapa Harus DolanDjogja?</h1>
         <p className="section-subtitle">
@@ -226,7 +266,6 @@ export default function Home() {
         </p>
 
         <div className="why-grid">
-
           <div className="why-card">
             <div className="why-icon green">
               <img src={iconGuide} alt="guide" />
@@ -266,11 +305,10 @@ export default function Home() {
               Jelajahi spot anti-mainstream yang jarang diketahui wisatawan.
             </p>
           </div>
-
         </div>
       </section>
 
-
+      {/* CTA SECTION */}
       <section className="cta-section" style={{ backgroundImage: `url(${senjaTugu})` }}>
         <div className="cta-overlay"></div>
 
