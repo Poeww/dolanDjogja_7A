@@ -628,3 +628,18 @@ html {
     font-size: 15px;
     opacity: 0.85;
 }
+
+.footer-simple {
+    width: 100%;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 0 !important;
+    background: #0c241b;
+    color: #d9e7df;
+    font-size: 15px;
+}
+
+.footer-simple span {
+    font-weight: 600;
+    color: #32d29a;
+}

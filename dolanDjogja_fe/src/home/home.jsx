@@ -13,7 +13,7 @@ import iconGuide from "../assets/icon/guide.svg";
 import iconCustom from "../assets/icon/custom.svg";
 import iconMoney from "../assets/icon/money.svg";
 import iconMaps from "../assets/icon/maps.svg";
-import senjaTugu from "../assets/img/senja-tugu.png";
+import senjaTugu from "../assets/img/senja-tugu.jpg";
 
 
 import img1 from "../assets/img/carousel-home1.png";
@@ -265,6 +265,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <footer className="footer-simple">
+        © {new Date().getFullYear()} <span>dolanDjogja</span>. All rights reserved.
+      </footer>
 
     </>
   );
