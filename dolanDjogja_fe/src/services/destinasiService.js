@@ -11,12 +11,20 @@ export const getDestinasiById = async (id) => {
 };
 
 export const createDestinasi = async (data) => {
-  const res = await API.post("/destinasi", data);
+  const res = await API.post("/destinasi", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 };
 
 export const updateDestinasi = async (id, data) => {
-  const res = await API.put(`/destinasi/${id}`, data);
+  const res = await API.post(`/destinasi/${id}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 };
 

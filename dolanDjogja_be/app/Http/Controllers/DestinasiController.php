@@ -27,8 +27,24 @@ class DestinasiController extends Controller
             'deskripsi'      => 'nullable|string',
             'harga_tiket'    => 'required|numeric|min:0',
             'jam_buka'       => 'nullable|string|max:255',
-            'gambar'         => 'nullable|string|max:255',
+            'gambar'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        if ($request->hasFile('gambar')) {
+
+            $file = $request->file('gambar');
+
+            $filename = str_replace(' ', '-', $file->getClientOriginalName());
+
+            $destination = public_path('destinasi');
+            if (!file_exists($destination)) {
+                mkdir($destination, 0777, true);
+            }
+
+            $file->move($destination, $filename);
+
+            $validated['gambar'] = 'destinasi/' . $filename;
+        }
 
         $destinasi = Destinasi::create($validated);
 
@@ -45,8 +61,27 @@ class DestinasiController extends Controller
             'deskripsi'      => 'sometimes|nullable|string',
             'harga_tiket'    => 'sometimes|required|numeric|min:0',
             'jam_buka'       => 'sometimes|nullable|string|max:255',
-            'gambar'         => 'sometimes|nullable|string|max:255',
+            'gambar'         => 'sometimes|nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        if ($request->hasFile('gambar')) {
+
+            if ($destinasi->gambar && file_exists(public_path($destinasi->gambar))) {
+                unlink(public_path($destinasi->gambar));
+            }
+
+            $file = $request->file('gambar');
+            $filename = str_replace(' ', '-', $file->getClientOriginalName());
+
+            $destination = public_path('destinasi');
+            if (!file_exists($destination)) {
+                mkdir($destination, 0777, true);
+            }
+
+            $file->move($destination, $filename);
+
+            $validated['gambar'] = 'destinasi/' . $filename;
+        }
 
         $destinasi->update($validated);
 

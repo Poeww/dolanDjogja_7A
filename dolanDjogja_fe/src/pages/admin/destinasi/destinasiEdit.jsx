@@ -217,31 +217,16 @@ export default function DestinasiEdit() {
               <div className="preview-wrapper">
 
                 {previewImg ? (
-                  <>
-                    <img src={previewImg} className="upload-preview" alt="preview" />
-                    <button
-                      type="button"
-                      className="remove-img-btn"
-                      onClick={() => {
-                        setPreviewImg(null);
-                        setForm({ ...form, gambar: null });
-                        document.getElementById("fileInput").value = "";
-                      }}
-                    >
-                      ✕
-                    </button>
-                  </>
+                  <img src={previewImg} className="upload-preview" />
                 ) : oldImage ? (
                   <img
-                    src={`/storage/${oldImage}`}
+                    src={`${import.meta.env.VITE_API_URL}/${oldImage}`}
                     className="upload-preview"
-                    alt="old"
                   />
                 ) : (
-                  <div className="upload-preview placeholder">
-                    Belum ada gambar
-                  </div>
+                  <div className="upload-preview placeholder">Belum ada gambar</div>
                 )}
+
 
               </div>
 
