@@ -15,3 +15,13 @@ Route::get('/destinasi/{filename}', function ($filename) {
 
     return response()->file($path);
 });
+
+Route::get('/paket/{filename}', function ($filename) {
+    $path = public_path('paket/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+});

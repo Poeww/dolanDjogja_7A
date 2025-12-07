@@ -243,7 +243,7 @@ export default function PaketEdit() {
 
                 {oldThumbnail && !previewImg && (
                   <img
-                    src={getThumbnailUrl(oldThumbnail)}
+                    src={`${import.meta.env.VITE_API_URL}/${oldThumbnail}`}
                     className="upload-preview"
                     alt="thumbnail lama"
                   />

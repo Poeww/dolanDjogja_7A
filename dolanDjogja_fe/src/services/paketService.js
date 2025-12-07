@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getThumbnailUrl = (path) => {
   if (!path) return null;
-  return `${BASE_URL}/storage/${path}`;
+  return `${BASE_URL}/${path}`;
 };
 
 export const getAllPaket = async () => {
@@ -19,9 +19,7 @@ export const getPaketById = async (id) => {
 
 export const createPaket = async (data) => {
   const res = await API.post("/paket-wisata", data, {
-    headers: { 
-      "Content-Type": "multipart/form-data"
-    }
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return res.data;
 };
@@ -30,9 +28,7 @@ export const updatePaket = async (id, data) => {
   data.append("_method", "PUT");
 
   const res = await API.post(`/paket-wisata/${id}`, data, {
-    headers: {
-      "Content-Type": "multipart/form-data"
-    }
+    headers: { "Content-Type": "multipart/form-data" },
   });
 
   return res.data;
