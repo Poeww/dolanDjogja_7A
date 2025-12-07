@@ -295,3 +295,151 @@ html {
     background: #E3A300;
     color: #000;
 }
+
+/* ==========================
+   PAKET SECTION
+========================== */
+
+.paket-section {
+    width: 100%;
+    padding: 80px 0;
+}
+
+.paket-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.paket-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.paket-grid {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 28px;
+}
+
+.paket-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    transition: 0.3s;
+}
+
+.paket-card:hover {
+    transform: translateY(-4px);
+}
+
+.paket-img {
+    position: relative;
+}
+
+.paket-img img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+.paket-price-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #15954f;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.paket-content {
+    padding: 20px;
+}
+
+.paket-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.paket-duration {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.paket-duration img {
+    width: 16px;
+}
+
+.paket-destinasi-list {
+    margin-bottom: 20px;
+}
+
+.paket-destinasi-list p {
+    font-size: 14px;
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.dest-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+.dest-item img {
+    width: 15px;
+}
+
+.more-dest {
+    color: #15954f;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.paket-btn-row {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-detail {
+    flex: 1;
+    background: transparent;
+    border: 2px solid #15954f;
+    padding: 10px 0;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #15954f;
+    cursor: pointer;
+}
+
+.btn-booking {
+    flex: 1;
+    background: #15954f;
+    border: none;
+    padding: 10px 0;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-booking:hover {
+    background: #0d743e;
+}

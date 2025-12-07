@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAllDestinasi } from "../services/destinasiService";
+import { getAllPaket } from "../services/paketService";
 
 import Navbar from "../components/navbar";
 import "./home.css";
 
 import iconMap from "../assets/icon/maps.svg";
+import iconClock from "../assets/icon/clock.svg";
 import bg from "../assets/img/highlight-home.png";
 
 import img1 from "../assets/img/carousel-home1.png";
@@ -19,15 +21,26 @@ export default function Home() {
   const duplicated = [...images, ...images];
 
   const [destinasi, setDestinasi] = useState([]);
+  const [paket, setPaket] = useState([]);
 
   useEffect(() => {
     loadDestinasi();
+    loadPaket();
   }, []);
 
   const loadDestinasi = async () => {
     try {
       const data = await getAllDestinasi();
       setDestinasi(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loadPaket = async () => {
+    try {
+      const data = await getAllPaket();
+      setPaket(data);
     } catch (err) {
       console.log(err);
     }
@@ -65,6 +78,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section className="destinasi-section">
         <h1 className="destinasi-title">Destinasi Populer</h1>
         <p className="destinasi-subtitle">
@@ -74,7 +88,6 @@ export default function Home() {
         <div className="destinasi-grid">
           {destinasi.map((d) => (
             <div className="destinasi-card" key={d.id}>
-
               <div className="img-wrapper">
                 <img
                   src={`${import.meta.env.VITE_API_URL}/${d.gambar}`}
@@ -91,12 +104,67 @@ export default function Home() {
                 <p className="desc">{d.deskripsi}</p>
                 <button className="btn-detail">Detail</button>
               </div>
-
             </div>
           ))}
         </div>
       </section>
 
+      <section className="paket-section">
+        <h1 className="paket-title">Paket Wisata Rekomendasi</h1>
+        <p className="paket-subtitle">
+          Pilihan paket terbaik untuk liburan sempurna Anda
+        </p>
+
+        <div className="paket-grid">
+          {paket.map((p) => (
+            <div className="paket-card" key={p.id}>
+
+              <div className="img-wrapper paket-img">
+                <img
+                  src={`${import.meta.env.VITE_API_URL}/${p.gambar_thumbnail}`}
+                  alt={p.nama_paket}
+                />
+                <div className="paket-price-badge">
+                  Rp {Number(p.harga).toLocaleString("id-ID")}
+                </div>
+              </div>
+
+              <div className="paket-content">
+                <h3>{p.nama_paket}</h3>
+
+                <div className="paket-duration">
+                  <img src={iconClock} alt="" />
+                  {p.durasi}
+                </div>
+
+                <div className="paket-destinasi-list">
+                  <p>Destinasi yang dikunjungi:</p>
+
+                  {p.destinasi &&
+                    p.destinasi.slice(0, 3).map((d, i) => (
+                      <div className="dest-item" key={i}>
+                        <img src={iconMap} alt="" />
+                        {d.nama_destinasi}
+                      </div>
+                    ))}
+
+                  {p.destinasi && p.destinasi.length > 3 && (
+                    <span className="more-dest">
+                      +{p.destinasi.length - 3} destinasi lainnya
+                    </span>
+                  )}
+                </div>
+
+                <div className="paket-btn-row">
+                  <button className="btn-detail">Detail</button>
+                  <button className="btn-booking">Booking</button>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
