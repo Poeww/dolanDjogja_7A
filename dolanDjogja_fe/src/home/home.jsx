@@ -9,6 +9,12 @@ import iconMap from "../assets/icon/maps.svg";
 import iconClock from "../assets/icon/clock.svg";
 import bg from "../assets/img/highlight-home.png";
 
+import iconGuide from "../assets/icon/guide.svg";
+import iconCustom from "../assets/icon/custom.svg";
+import iconMoney from "../assets/icon/money.svg";
+import iconMaps from "../assets/icon/maps.svg";
+
+
 import img1 from "../assets/img/carousel-home1.png";
 import img2 from "../assets/img/carousel-home2.png";
 import img3 from "../assets/img/carousel-home3.png";
@@ -165,6 +171,59 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section className="why-section">
+        <h1 className="why-title">Kenapa Harus DolanDjogja?</h1>
+        <p className="why-subtitle">
+          Nikmati pengalaman liburan terbaik dengan layanan yang ramah dan pastinya seru!
+        </p>
+
+        <div className="why-grid">
+
+          <div className="why-card">
+            <div className="why-icon green">
+              <img src={iconGuide} alt="guide" />
+            </div>
+            <h3>Tour Guide Lokal</h3>
+            <p>
+              Dipandu langsung oleh warga lokal yang paham budaya dan tahu banyak spot unik di Jogja lho!
+            </p>
+          </div>
+
+          <div className="why-card">
+            <div className="why-icon blue">
+              <img src={iconCustom} alt="custom trip" />
+            </div>
+            <h3>Custom Trip</h3>
+            <p>
+              Bikin itinerary sesuai gaya liburanmu! Fleksibel banget dan bebas request ke mana pun!
+            </p>
+          </div>
+
+          <div className="why-card">
+            <div className="why-icon orange">
+              <img src={iconMoney} alt="harga murah" />
+            </div>
+            <h3>Harga Murce</h3>
+            <p>
+              Paket wisata terjangkau tanpa mengurangi kualitas pengalaman liburanmu.
+            </p>
+          </div>
+
+          <div className="why-card">
+            <div className="why-icon purple">
+              <img src={iconMaps} alt="hidden gem" />
+            </div>
+            <h3>Destinasi Hidden Gem</h3>
+            <p>
+              Jelajahi spot anti-mainstream yang jarang diketahui wisatawan lainnya. Eksklusif banget!
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
     </>
   );
 }

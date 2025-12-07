@@ -443,3 +443,89 @@ html {
 .btn-booking:hover {
     background: #0d743e;
 }
+
+/* ================================
+   WHY SECTION
+================================ */
+.why-section {
+    padding: 90px 100px;
+    text-align: center;
+}
+
+.why-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #11243d;
+}
+
+.why-subtitle {
+    font-size: 17px;
+    color: #6d7b8a;
+    margin-top: 8px;
+}
+
+.why-grid {
+    margin-top: 55px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+}
+
+.why-card {
+    background: #ffffff;
+    padding: 30px 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transition: 0.25s;
+    border: 1px solid #eef2f7;
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.why-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+}
+
+.why-icon img {
+    width: 32px;
+    filter: brightness(0) invert(1);
+}
+
+.why-icon.green {
+    background: #0db67a;
+}
+
+.why-icon.blue {
+    background: #3a7bff;
+}
+
+.why-icon.orange {
+    background: #ff9f45;
+}
+
+.why-icon.purple {
+    background: #7a57ff;
+}
+
+.why-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+    color: #11243d;
+}
+
+.why-card p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5f6f83;
+    line-height: 1.5;
+}
