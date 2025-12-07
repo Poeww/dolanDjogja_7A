@@ -675,14 +675,14 @@ html {
     text-align: center;
     padding: 25px 0;
     margin-top: 0 !important;
-    background: #0c241b;
-    color: #d9e7df;
+    background: #1E6FEB;
+    color: #ffffff;
     font-size: 15px;
 }
 
 .footer-simple span {
     font-weight: 600;
-    color: #32d29a;
+    color: #ffd900;
 }
 
 /* ============================

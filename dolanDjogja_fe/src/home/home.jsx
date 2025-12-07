@@ -307,7 +307,7 @@ export default function Home() {
       </section>
 
       <footer className="footer-simple">
-        © {new Date().getFullYear()} <span>DolanDjogja</span>. All rights reserved.
+        © {new Date().getFullYear()} <span>dolanDjogja</span>. All rights reserved.
       </footer>
     </>
   );
