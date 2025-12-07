@@ -5,19 +5,13 @@ import bg from "../assets/img/highlight-home.png";
 import img1 from "../assets/img/carousel-home1.png";
 import img2 from "../assets/img/carousel-home2.png";
 import img3 from "../assets/img/carousel-home3.png";
-
-import { useEffect, useState } from "react";
+import img4 from "../assets/img/carousel-home4.png";
+import img5 from "../assets/img/carousel-home5.png";
+import img6 from "../assets/img/carousel-home6.png";
 
 export default function Home() {
-  const images = [img1, img2, img3];
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
+  const images = [img1, img2, img3, img4, img5, img6];
+  const duplicated = [...images, ...images];
 
   return (
     <>
@@ -42,11 +36,8 @@ export default function Home() {
           </div>
 
           <div className="multi-slider">
-            <div
-              className="slider-track"
-              style={{ transform: `translateX(-${index * 260}px)` }}
-            >
-              {images.concat(images).map((src, i) => (
+            <div className="slider-track infinite-scroll">
+              {duplicated.map((src, i) => (
                 <div className="slider-card" key={i}>
                   <img src={src} alt="" />
                 </div>

@@ -109,7 +109,7 @@ html {
 }
 
 .multi-slider {
-    width: 380px;
+    width: 660px;
     overflow: hidden;
     position: relative;
     padding: 20px 0;
@@ -118,18 +118,29 @@ html {
 .slider-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.6s ease-in-out;
+}
+
+.infinite-scroll {
+    animation: scroll-left 18s linear infinite;
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 .slider-card {
     min-width: 240px;
-    height: 300px;
+    height: 320px;
     border-radius: 16px;
-
     overflow: hidden;
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(4px);
-
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
@@ -144,8 +155,8 @@ html {
     position: absolute;
     right: 0;
     top: 0;
-    width: 60px;
+    width: 80px;
     height: 100%;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent);
     pointer-events: none;
 }

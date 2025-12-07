@@ -1,5 +1,5 @@
 /* ====================================
-    ROOT VARIABLE (PENTING!)
+    ROOT VARIABLE
 ==================================== */
 :root {
   --sidebar-wide: 260px;
@@ -29,8 +29,8 @@ body {
 .dashboard-container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
   background: #f5f8ff;
-  position: relative;
 }
 
 /* =============================
@@ -45,6 +45,7 @@ body {
   flex-direction: column;
   position: fixed;
   top: 0;
+  left: 0;
   bottom: 0;
   transition: width 0.3s ease;
   z-index: 9990;
@@ -109,7 +110,6 @@ body {
 
 .sidebar.collapsed {
   width: var(--sidebar-narrow);
-  transition: 0.3s ease;
 }
 
 .sidebar.collapsed .sidebar-menu a.active {
@@ -127,25 +127,6 @@ body {
 .sidebar.collapsed .sidebar-menu a {
   justify-content: center;
   padding: 12px 0;
-}
-
-.sidebar.collapsed .sidebar-menu a::after {
-  content: attr(data-title);
-  left: 70px;
-}
-
-.sidebar.collapsed .sidebar-menu a:hover::after {
-  opacity: 1;
-  left: calc(var(--sidebar-narrow) + 10px);
-}
-
-.sidebar.collapsed .logout-btn::after {
-  opacity: 0;
-}
-
-.sidebar.collapsed .logout-btn:hover::after {
-  opacity: 1;
-  left: calc(var(--sidebar-narrow) + 10px);
 }
 
 .sidebar.collapsed .logout-btn {
@@ -177,37 +158,19 @@ body {
   position: relative;
 }
 
-.tooltip-base {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.75);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s ease;
-  z-index: 99999;
-}
-
 .logout-btn:hover {
   background: #c92c37;
 }
 
 .toggle-btn {
-  position: absolute;
+  position: fixed;
   top: 15px;
   left: var(--sidebar-wide);
   padding: 8px 12px;
   background: #1e6feb;
   color: white;
-  border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px;
   transition: left 0.3s ease;
   z-index: 99999;
 }
@@ -216,20 +179,22 @@ body {
   left: var(--sidebar-narrow) !important;
 }
 
+.dashboard-container.collapsed .toggle-btn {
+  left: var(--sidebar-narrow);
+}
 
 .toggle-btn:hover {
   background: #185ec9;
 }
 
-
 /* =============================
     MAIN CONTENT
 ============================= */
 .main-content {
-  margin-left: calc(var(--sidebar-wide) + var(--toggle-offset));
-  flex: 1;
+  margin-left: var(--sidebar-wide);
+  width: calc(100% - var(--sidebar-wide));
   padding: 90px 60px;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 .sidebar.collapsed~.main-content {
@@ -237,8 +202,8 @@ body {
 }
 
 .dashboard-container.collapsed .main-content {
-  margin-left: 90px !important;
-  padding: 90px 60px !important;
+  margin-left: var(--sidebar-narrow);
+  width: calc(100% - var(--sidebar-narrow));
 }
 
 .dashboard-container.collapsed .cards-row {
@@ -304,7 +269,6 @@ body {
   margin-top: 20px;
 }
 
-
 .large-card {
   background: white;
   padding: 25px;
@@ -357,88 +321,9 @@ body {
   }
 }
 
-.sidebar-menu a {
-  position: relative;
-}
-
-.sidebar-menu a::after {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.75);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s ease;
-  z-index: 99999;
-}
-
-.sidebar-menu a:hover::after {
-  opacity: 1;
-  left: 90px;
-}
-
-.sidebar:not(.collapsed) .sidebar-menu a::after,
-.sidebar:not(.collapsed) .logout-btn::after {
-  display: none !important;
-  opacity: 0 !important;
-}
-
-.logout-btn {
-  position: relative;
-}
-
-.logout-btn::after {
-  content: "Logout";
-  left: 70px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.75);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s ease;
-  z-index: 99999;
-}
-
-.logout-btn:hover::after {
-  opacity: 1;
-  left: 90px;
-}
-
-/* =============================
-    CARD RESPONSIVE
-============================= */
-@media (max-width: 900px) {
-  .cards-row {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-@media (max-width: 600px) {
-  .cards-row {
-    grid-template-columns: 1fr !important;
-    gap: 15px;
-  }
-
-  .large-card {
-    padding: 20px;
-  }
-}
-
-/* ============================
+/* ============================ 
    CHART LAYOUT
 ============================ */
-
 .charts-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
