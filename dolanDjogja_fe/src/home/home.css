@@ -682,20 +682,218 @@ html {
     color: #32d29a;
 }
 
+/* =========================================
+   RESPONSIVE — TABLET (≤ 992px)
+========================================= */
+
 @media (max-width: 992px) {
-    .destinasi-grid {
-        grid-template-columns: repeat(2, 1fr);
+
+    /* HERO */
+    .home-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 40px;
+        gap: 40px;
     }
 
+    .left-text {
+        max-width: 90%;
+    }
+
+    .welcome-title {
+        font-size: 42px;
+    }
+
+    .multi-slider {
+        width: 85%;
+    }
+
+    /* DESTINASI & PAKET GRID */
+    .destinasi-grid,
     .paket-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+        padding: 0 20px;
+    }
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .section-title {
+        font-size: 40px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+    }
+
+    /* CTA */
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 14px;
+    }
+
+    .cta-stats {
+        gap: 40px;
     }
 }
 
-@media (max-width: 600px) {
 
-    .destinasi-grid,
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .home-hero {
+        height: 100vh;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        padding-top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    .region {
+        font-size: 18px;
+    }
+
+    .welcome-title {
+        font-size: 36px;
+    }
+
+    .left-text .desc {
+        font-size: 15px;
+        max-width: 100%;
+    }
+
+    .btn-hero {
+        font-size: 16px;
+    }
+
+    .multi-slider {
+        width: 100%;
+        padding: 0;
+        margin-top: 25px;
+    }
+
+    .slider-card {
+        min-width: 180px;
+        height: 240px;
+    }
+
+    .destinasi-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .destinasi-card {
+        max-width: 95%;
+        margin: auto;
+    }
+
     .paket-grid {
         grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .paket-card {
+        max-width: 95%;
+        margin: auto;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    .cta-section {
+        padding: 70px 20px;
+    }
+
+    .cta-title {
+        font-size: 32px;
+    }
+
+    .cta-subtitle {
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    .cta-buttons button {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    .cta-stats {
+        flex-direction: column;
+        gap: 22px;
+        margin-top: 35px;
+    }
+
+    .stat-item h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .home-hero {
+        height: 85vh;
+        background-position: center center;
+        padding-top: 40px;
+    }
+
+    .welcome-title {
+        font-size: 30px;
+    }
+
+    .left-text .desc {
+        font-size: 14px;
+        max-width: 100%;
+    }
+
+    .slider-card {
+        min-width: 150px;
+        height: 200px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: 15px;
+    }
+
+    .why-card {
+        padding: 24px 18px;
+    }
+
+    .cta-title {
+        font-size: 26px;
+    }
+
+    .cta-subtitle {
+        font-size: 14px;
+    }
+
+    footer.footer-simple {
+        font-size: 13px;
     }
 }
