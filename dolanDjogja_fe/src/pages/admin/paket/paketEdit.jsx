@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPaketById, updatePaket } from "../../../services/paketService";
+import { getPaketById, updatePaket, getThumbnailUrl } from "../../../services/paketService";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import "../dashboard/dashboard.css";
@@ -60,6 +60,7 @@ export default function PaketEdit() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === "harga") {
       const numeric = value.replace(/\D/g, "");
       setForm({ ...form, harga: numeric });
@@ -242,7 +243,7 @@ export default function PaketEdit() {
 
                 {oldThumbnail && !previewImg && (
                   <img
-                    src={`/storage/${oldThumbnail}`}
+                    src={getThumbnailUrl(oldThumbnail)}
                     className="upload-preview"
                     alt="thumbnail lama"
                   />
@@ -270,6 +271,7 @@ export default function PaketEdit() {
                     Belum ada gambar
                   </div>
                 )}
+
               </div>
 
               <div className="upload-right">
