@@ -4,6 +4,7 @@ import Login from "../home/login";
 import Register from "../home/register";
 import Home from "../home/home";
 import Profil from "../pages/customer/profil";
+import Packages from "../pages/customer/Packages";
 
 import PaketList from "../pages/admin/paket/paketList";
 import PaketCreate from "../pages/admin/paket/paketCreate";
@@ -50,6 +51,8 @@ export default function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/packages" element={<Packages />} />
+
 
         {/* ADMIN PAKET */}
         <Route

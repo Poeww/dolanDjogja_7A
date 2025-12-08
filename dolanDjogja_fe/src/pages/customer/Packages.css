@@ -1,0 +1,204 @@
+/* Reset & Global */
+.packages-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* === HEADER === */
+.main-header {
+  background-color: #dc2626;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.nav-menu .nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-menu .nav-list li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+
+}
+
+.nav-menu{
+    margin-left: auto;
+    margin-right: 24px;
+}
+
+.user-avatar .avatar-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #fee2e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc2626;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* === BANNER === */
+.packages-banner {
+  position: relative;
+  height: 400px;
+  width: 1300px;
+  overflow: hidden;
+  z-index: 1000;
+  margin-top: 60px; /* offset header */
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* === KONTEN UTAMA — SATU KOLOM, CENTERED === */
+.packages-content {
+  padding: 3rem;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto; /* ✅ Pusatkan semua konten */
+  padding: 0 1.5rem;
+  text-align: center; /* ✅ Semua teks di tengah */
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 1rem 0;
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.section-subtitle {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto; /* ✅ Center + jarak bawah */
+  text-align: center;
+}
+
+/* === KATEGORI === */
+.category-section {
+  margin-bottom: 3rem;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #dc2626;
+  padding-bottom: 0.5rem;
+  display: inline-block; /* Agar garis bawah tidak melebar penuh */
+}
+
+.category-title-h3{
+    margin-left: 4rem;
+}
+
+/* === GRID CARD — CENTERED, RESPONSIVE === */
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-items: center; /* ✅ Card di-center */
+  margin-left: 2rem;
+  padding-left: 10px;
+  gap: 16px;
+}
+
+.package-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width: 100%;
+  max-width: 250px;
+  
+}
+
+.package-card:hover {
+  transform: translateY(-5px);
+}
+
+.package-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.package-info {
+  padding: 1rem;
+}
+
+.package-name {
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.package-duration {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0 0 0.5rem 0;
+}
+
+.package-price {
+  font-weight: 600;
+  color: #1d4ed8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .packages-banner { height: 300px; }
+  .section-title { font-size: 1.8rem; }
+  .packages-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .package-image { height: 200px; }
+}
