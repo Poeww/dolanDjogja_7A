@@ -99,19 +99,15 @@ const Home = () => (
         </nav>
       </div>
     </section>
-
-    <section className="banner-section">
-        <div className="banner-image">
-          <img 
-            src={foto6} 
-            alt="Candi Prambanan" 
-            className="banner-img"
-          />
-          <div className="banner-text">
-            <h1>dolanDjogja</h1>
-          </div>
-        </div>
-      </section>
+    
+    <section 
+      className="banner-section" 
+      style={{ backgroundImage: `url(${foto6})` }}
+    >
+      <div className="banner-text">
+        <h1>dolanDjogja</h1>
+      </div>
+    </section>
       
         
       

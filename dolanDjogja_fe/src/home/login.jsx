@@ -8,7 +8,7 @@ import "./Login.css"; // ✅ CSS global
 // ✅ Import gambar PNG
 import dolandjogjaLogo from "../assets/dolandjogjaLogo.png";
 import loginImage from "../assets/loginImage.png";
-import ilustrasi from "../assets/ilustrasi.png"; // ✅ perbaiki typo: ..// → ../
+import ilustrasi from "../assets/ilustrasi.png"; 
 
 export default function Login() {
     const navigate = useNavigate();
@@ -61,9 +61,8 @@ export default function Login() {
                     </p>
                 </div>
 
-                {error && <div className="errorMessage">{error}</div>}
-
                 <form onSubmit={handleSubmit} className="form">
+                {error && <div className="errorMessage">{error}</div>}
                     <div className="formGroup">
                         <label className="label">Email</label>
                         <input

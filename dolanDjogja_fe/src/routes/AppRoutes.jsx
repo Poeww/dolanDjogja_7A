@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../home/login";
 import Register from "../home/register";
 import Home from "../home/home";
+import Profil from "../pages/customer/profil";
 
 import PaketList from "../pages/admin/paket/paketList";
 import PaketCreate from "../pages/admin/paket/paketCreate";
@@ -28,13 +29,13 @@ import { getUser } from "../services/authService";
 const PrivateRoute = ({ children, role }) => {
   const user = getUser();
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" />;
+  // }
 
-  if (role && user.role !== role) {
-    return <Navigate to="/" />;
-  }
+  // if (role && user.role !== role) {
+  //   return <Navigate to="/" />;
+  // }
 
   return children;
 };
@@ -47,6 +48,8 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/payment" element={<Payment />} />
 
         {/* ADMIN PAKET */}
         <Route
