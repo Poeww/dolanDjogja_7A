@@ -91,7 +91,7 @@ export default function Packages() {
             </ul>
           </nav>
           <div className="user-avatar">
-            <div className="avatar-circle">👤</div>
+            <div className="avatar-circle"><a href="/profil">👤</a></div>
           </div>
         </div>
       </header>
