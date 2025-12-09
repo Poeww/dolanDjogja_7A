@@ -146,7 +146,7 @@ export default function Packages() {
         </div>
       </div>
 
-      {/* Footer (Kode Footer Anda tetap sama) */}
+      {/* Footer */}
       <footer className="footer-section">
         <div className="footer-container">
           <div className="footer-logo">
