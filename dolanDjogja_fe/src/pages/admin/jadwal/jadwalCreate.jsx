@@ -62,6 +62,18 @@ export default function JadwalCreate() {
     navigate("/admin/jadwal");
   };
 
+  const formatRupiah = (angka) =>
+    angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  const handleHargaChange = (e) => {
+    const raw = e.target.value.replace(/\D/g, "");
+    setForm({ ...form, harga_per_orang: raw });
+  };
+
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  const minDate = today.toISOString().split("T")[0];
+
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
 
@@ -138,6 +150,7 @@ export default function JadwalCreate() {
                 type="date"
                 name="tanggal_berangkat"
                 className="form-input"
+                min={minDate}
                 value={form.tanggal_berangkat}
                 onChange={handleChange}
               />
@@ -149,6 +162,7 @@ export default function JadwalCreate() {
                 type="date"
                 name="tanggal_pulang"
                 className="form-input"
+                min={form.tanggal_berangkat || minDate}
                 value={form.tanggal_pulang}
                 onChange={handleChange}
               />
@@ -161,23 +175,31 @@ export default function JadwalCreate() {
                 name="kuota_tersedia"
                 className="form-input"
                 placeholder=" "
+                min="1"
                 value={form.kuota_tersedia}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val < 1) setForm({ ...form, kuota_tersedia: 1 });
+                  else setForm({ ...form, kuota_tersedia: val });
+                }}
               />
               <label className="form-label">Kuota Tersedia</label>
             </div>
 
             <div className="form-group form-left">
               <input
-                type="number"
-                name="harga_per_orang"
                 className="form-input"
                 placeholder=" "
-                value={form.harga_per_orang}
-                onChange={handleChange}
+                value={
+                  form.harga_per_orang
+                    ? "Rp " + formatRupiah(form.harga_per_orang)
+                    : ""
+                }
+                onChange={handleHargaChange}
               />
               <label className="form-label">Harga per Orang</label>
             </div>
+
 
             <div className="form-buttons">
               <button type="button" className="submit-btn-basic" onClick={() => setShowSaveModal(true)}>
