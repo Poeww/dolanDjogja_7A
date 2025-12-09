@@ -1,0 +1,321 @@
+/* ============================
+   GENERAL
+============================= */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #f8f8f8 !important;
+    overflow-x: hidden;
+}
+
+/* ============================
+   HERO SECTION
+============================= */
+.booking-hero {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+.booking-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(65%);
+}
+
+.booking-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.booking-hero-text {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+.booking-hero-text h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.booking-hero-text p {
+    font-size: 17px;
+    opacity: 0.92;
+}
+
+/* ============================
+   MAIN LAYOUT
+============================= */
+.booking-container {
+    max-width: 1250px;
+    margin: 50px auto 90px;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.booking-left {
+    flex: 2;
+}
+
+.booking-right {
+    flex: 1.2;
+}
+
+/* ============================
+   CARD STYLE
+============================= */
+.booking-card,
+.summary-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    margin-bottom: 28px;
+
+    position: relative;
+    z-index: 3;
+}
+
+.card-title {
+    font-size: 20px;
+    color: #1e6feb;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+/* ============================
+   FLOATING LABEL INPUT
+============================= */
+.floating-group {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.floating-group input,
+.floating-group select {
+    width: 100%;
+    padding: 15px 14px;
+    border: 1px solid #cfcfcf;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #ffffff;
+    transition: all 0.25s ease;
+}
+
+.floating-group select {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.floating-group input:focus,
+.floating-group select:focus {
+    border-color: #1e6feb;
+    box-shadow: 0 0 0 2px rgba(30, 111, 235, 0.18);
+    outline: none;
+}
+
+.floating-group label {
+    position: absolute;
+    top: 15px;
+    left: 14px;
+    color: #777;
+    font-size: 15px;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.floating-group input:not(:placeholder-shown)+label,
+.floating-group input:focus+label {
+    top: -9px;
+    left: 10px;
+    background: white;
+    padding: 0 6px;
+    font-size: 12px;
+    color: #1e6feb;
+}
+
+.floating-group select[data-has-value="true"]+label,
+.floating-group select:focus+label {
+    top: -9px;
+    left: 10px;
+    background: white;
+    padding: 0 6px;
+    font-size: 12px;
+    color: #1e6feb;
+}
+
+.floating-group input:disabled {
+    background: #f3f3f3;
+    border-color: #dedede;
+    color: #777;
+}
+
+/* ============================
+   SUMMARY CARD
+============================= */
+.summary-info div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-bottom: 14px;
+}
+
+.summary-info span {
+    color: #555;
+}
+
+.summary-info strong {
+    font-weight: 700;
+}
+
+/* ============================
+   BUTTON
+============================= */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    margin-top: 12px;
+
+    background: #1e6feb;
+    color: #fff;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.btn-submit:hover {
+    background: #1451b8;
+    transform: translateY(-2px);
+}
+
+/* =============================
+   MODAL POPUP
+================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-box {
+    width: 360px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    animation: popUp 0.25s ease;
+}
+
+.modal-box h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.modal-box p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.modal-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: #1e6feb;
+    transition: 0.25s;
+}
+
+.modal-btn:hover {
+    background: #1556c4;
+}
+
+.modal-box.success h2 {
+    color: #0bbf75;
+}
+
+.modal-box.error h2 {
+    color: #e63946;
+}
+
+.modal-box.warning h2 {
+    color: #f4a71d;
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ============================
+   FOOTER
+============================= */
+.footer-simple {
+    width: 100vw !important;
+    background: #1e6feb;
+    color: #ffffff;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 70px;
+    font-size: 15px;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.footer-simple span {
+    font-weight: 600;
+    color: #ffd447;
+}
