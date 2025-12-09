@@ -56,6 +56,13 @@ export default function UserList() {
         loadData();
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+
+
     return (
         <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
 
@@ -95,9 +102,10 @@ export default function UserList() {
                     </Link>
                 </nav>
 
-                <button className="logout-btn">
+                <button className="logout-btn" onClick={handleLogout}>
                     <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
                 </button>
+
             </aside>
 
             <button className="toggle-btn" onClick={() => setCollapsed(!collapsed)}>
