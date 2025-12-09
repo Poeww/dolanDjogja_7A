@@ -12,7 +12,7 @@ body {
   padding: 9px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 100%;
+  width: auto;
   position: relative;
   z-index: 1000;
 }
@@ -81,9 +81,9 @@ body {
 
 /* Banner Styling */
 .banner-section {
-      width: 102%;
+      width: auto;
       height: 400px;
-      background-image: url('https://via.placeholder.com/1920x800?text=Banner+Image'); /* GANTI DENGAN GAMBAR ASLI */
+       /* GANTI DENGAN GAMBAR ASLI */
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -148,12 +148,14 @@ body {
   height: 100px;
   background-color: #ddd;
   margin: 0 2rem;
+  margin-top: 50px;
 }
 
 .feature-icons {
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-top: 50px;
 }
 
 .icon-item {
@@ -190,6 +192,7 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 /* Destinations Section */
@@ -204,6 +207,14 @@ body {
 }
 
 .section-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.section-title-h2 {
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -411,6 +422,9 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 1.5rem;
+  width: auto;
+  text-align: center;
+  margin-left: 30px;
 }
 
 .package-header h2 {
@@ -418,6 +432,15 @@ body {
   font-weight: bold;
   color: #000;
   margin: 0;
+}
+
+.package-header a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-right: 40px;
+  margin-left: 50px;
 }
 
 .subtitle {
@@ -441,7 +464,7 @@ body {
 .packages-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .package-card {
@@ -450,6 +473,7 @@ body {
   overflow: hidden;
   box-shadow: none;
   transition: transform 0.2s ease;
+  margin-right: 50px;
 }
 
 .package-card:hover {
@@ -526,6 +550,7 @@ body {
   color: white;
   padding: 3rem 1.5rem;
   margin-top: 2rem;
+  width: 1100px;
 }
 
 .footer-container {
@@ -535,12 +560,14 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
   align-items: flex-start;
+  justify-content: center;
+  max-width: fit-content;
 }
 
 .footer-logo h2 {
   font-size: 1.8rem;
   font-weight: bold;
-  margin: 0;
+  margin-left: 20px;
 }
 
 .footer-logo p {
@@ -553,6 +580,9 @@ body {
   display: flex;
   gap: 2rem;
   flex: 1;
+  margin-left: 50px;
+  width: 100px;
+  max-width: fit-content;
 }
 
 .link-column h3 {
@@ -587,6 +617,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: 50px;
 }
 
 .social-icons {

@@ -76,25 +76,37 @@ export default function Packages() {
   };
 
   return (
-    <div className="packages-page">
+    <div>
       {/* Header */}
-      <header className="main-header">
-        <div className="header-container">
-          <div className="logo">
-            <h1>dolanDjogja</h1>
-          </div>
-          <nav className="nav-menu">
-            <ul className="nav-list">
-              <li><a href="/">Home</a></li>
-              <li><a href="/packages">Packages</a></li>
-              <li><a href="/mybookings">MyBookings</a></li>
-            </ul>
-          </nav>
-          <div className="user-avatar">
-            <div className="avatar-circle"><a href="/profil">👤</a></div>
-          </div>
+      <section className="header-section">
+      <div className="header-container">
+        {/* Logo */}
+        <div className="logo">
+          <h2>dolanDjogja</h2>
         </div>
-      </header>
+        
+        {/* Navigation Menu */}
+        <nav className="nav-menu">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="nav-item">
+              <a href="/packages">Packages</a>
+            </li>
+            <li className="nav-item">
+              <a href="/mybookings">MyBookings</a>
+            </li>
+            <li className="nav-item">
+              <a href="/login">Login</a>
+            </li>
+            <li className="nav-item">
+              <a href="/register">Register</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
 
       {/* Banner */}
       <section className="packages-banner">

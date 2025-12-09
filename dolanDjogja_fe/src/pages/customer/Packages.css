@@ -13,7 +13,7 @@
   background-color: #dc2626;
   padding: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: fixed;
+  position:relative;
   top: 0;
   left: 0;
   right: 0;

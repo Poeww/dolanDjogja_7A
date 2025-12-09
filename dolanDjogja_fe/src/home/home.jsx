@@ -146,7 +146,7 @@ const Home = () => (
     {/* Destinations */}
     <section className="destination-section">
         <div className="destination-container">
-          <h2 className="section-title">Top Destination</h2>
+          <h2 className="section-title-h2">Top Destination</h2>
           <div className="destinations-grid">
             {destinations.map((dest) => (
               <div key={dest.id} className="destination-card">
@@ -189,7 +189,7 @@ const Home = () => (
         <div className="package-container">
           <div className="package-header">
             <h2>The Best Package <span className="subtitle">for you</span></h2>
-            <a href="#" className="view-all">Lihat semua &gt;</a>
+            <a href="/packages" className="view-all">Lihat semua &gt;</a>
           </div>
           <div className="packages-grid">
             {[
