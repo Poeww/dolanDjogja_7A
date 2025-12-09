@@ -48,7 +48,8 @@ export default function DestinasiEdit() {
       nama_destinasi: data.nama_destinasi || "",
       lokasi: data.lokasi || "",
       deskripsi: data.deskripsi || "",
-      harga_tiket: data.harga_tiket || "",
+      harga_tiket: data.harga_tiket ? "Rp " + formatRupiah(String(data.harga_tiket)) : "",
+      harga_number: data.harga_tiket || "",
       jam_buka: data.jam_buka || "",
       gambar: null,
     });
@@ -86,7 +87,7 @@ export default function DestinasiEdit() {
     fd.append("nama_destinasi", form.nama_destinasi);
     fd.append("lokasi", form.lokasi);
     fd.append("deskripsi", form.deskripsi);
-    fd.append("harga_tiket", form.harga_tiket);
+    fd.append("harga_tiket", form.harga_number || 0);
     fd.append("jam_buka", form.jam_buka);
 
     if (form.gambar) {
@@ -98,6 +99,23 @@ export default function DestinasiEdit() {
     await updateDestinasi(id, fd);
     navigate("/admin/destinasi");
   };
+
+  const formatRupiah = (value) => {
+    const number = value.replace(/[^0-9]/g, "");
+    if (!number || number === "0") return "";
+    return number.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
+  const handleHargaChange = (e) => {
+    const raw = e.target.value.replace(/[^0-9]/g, "");
+
+    setForm({
+      ...form,
+      harga_tiket: raw ? "Rp " + formatRupiah(raw) : "",
+      harga_number: raw ? parseInt(raw) : ""
+    });
+  };
+
 
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
@@ -181,12 +199,12 @@ export default function DestinasiEdit() {
 
             <div className="form-group form-left">
               <input
-                type="number"
+                type="text"
                 name="harga_tiket"
                 className="form-input"
                 placeholder=" "
                 value={form.harga_tiket}
-                onChange={handleChange}
+                onChange={handleHargaChange}
               />
               <label className="form-label">Harga Tiket</label>
             </div>
