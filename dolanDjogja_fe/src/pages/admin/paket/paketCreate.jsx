@@ -16,6 +16,7 @@ import BookingIcon from "../../../assets/icon/booking.svg";
 import PaymentIcon from "../../../assets/icon/payment.svg";
 import LogoutIcon from "../../../assets/icon/logout.svg";
 import BackIcon from "../../../assets/icon/back.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 
 export default function PaketCreate() {
   const navigate = useNavigate();
@@ -113,32 +114,63 @@ export default function PaketCreate() {
         </div>
 
         <nav className="sidebar-menu">
+
           <Link
             to="/admin/dashboard"
             className={location.pathname === "/admin/dashboard" ? "active" : ""}
           >
-            <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+            <img src={DashboardIcon} className="menu-icon" />
+            {!collapsed && "Dashboard"}
           </Link>
 
-          <Link to="/admin/paket" className="active">
-            <img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}
+          <Link
+            to="/admin/users"
+            className={location.pathname.includes("/admin/users") ? "active" : ""}
+          >
+            <img src={ProfilIcon} className="menu-icon" />
+            {!collapsed && "Kelola User"}
           </Link>
 
-          <Link to="/admin/destinasi">
-            <img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}
+          <Link
+            to="/admin/paket"
+            className={location.pathname.includes("/admin/paket") ? "active" : ""}
+          >
+            <img src={PaketIcon} className="menu-icon" />
+            {!collapsed && "Paket Wisata"}
           </Link>
 
-          <Link to="/admin/jadwal">
-            <img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}
+          <Link
+            to="/admin/destinasi"
+            className={location.pathname.includes("/admin/destinasi") ? "active" : ""}
+          >
+            <img src={DestinasiIcon} className="menu-icon" />
+            {!collapsed && "Destinasi"}
           </Link>
 
-          <Link to="/admin/bookings">
-            <img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}
+          <Link
+            to="/admin/jadwal"
+            className={location.pathname.includes("/admin/jadwal") ? "active" : ""}
+          >
+            <img src={JadwalIcon} className="menu-icon" />
+            {!collapsed && "Jadwal Trip"}
           </Link>
 
-          <Link to="/admin/payments">
-            <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
+          <Link
+            to="/admin/bookings"
+            className={location.pathname.includes("/admin/bookings") ? "active" : ""}
+          >
+            <img src={BookingIcon} className="menu-icon" />
+            {!collapsed && "Booking"}
           </Link>
+
+          <Link
+            to="/admin/payments"
+            className={location.pathname.includes("/admin/payments") ? "active" : ""}
+          >
+            <img src={PaymentIcon} className="menu-icon" />
+            {!collapsed && "Payments"}
+          </Link>
+
         </nav>
 
         <button className="logout-btn">
