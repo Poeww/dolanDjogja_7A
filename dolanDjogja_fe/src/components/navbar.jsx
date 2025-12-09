@@ -60,7 +60,6 @@ export default function Navbar() {
 
                 {user && role === "user" && (
                     <>
-                        <a href="/booking" className="nav-item">Booking</a>
 
                         <div className="dropdown" ref={dropdownRef}>
                             <button className="dropbtn" onClick={toggleDropdown}>

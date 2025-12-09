@@ -290,6 +290,12 @@ export default function AppRoutes() {
           }
         />
 
+        {/* ===============================
+            CUSTOMER - BOOKING
+        =============================== */}
+        <Route path="/booking/:id" 
+        element={<Booking />} 
+        />
 
         {/* ===============================
             CUSTOMER - PROFILE
@@ -302,6 +308,8 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         />
+
+
 
 
       </Routes>

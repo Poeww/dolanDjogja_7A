@@ -205,6 +205,16 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  const handleBookingButton = (paketId) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+
+    window.location.href = `/booking/${paketId}`;
+  };
 
 
   return (
@@ -380,7 +390,7 @@ export default function Home() {
 
                   <button
                     className="btn-booking"
-                    onClick={handleBookingButton}
+                    onClick={() => handleBookingButton(p.id)}
                   >
                     Booking
                   </button>
