@@ -19,6 +19,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  width: 1300px;
 }
 
 .header-container {
@@ -68,8 +69,8 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  width: 100%; /* ✅ Agar container tidak membatasi lebar */
-  height: 30%;
+  width: 1300px; /* ✅ Agar container tidak membatasi lebar */
+  height: 400px;
   
 }
 

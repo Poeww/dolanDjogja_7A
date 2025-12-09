@@ -43,24 +43,37 @@ export default function MyBookings() {
   };
 
   return (
-    <div className="my-bookings-page">
+    <div>
       {/* Header */}
-      <header className="main-header">
-        <div className="header-container">
-          <div className="logo">
-            <h1>dolanDjogja</h1>
-          </div>
-          <nav className="nav-menu">
-            <ul className="nav-list">
-              <li><a href="/">Home</a></li>
-              <li><a href="/packages">Packages</a></li>
-              <li><a href="/mybookings">MyBookings</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/register">Register</a></li>
-            </ul>
-          </nav>
+      <section className="header-section">
+      <div className="header-container">
+        {/* Logo */}
+        <div className="logo">
+          <h2>dolanDjogja</h2>
         </div>
-      </header>
+        
+        {/* Navigation Menu */}
+        <nav className="nav-menu">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="nav-item">
+              <a href="/packages">Packages</a>
+            </li>
+            <li className="nav-item">
+              <a href="/mybookings">MyBookings</a>
+            </li>
+            <li className="nav-item">
+              <a href="/login">Login</a>
+            </li>
+            <li className="nav-item">
+              <a href="/register">Register</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
 
       {/* Banner - Dibungkus Container Sama Seperti Header */}
       <section className="my-bookings-banner">

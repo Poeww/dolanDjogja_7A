@@ -1,0 +1,444 @@
+/* Payment.css */
+
+.payment-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  padding-top: 60px; /* untuk header fixed */
+}
+
+/* === HEADER === */
+.header-section {
+  background-color: #2c5a7a;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.logo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+  color: #007bff;
+}
+
+/* === BANNER === */
+.my-bookings-banner {
+  margin-bottom: 40px;
+  width: 100%;
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center; /* ✅ Mepet ke kiri */
+  display: block;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5%;
+  color: white;
+  text-align: left;
+  z-index: 1;
+}
+
+.banner-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+}
+
+.banner-subtitle {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+/* === MAIN CONTENT === */
+.payment-content {
+  max-width: 1100px;
+  margin-right: 10px;
+  margin: 30px auto 0 70px ;
+  
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* === BOOKING HEADER === */
+.booking-header {
+  margin-bottom: 20px;
+}
+
+.booking-header h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+}
+
+.booking-header h3 {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 0;
+  color: #555;
+}
+
+.success-card {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: #28a745;
+}
+
+.success-card h2 {
+  font-size: 1.8rem;
+  color: #28a745;
+  margin: 0 0 12px 0;
+}
+
+.success-card p {
+  color: #666;
+  margin-bottom: 24px;
+  font-size: 1rem;
+}
+
+.back-button {
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-button:hover {
+  background: linear-gradient(90deg, #2980b9, #1a5276);
+}
+
+/* === DETAIL BOOKING === */
+.booking-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 30px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.booking-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+}
+
+.booking-detail-item strong {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.booking-detail-item span {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Status Warna */
+.status-pending { color: #ffc107; }
+.status-confirmed { color: #28a745; }
+.status-cancelled,
+.status-completed { color: #6c757d; }
+
+/* === UPLOAD FORM === */
+.upload-form {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.upload-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+.file-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.pay-button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.pay-button:hover {
+  background: linear-gradient(90deg, #2980b9, #1a5276);
+}
+
+/* --- FOOTER SECTION --- */
+.footer-section {
+  background-color: #2c5a7a;
+  color: white;
+  padding: 40px 0 50px;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.footer-logo h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.footer-logo p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.link-column h3 {
+  font-size: 1rem;
+  margin: 0 0 12px 0;
+  font-weight: bold;
+}
+
+.link-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link-column li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.link-column a {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.link-column a:hover {
+  opacity: 0.8;
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+
+.social-icons a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.footer-copyright {
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  padding: 0 20px;
+}
+
+/* === METODE PEMBAYARAN DROPDOWN === */
+.payment-method {
+  margin: 20px 0;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.payment-method label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.payment-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: rgb(255, 255, 255);
+  color: #1a5276;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  appearance: none; /* Untuk remove arrow default */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.payment-select::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.payment-select::before {
+  content: "📱";
+  font-size: 1.2rem;
+}
+
+.payment-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .booking-details {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .booking-detail-item {
+    min-width: auto;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-social {
+    align-items: center;
+  }
+
+  .payment-content {
+    margin: 0 16px 40px;
+    padding: 20px;
+  }
+}
