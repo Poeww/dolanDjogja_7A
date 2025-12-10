@@ -1,0 +1,190 @@
+/* ============================
+   GLOBAL
+============================= */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #f8f8f8;
+}
+
+/* ============================
+   CONTAINER
+============================= */
+.payment-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.payment-card {
+    width: 520px;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e6e6e6;
+    color: #333 !important;
+}
+
+/* ============================
+   TITLE
+============================= */
+.payment-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #1e6feb !important;
+}
+
+/* ============================
+   DETAIL BOX
+============================= */
+.detail-box {
+    background: #fafafa;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 1px solid #e3e3e3;
+    margin-bottom: 30px;
+}
+
+.detail-box div {
+    font-size: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    color: #333 !important;
+}
+
+.detail-box span {
+    color: #555;
+}
+
+.highlight {
+    color: #1e6feb;
+    font-weight: 700;
+}
+
+/* ============================
+   FLOATING INPUT
+============================= */
+.floating-group {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.floating-group select {
+    width: 100%;
+    padding: 15px 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fff;
+    color: #333 !important;
+}
+
+.floating-group label {
+    position: absolute;
+    top: 15px;
+    left: 14px;
+    color: #777;
+    font-size: 15px;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.floating-group select[data-has-value="true"] + label,
+.floating-group select:focus + label {
+    top: -9px;
+    left: 10px;
+    background: #fff;
+    padding: 0 6px;
+    font-size: 12px;
+    color: #1e6feb;
+}
+
+/* ============================
+   PAYMENT INFO BOX
+============================= */
+.payment-info-box {
+    background: #f0f6ff;
+    border: 1px solid #c8ddff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 25px;
+    color: #333 !important;
+}
+
+.info-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1e6feb;
+}
+
+.payment-code {
+    margin-top: 8px;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px dashed #1e6feb;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #1e6feb;
+}
+
+/* ============================
+   UPLOAD BOX
+============================= */
+.upload-box label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.upload-box input {
+    margin-top: 6px;
+    margin-bottom: 20px;
+}
+
+.upload-inside-box {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #d3dff7;
+}
+
+.upload-inside-box label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.upload-inside-box input {
+  margin-top: 6px;
+  display: block;
+}
+
+
+/* ============================
+   SUBMIT BUTTON
+============================= */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #1e6feb;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-submit:hover {
+    background: #1451b8;
+    transform: translateY(-2px);
+}
