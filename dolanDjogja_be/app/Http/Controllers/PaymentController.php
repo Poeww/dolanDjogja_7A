@@ -20,7 +20,9 @@ class PaymentController extends Controller
         $validated = $request->validate([
             'booking_id'       => 'required|integer|exists:bookings,id',
             'jumlah_bayar'     => 'required|numeric|min:0',
-            'bukti_pembayaran' => 'nullable|string',
+            'metode_pembayaran'=> 'required|string',
+            'kode_pembayaran'  => 'required|string',
+            'bukti_pembayaran' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $booking = Booking::findOrFail($validated['booking_id']);
@@ -29,12 +31,21 @@ class PaymentController extends Controller
             return response()->json(['message' => 'Tidak boleh membayar booking orang lain'], 403);
         }
 
-        $payment = Payment::create([
-            'booking_id'       => $validated['booking_id'],
-            'jumlah_bayar'     => $validated['jumlah_bayar'],
-            'bukti_pembayaran' => $validated['bukti_pembayaran'] ?? null,
-            'status_verifikasi'=> 'pending',
-        ]);
+        if ($request->hasFile('bukti_pembayaran')) {
+            $file = $request->file('bukti_pembayaran');
+            $filename = time() . '_' . str_replace(' ', '-', $file->getClientOriginalName());
+
+            $destination = public_path('uploads/payments');
+            if (!file_exists($destination)) mkdir($destination, 0777, true);
+
+            $file->move($destination, $filename);
+
+            $validated['bukti_pembayaran'] = 'uploads/payments/' . $filename;
+        }
+
+        $validated['status_verifikasi'] = 'pending';
+
+        $payment = Payment::create($validated);
 
         return response()->json(
             $payment->load('booking.jadwalTrip.paket'),
@@ -67,6 +78,11 @@ class PaymentController extends Controller
     public function destroy($id)
     {
         $payment = Payment::findOrFail($id);
+
+        if ($payment->bukti_pembayaran && file_exists(public_path($payment->bukti_pembayaran))) {
+            unlink(public_path($payment->bukti_pembayaran));
+        }
+
         $payment->delete();
 
         return response()->json(['message' => 'Payment dihapus']);
