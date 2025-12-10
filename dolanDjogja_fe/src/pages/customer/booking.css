@@ -89,6 +89,12 @@ html {
 
     position: relative;
     z-index: 3;
+    color: #333;
+}
+
+.booking-card *,
+.summary-card * {
+    color: #333;
 }
 
 .card-title {
@@ -114,6 +120,7 @@ html {
     border-radius: 10px;
     font-size: 15px;
     background: #ffffff;
+    color: #333;
     transition: all 0.25s ease;
 }
 
@@ -190,17 +197,13 @@ html {
     width: 100%;
     padding: 16px;
     margin-top: 12px;
-
     background: #1e6feb;
     color: #fff;
-
     border: none;
     border-radius: 10px;
-
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-
     transition: 0.25s ease;
 }
 
@@ -209,9 +212,9 @@ html {
     transform: translateY(-2px);
 }
 
-/* =============================
+/* ============================
    MODAL POPUP
-================================ */
+============================= */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -296,7 +299,6 @@ html {
     }
 }
 
-
 /* ============================
    FOOTER
 ============================= */
@@ -308,7 +310,6 @@ html {
     padding: 25px 0;
     margin-top: 70px;
     font-size: 15px;
-
     position: relative;
     left: 50%;
     transform: translateX(-50%);

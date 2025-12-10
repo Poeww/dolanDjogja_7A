@@ -64,13 +64,13 @@ export default function Booking() {
   // ================================
   const handleChange = (e) => {
     let { name, value } = e.target;
+
     if (name === "jumlah_orang") {
       const num = Number(value);
 
       if (num < 1 || isNaN(num)) value = 1;
 
       const selected = jadwal.find((j) => j.id === Number(form.jadwal_trip_id));
-
       if (selected) {
         const maxKuota = selected.kuota_tersedia;
 
@@ -85,10 +85,7 @@ export default function Booking() {
       }
     }
 
-    setForm({
-      ...form,
-      [name]: value,
-    });
+    setForm({ ...form, [name]: value });
   };
 
   // ================================
@@ -103,12 +100,19 @@ export default function Booking() {
     };
 
     try {
-      await createBooking(payload);
+      const booking = await createBooking(payload);
 
-      openModal("Booking Berhasil!", "Silakan lanjut ke pembayaran.", "success");
+      openModal(
+        "Booking Berhasil!",
+        "Anda akan diarahkan ke halaman pembayaran...",
+        "success"
+      );
 
-      setTimeout(() => navigate("/my-bookings"), 1500);
-    } catch {
+      setTimeout(() => {
+        navigate(`/payment/${booking.id}`);
+      }, 1200);
+
+    } catch (err) {
       openModal("Gagal Booking", "Terjadi kesalahan. Coba lagi.", "error");
     }
   };
@@ -122,6 +126,7 @@ export default function Booking() {
   return (
     <>
       <Navbar />
+
       <div className="booking-hero">
         <img
           className="booking-hero-img"
@@ -139,6 +144,7 @@ export default function Booking() {
       {/* MAIN CONTENT */}
       <div className="booking-container">
         <div className="booking-left">
+
           {/* PEMESAN */}
           <div className="booking-card">
             <h2 className="card-title">Detail Pemesan</h2>
@@ -177,7 +183,6 @@ export default function Booking() {
                   ))}
                 </select>
                 <label>Pilih Jadwal</label>
-
               </div>
 
               {/* JUMLAH ORANG */}
@@ -193,7 +198,6 @@ export default function Booking() {
                 />
                 <label>Jumlah Orang</label>
               </div>
-
             </form>
           </div>
 
@@ -220,7 +224,6 @@ export default function Booking() {
                 <strong>{form.jumlah_orang} Orang</strong>
               </div>
 
-              {/* Harga per orang */}
               <div>
                 <span>Harga / Orang:</span>
                 <strong>
@@ -231,22 +234,17 @@ export default function Booking() {
                 </strong>
               </div>
 
-              {/* Total harga */}
               <div>
                 <span>Total Bayar:</span>
                 <strong style={{ color: "#1e6feb" }}>
                   {(Number(paket.harga) * Number(form.jumlah_orang)).toLocaleString(
                     "id-ID",
-                    {
-                      style: "currency",
-                      currency: "IDR",
-                    }
+                    { style: "currency", currency: "IDR" }
                   )}
                 </strong>
               </div>
             </div>
 
-            {/* BUTTON DISABLED */}
             <button
               type="submit"
               form="bookingForm"
@@ -261,7 +259,6 @@ export default function Booking() {
             </button>
           </div>
         </div>
-
       </div>
 
       {/* MODAL POPUP */}
