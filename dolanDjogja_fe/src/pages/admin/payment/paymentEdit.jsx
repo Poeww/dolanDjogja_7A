@@ -128,11 +128,12 @@ export default function PaymentEdit() {
           <div className="payment-row">
             <span>Bukti Pembayaran</span>
             <img
-              src={payment.bukti_pembayaran}
+              src={`${import.meta.env.VITE_API_URL}/${payment.bukti_pembayaran}`}
               className="payment-proof"
               alt="Bukti Pembayaran"
             />
           </div>
+
 
           <div className="payment-row">
             <span>Update Status</span>
