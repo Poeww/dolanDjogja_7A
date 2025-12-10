@@ -15,6 +15,7 @@ import BookingIcon from "../../../assets/icon/booking.svg";
 import PaymentIcon from "../../../assets/icon/payment.svg";
 import LogoutIcon from "../../../assets/icon/logout.svg";
 import BackIcon from "../../../assets/icon/back.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 
 export default function BookingEdit() {
   const { id } = useParams();
@@ -70,6 +71,10 @@ export default function BookingEdit() {
 
           <Link to="/admin/dashboard">
             <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+          </Link>
+
+          <Link to="/admin/users">
+            <img src={ProfilIcon} className="menu-icon" /> {!collapsed && "Kelola User"}
           </Link>
 
           <Link to="/admin/paket">

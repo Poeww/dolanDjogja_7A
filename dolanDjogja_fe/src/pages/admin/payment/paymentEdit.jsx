@@ -62,8 +62,13 @@ export default function PaymentEdit() {
         </div>
 
         <nav className="sidebar-menu">
+
           <Link to="/admin/dashboard">
             <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+          </Link>
+
+          <Link to="/admin/users">
+            <img src={ProfilIcon} className="menu-icon" /> {!collapsed && "Kelola User"}
           </Link>
 
           <Link to="/admin/paket">
@@ -85,7 +90,9 @@ export default function PaymentEdit() {
           <Link to="/admin/payments" className="active">
             <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
           </Link>
+
         </nav>
+
 
         <button className="logout-btn">
           <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
