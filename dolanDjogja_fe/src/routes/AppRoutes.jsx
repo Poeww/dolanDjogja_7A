@@ -262,9 +262,9 @@ export default function AppRoutes() {
         <Route
           path="/payment/:id"
           element={
-            <PrivateRoute role="user">
+            // <PrivateRoute role="user">
               <Payment />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
 
