@@ -228,7 +228,7 @@ export default function PaymentList() {
                     <td>
                       {p.bukti_pembayaran ? (
                         <img
-                          src={p.bukti_pembayaran}
+                          src={`${import.meta.env.VITE_API_URL}/${p.bukti_pembayaran}`}
                           className="payment-proof-img"
                           alt="Bukti Pembayaran"
                         />
