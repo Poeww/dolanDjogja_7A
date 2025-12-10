@@ -893,172 +893,14 @@ html {
     color: #ffd900;
 }
 
-/* ============================
-   TABLET RESPONSIVE
-============================ */
-@media (max-width: 992px) {
-    .home-container {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        padding: 0 40px;
-        gap: 60px;
-    }
+/* =========================================
+   MOBILE VERY SMALL (MAX 400px)
+========================================= */
+@media (max-width: 400px) {
 
-    .left-text {
-        max-width: 90%;
-        margin: auto;
-    }
-
-    .welcome-title {
-        font-size: 46px;
-    }
-
-    .desc {
-        max-width: 90%;
-        margin: auto;
-    }
-
-    .right-cards {
-        scale: 0.85;
-        gap: 18px;
-    }
-
-    .destinasi-section {
-        padding: 60px 40px;
-    }
-
-    .destinasi-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-    }
-
-    .paket-section {
-        padding: 60px 30px;
-    }
-
-    .paket-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 22px;
-    }
-
-    .why-section {
-        padding: 70px 40px;
-    }
-
-    .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 22px;
-    }
-
-    .cta-section {
-        padding: 100px 40px;
-    }
-
-    .cta-stats {
-        gap: 40px;
-    }
-
-    .cta-title {
-        font-size: 34px;
-    }
-}
-
-/* ============================
-   MOBILE RESPONSIVE
-============================ */
-@media (max-width: 600px) {
-    .home-container {
-        padding: 0 22px;
-        gap: 45px;
-    }
-
-    .welcome-title {
-        font-size: 38px;
-    }
-
-    .region {
-        font-size: 18px;
-    }
-
-    .desc {
-        font-size: 15px;
-    }
-
-    .btn-hero {
-        font-size: 16px;
-        padding: 10px 26px;
-    }
-
-    .right-cards {
-        scale: 0.7;
-        gap: 10px;
-    }
-
-    .destinasi-section {
-        padding: 50px 20px;
-    }
-
-    .destinasi-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: auto;
-    }
-
-    .img-wrapper {
-        height: 170px;
-    }
-
-    .paket-grid {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-        margin: auto;
-    }
-
-    .paket-img img {
-        height: 180px;
-    }
-
-    .why-section {
-        padding: 60px 20px;
-    }
-
-    .why-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        max-width: 420px;
-        margin: auto;
-    }
-
-    .why-card {
-        padding: 25px 20px;
-    }
-
-    .cta-section {
-        padding: 90px 25px;
-    }
-
-    .cta-title {
-        font-size: 28px;
-    }
-
-    .cta-subtitle {
-        font-size: 15px;
-    }
-
-    .cta-stats {
-        flex-direction: column;
-        gap: 22px;
-    }
-}
-
-/* ====================================================
-   MOBILE (≤ 480px)
-==================================================== */
-@media (max-width: 480px) {
     .home-hero {
         height: auto !important;
-        padding: 110px 0 60px;
+        padding: 120px 0 70px !important;
         background-size: cover !important;
         background-position: center !important;
     }
@@ -1066,102 +908,62 @@ html {
     .home-container {
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: flex-start !important;
-
-        text-align: center;
-        padding: 0 20px !important;
-        gap: 40px;
-        height: auto !important;
+        padding: 0 18px !important;
+        gap: 32px !important;
     }
 
-    .left-text {
-        max-width: 100%;
+    .region {
+        font-size: 16px !important;
     }
 
     .welcome-title {
-        font-size: 34px !important;
+        font-size: 28px !important;
+        line-height: 1.2 !important;
     }
 
     .desc {
+        font-size: 14px !important;
+        max-width: 100% !important;
+    }
+
+    .btn-hero {
         font-size: 15px !important;
-        max-width: 95%;
-        margin: 0 auto;
+        padding: 10px 22px !important;
     }
 
     .right-cards {
-        scale: 0.62 !important;
-        gap: 12px !important;
+        scale: 0.55 !important;
+        gap: 10px !important;
     }
 
     .slider-card {
-        min-width: 170px !important;
-        height: 230px !important;
+        min-width: 150px !important;
+        height: 210px !important;
     }
 
-    .destinasi-section {
-        padding: 50px 20px !important;
-    }
-
-    .destinasi-grid {
+    /* GRID FIX */
+    .destinasi-grid,
+    .paket-grid,
+    .why-grid {
         grid-template-columns: 1fr !important;
-        gap: 22px !important;
-        max-width: 420px;
+        max-width: 340px !important;
         margin: auto;
+        gap: 18px !important;
     }
 
     .img-wrapper {
-        height: 160px !important;
+        height: 150px !important;
     }
 
-    .paket-section {
-        padding: 60px 20px !important;
-    }
-
-    .paket-grid {
-        grid-template-columns: 1fr !important;
-        gap: 22px !important;
-        max-width: 420px;
-        margin: auto;
-    }
-
-    .paket-img img {
-        height: 180px !important;
-    }
-
-    .why-section {
-        padding: 60px 20px !important;
-    }
-
-    .why-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-        max-width: 420px;
-        margin: auto;
-    }
-
-    .why-card {
-        padding: 25px 20px !important;
-    }
-
+    /* CTA FIX */
     .cta-section {
-        padding: 80px 20px 60px !important;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        background-position: top center !important;
-
-        min-height: 620px !important;
-        height: auto !important;
-        background-color: #0c241b;
+        padding: 70px 18px 50px !important;
+        min-height: 580px !important;
+        background-size: cover !important;
     }
 
     .cta-title {
-        font-size: 26px !important;
-    }
-
-    .cta-subtitle {
-        font-size: 15px !important;
-        max-width: 90%;
-        margin: 0 auto 26px;
+        font-size: 24px !important;
     }
 
     .cta-buttons {
@@ -1169,16 +971,102 @@ html {
         gap: 12px !important;
     }
 
-    .btn-cta-primary,
-    .btn-cta-outline {
-        width: 100% !important;
-        padding: 12px 26px !important;
-        font-size: 15px !important;
+    .cta-stats {
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+}
+
+
+/* =========================================
+   MOBILE MEDIUM (MAX 600px)
+========================================= */
+@media (max-width: 600px) {
+
+    .home-container {
+        padding: 0 24px !important;
+        gap: 38px !important;
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .welcome-title {
+        font-size: 32px;
+    }
+
+    .desc {
+        font-size: 15px;
+    }
+
+    .right-cards {
+        scale: 0.65;
+    }
+
+    .destinasi-grid,
+    .paket-grid,
+    .why-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 420px;
+        margin: auto;
+    }
+
+    .cta-section {
+        padding: 80px 25px !important;
+    }
+}
+
+/* =========================================
+   TABLET (MAX 992px)
+========================================= */
+@media (max-width: 992px) {
+
+    .home-container {
+        flex-direction: column;
+        padding: 0 40px;
+        gap: 55px;
+        text-align: center;
+    }
+
+    .right-cards {
+        scale: 0.8;
+    }
+
+    .destinasi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .paket-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .cta-stats {
-        flex-direction: column !important;
-        gap: 16px !important;
-        margin-top: 40px !important;
+        gap: 35px;
+    }
+}
+
+/* =========================================
+   LARGE DESKTOP WIDE SCREEN (MIN 1440px)
+========================================= */
+@media (min-width: 1440px) {
+
+    .home-container {
+        max-width: 1400px;
+        margin: auto;
+        padding: 0 120px;
+    }
+
+    .right-cards {
+        scale: 1.05;
+    }
+
+    .destinasi-grid,
+    .paket-grid,
+    .why-grid {
+        max-width: 1300px;
+        margin: auto;
     }
 }
