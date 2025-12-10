@@ -68,7 +68,7 @@ export default function Navbar() {
 
                             <div className={`dropdown-content ${openDropdown ? "show" : ""}`}>
                                 <a href="/profile">Profil</a>
-                                <a href="/mybookings">Riwayat Booking</a>
+                                <a href="/my-bookings">Riwayat Booking</a>
 
                                 <button onClick={handleLogout} className="logout-btn">
                                     Logout
