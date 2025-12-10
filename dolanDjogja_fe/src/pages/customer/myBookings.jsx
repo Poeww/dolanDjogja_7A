@@ -3,6 +3,9 @@ import { getMyBookings } from "../../services/bookingService";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../services/authService";
 
+import Navbar from "../../components/navbar";
+import "./myBookings.css";
+
 export default function MyBookings() {
   const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
@@ -13,48 +16,91 @@ export default function MyBookings() {
       navigate("/login");
       return;
     }
-
-    loadData();
+    loadData(user.id);
   }, []);
 
-  const loadData = async () => {
-    const data = await getMyBookings();
-    setBookings(data);
+  const loadData = async (userId) => {
+    try {
+      const data = await getMyBookings(userId);
+      setBookings(data);
+    } catch (error) {
+      console.error("Gagal mengambil data booking:", error);
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "paid":
+        return "green";
+      case "pending":
+        return "red";
+      case "verified":
+        return "orange";
+      case "cancelled":
+        return "gray";
+      default:
+        return "black";
+    }
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>Booking Saya</h2>
+    <>
+      <Navbar />
 
-      <table border="1" cellPadding="8">
-        <thead>
-          <tr>
-            <th>Paket</th>
-            <th>Tgl Berangkat</th>
-            <th>Tgl Pulang</th>
-            <th>Jumlah Orang</th>
-            <th>Total Harga</th>
-          </tr>
-        </thead>
+      <div className="mybookings-container">
+        <h2 className="mybookings-title">Booking Saya</h2>
 
-        <tbody>
-          {bookings.map((b) => (
-            <tr key={b.id}>
-              <td>{b.jadwal_trip?.paket?.nama_paket}</td>
-              <td>{b.jadwal_trip?.tanggal_berangkat}</td>
-              <td>{b.jadwal_trip?.tanggal_pulang}</td>
-              <td>{b.jumlah_orang}</td>
-              <td>{b.total_harga}</td>
-            </tr>
-          ))}
-
-          {bookings.length === 0 && (
+        <table className="mybookings-table">
+          <thead>
             <tr>
-              <td colSpan="5">Belum ada booking.</td>
+              <th>Paket</th>
+              <th>Tgl Berangkat</th>
+              <th>Tgl Pulang</th>
+              <th>Jumlah Orang</th>
+              <th>Total Harga</th>
+              <th>Status</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+
+          <tbody>
+            {bookings.length > 0 ? (
+              bookings.map((b) => (
+                <tr key={b.id}>
+                  <td>{b.jadwal_trip?.paket?.nama_paket || "-"}</td>
+
+                  <td>{b.jadwal_trip?.tanggal_berangkat || "-"}</td>
+
+                  <td>{b.jadwal_trip?.tanggal_pulang || "-"}</td>
+
+                  <td>{b.jumlah_orang}</td>
+
+                  <td>
+                    {Number(b.total_harga).toLocaleString("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                    })}
+                  </td>
+
+                  <td
+                    style={{
+                      fontWeight: "bold",
+                      color: getStatusColor(b.status_pembayaran),
+                    }}
+                  >
+                    {b.status_pembayaran?.toUpperCase()}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="mybookings-empty">
+                  Belum ada booking.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

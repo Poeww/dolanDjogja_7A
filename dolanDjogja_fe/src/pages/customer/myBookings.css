@@ -1,0 +1,91 @@
+/* ============================
+   PAGE WRAPPER
+=============================== */
+.mybookings-container {
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mybookings-title {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1E2A39;
+}
+
+/* ============================
+   TABLE WRAPPER
+=============================== */
+.mybookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================
+   TABLE HEADER
+=============================== */
+.mybookings-table thead tr {
+    background: #1e6feb;
+    color: #ffffff;
+}
+
+.mybookings-table th {
+    padding: 14px 12px;
+    font-weight: 600;
+    text-align: left;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+/* ============================
+   TABLE BODY
+=============================== */
+.mybookings-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+}
+
+.mybookings-table tbody tr:hover {
+    background: #f7faff;
+    transition: 0.2s ease-in-out;
+}
+
+/* ============================
+   STATUS COLORS
+=============================== */
+.status-paid {
+    color: green;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: red;
+    font-weight: bold;
+}
+
+.status-verified {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-cancelled {
+    color: gray;
+    font-weight: bold;
+}
+
+/* ============================
+   EMPTY ROW
+=============================== */
+.mybookings-empty {
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+}
