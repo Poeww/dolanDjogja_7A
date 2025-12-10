@@ -1,6 +1,6 @@
-/* =========================================================
+/* ============================
    FORM CARD WRAPPER
-========================================================= */
+=============================== */
 .user-form-card {
     background: #ffffff;
     padding: 40px 50px;
@@ -16,16 +16,25 @@
         opacity: 0;
         transform: translateY(10px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* =========================================================
-   FORM GRID (2 Kolom)
-========================================================= */
+/* ============================
+   PAGE TITLE (Tambah User)
+=============================== */
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    color: #1a73e8;
+}
+
+/* ============================
+   FORM GRID (2 kolom)
+=============================== */
 .user-form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -44,9 +53,9 @@
     grid-column: span 2;
 }
 
-/* =========================================================
-   FLOATING INPUT STYLE
-========================================================= */
+/* ============================
+   FLOATING INPUT
+=============================== */
 .user-form-group {
     position: relative;
 }
@@ -62,12 +71,13 @@
     outline: none;
     transition: .25s ease;
     appearance: none;
+    color: #000 !important; 
 }
 
 .user-input:focus,
 .user-select:focus {
     border-color: #1a73e8;
-    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.17);
+    box-shadow: 0 0 0 4px rgba(26,115,232,0.17);
 }
 
 .user-label {
@@ -82,8 +92,8 @@
     transition: .2s ease;
 }
 
-.user-input:focus+.user-label,
-.user-input:not(:placeholder-shown)+.user-label {
+.user-input:focus + .user-label,
+.user-input:not(:placeholder-shown) + .user-label {
     top: -10px;
     left: 14px;
     font-size: 13px;
@@ -91,22 +101,25 @@
     font-weight: 600;
 }
 
-/* =========================================================
-   FLOATING LABEL FIX FOR SELECT
-========================================================= */
-.user-select+.user-label {
+/* ============================
+   SELECT FIX
+=============================== */
+.user-select + .user-label {
     top: -10px !important;
     left: 14px !important;
     font-size: 13px !important;
     color: #1a73e8 !important;
     font-weight: 600 !important;
     background: #fff;
-    padding: 0 6px;
 }
 
-/* =========================================================
+.user-select option {
+    color: #000 !important; 
+}
+
+/* ============================
    BUTTONS
-========================================================= */
+=============================== */
 .user-buttons {
     grid-column: span 2;
     display: flex;
@@ -144,13 +157,13 @@
     background: #b71d1d;
 }
 
-/* =========================================================
-   MODAL (Cancel & Save)
-========================================================= */
+/* ============================
+   MODAL
+=============================== */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0,0,0,0.45);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,7 +177,7 @@
     border-radius: 12px;
     text-align: center;
     animation: modalFade .2s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .modal-box h3 {
@@ -215,7 +228,6 @@
         opacity: 0;
         transform: scale(.9);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
