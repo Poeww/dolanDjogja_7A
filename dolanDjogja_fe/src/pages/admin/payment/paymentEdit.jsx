@@ -8,6 +8,7 @@ import "./paymentEdit.css";
 
 import logo from "../../../assets/img/logo-dolandjogja.svg";
 import DashboardIcon from "../../../assets/icon/dashboard.svg";
+import ProfilIcon from "../../../assets/icon/profil.svg";
 import PaketIcon from "../../../assets/icon/paket.svg";
 import DestinasiIcon from "../../../assets/icon/destinasi.svg";
 import JadwalIcon from "../../../assets/icon/jadwal.svg";
@@ -37,9 +38,21 @@ export default function PaymentEdit() {
 
   const loadData = async () => {
     const data = await getAllPayments();
+
+    console.log("ID PARAM:", id);
+    console.log("PAYMENTS:", data);
+
     const found = data.find((p) => p.id == id);
+    console.log("FOUND:", found);
+
+    if (!found) {
+      alert("Data pembayaran tidak ditemukan!");
+      navigate("/admin/payments");
+      return;
+    }
+
     setPayment(found);
-    setStatus(found.status_verifikasi);
+    setStatus(found.status_verifikasi || "pending");
   };
 
   const submitNow = async () => {
@@ -50,11 +63,12 @@ export default function PaymentEdit() {
     navigate("/admin/payments");
   };
 
-  if (!payment) return <div>Loading...</div>;
+  if (!payment) return <div style={{ padding: 20 }}>Loading...</div>;
 
   return (
     <div className={`dashboard-container ${collapsed ? "collapsed" : ""}`}>
 
+      {/* SIDEBAR */}
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} className="sidebar-logo" alt="Logo" />
@@ -62,40 +76,45 @@ export default function PaymentEdit() {
         </div>
 
         <nav className="sidebar-menu">
-
           <Link to="/admin/dashboard">
-            <img src={DashboardIcon} className="menu-icon" /> {!collapsed && "Dashboard"}
+            <img src={DashboardIcon} className="menu-icon" />
+            {!collapsed && "Dashboard"}
           </Link>
 
           <Link to="/admin/users">
-            <img src={ProfilIcon} className="menu-icon" /> {!collapsed && "Kelola User"}
+            <img src={ProfilIcon} className="menu-icon" />
+            {!collapsed && "Kelola User"}
           </Link>
 
           <Link to="/admin/paket">
-            <img src={PaketIcon} className="menu-icon" /> {!collapsed && "Paket Wisata"}
+            <img src={PaketIcon} className="menu-icon" />
+            {!collapsed && "Paket Wisata"}
           </Link>
 
           <Link to="/admin/destinasi">
-            <img src={DestinasiIcon} className="menu-icon" /> {!collapsed && "Destinasi"}
+            <img src={DestinasiIcon} className="menu-icon" />
+            {!collapsed && "Destinasi"}
           </Link>
 
           <Link to="/admin/jadwal">
-            <img src={JadwalIcon} className="menu-icon" /> {!collapsed && "Jadwal Trip"}
+            <img src={JadwalIcon} className="menu-icon" />
+            {!collapsed && "Jadwal Trip"}
           </Link>
 
           <Link to="/admin/bookings">
-            <img src={BookingIcon} className="menu-icon" /> {!collapsed && "Booking"}
+            <img src={BookingIcon} className="menu-icon" />
+            {!collapsed && "Booking"}
           </Link>
 
           <Link to="/admin/payments" className="active">
-            <img src={PaymentIcon} className="menu-icon" /> {!collapsed && "Payments"}
+            <img src={PaymentIcon} className="menu-icon" />
+            {!collapsed && "Payments"}
           </Link>
-
         </nav>
 
-
         <button className="logout-btn">
-          <img src={LogoutIcon} className="menu-icon" /> {!collapsed && "Logout"}
+          <img src={LogoutIcon} className="menu-icon" />
+          {!collapsed && "Logout"}
         </button>
       </aside>
 
@@ -104,7 +123,6 @@ export default function PaymentEdit() {
       </button>
 
       <main className="main-content">
-
         <Link to="/admin/payments" className="back-btn">
           <img src={BackIcon} className="back-icon" /> Kembali
         </Link>
@@ -141,7 +159,6 @@ export default function PaymentEdit() {
             />
           </div>
 
-
           <div className="payment-row">
             <span>Update Status</span>
             <select
@@ -168,6 +185,7 @@ export default function PaymentEdit() {
         </div>
       </main>
 
+      {/* SAVE MODAL */}
       {showSaveModal && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -186,6 +204,7 @@ export default function PaymentEdit() {
         </div>
       )}
 
+      {/* CANCEL MODAL */}
       {showCancelModal && (
         <div className="modal-overlay">
           <div className="modal-box">
